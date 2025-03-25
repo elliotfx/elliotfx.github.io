@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des Arrondissements</title>
+    <link rel="stylesheet" href="./../style/header.css">
+    <link rel="stylesheet" href="./../style/carte.css">
+    <script defer src="./../scripts/carte.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">Projet Airbnb</div>
+        <nav>
+            <ul class="menu">
+                <li><a href="main.html">Accueil</a></li>
+                <li><a href="page1.html">Statistiques</a></li>
+                <li><a href="carte.html" class="active">Carte</a></li>
+                <li><a href="repart.html">Répartition</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Carte des Arrondissements</h1>
+        <p class="arr">Choisissez la statistique à afficher :</p>
+        <select id="choixStat">
+            <option value="nb_logements">Nombre de logements</option>
+            <option value="prix_moyen">Prix moyen</option>
+            <option value="part_entier">Part de logement entier</option>
+        </select>
+        <div id="map"></div>
+
+        <div id="appmoy"></div>
+
+        <img src="./../img/map.jpeg" alt="" class="fond">
+    </main>
+</body>
+</html>

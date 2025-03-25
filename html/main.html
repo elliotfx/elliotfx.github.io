@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Airbnb Paris</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/header.css">
+    <link rel="stylesheet" href="../style/main.css">
+    <script defer src="../scripts/script.js"></script>
+</head>
+<body>
+    <header>
+        <img src="../img/logo.png" alt="">
+        <nav>
+            <ul class="menu">
+                <li><a href="main.html" class="active">Accueil</a></li>
+                <li><a href="stat.html">Statistiques</a></li>
+                <li><a href="carte.html">Carte</a></li>
+                <li><a href="repart.html">Répartition</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="div-team">
+            <h1>Projet Airbnb</h1>
+            <p class="team">Lola, Jules, Elliot et Rémi</p>
+            <div class="scroll-indicator" onclick="scrollToPresentation()">
+                <span></span>
+            </div>
+        </div>
+        <img src="../img/rbnb.png" alt="" class="fond">
+
+        <section id="presentation" class="presentation">
+            <h2>Projet logements Airbnb Paris</h2>
+            <p>Ce projet vise à analyser les données des locations Airbnb à Paris. Nous avons collecté et visualisé diverses statistiques pour mieux comprendre le marché et les tendances.</p>
+            
+            <div class="content-section">
+                <img src="../img/vue_1.png" alt="Vue de la tour Eiffel" class="image-left">
+                <p class="text-right">Cette image montre la vue magnifique de la tour Eiffel depuis l'un des appartements disponibles sur Airbnb. Paris offre des vues imprenables et des expériences uniques pour les visiteurs.</p>
+            </div>
+
+            <div class="content-section">
+                <p class="text-left">L'appartement présenté ici est l'un des plus populaires sur Airbnb. Il offre un confort exceptionnel et est situé dans un quartier très prisé de Paris.</p>
+                <img src="../img/appart_1.png" alt="Appartement" class="image-right">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Airbnb Paris Visualisation</p>
+    </footer>
+</body>
+</html>

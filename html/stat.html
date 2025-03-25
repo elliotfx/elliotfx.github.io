@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Paris - Visualisation</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/header.css">
+</head>
+<body>
+    <header>
+        <img src="../img/logo.png" alt="">
+        <nav>
+            <ul class="menu">
+                <li><a href="main.html">Accueil</a></li>
+                <li><a href="stat.html" class="active">Statistiques</a></li>
+                <li><a href="carte.html">Carte</a></li>
+                <li><a href="repart.html">Répartition</a></li>
+            </ul>
+        </nav>
+        <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div id="filters">
+                <label for="room_type">Type de logement :</label>
+                <select id="room_type">
+                    <option value="all">Tous</option>
+                    <option value="Entire home/apt">Logement entier</option>
+                    <option value="Private room">Chambre privée</option>
+                    <option value="Shared room">Chambre partagée</option>
+                </select>
+
+                <label for="price_min">Prix min :</label>
+                <input type="number" id="price_min" min="0" value="0">
+
+                <label for="price_max">Prix max :</label>
+                <input type="number" id="price_max" min="0" value="1000">
+
+                <label for="neighborhoods">Arrondissements :</label>
+                <div id="neighborhoods">
+                    <!-- Les cases à cocher seront ajoutées par JavaScript -->
+                </div>
+
+                <button id="apply_filters">Appliquer les filtres</button>
+            </div>
+            <h2>Logements par type de chambre</h2>
+            <div class="chart-container">
+                <div id="roomTypeCountChart" class="chart" style="width: 100%; height: 500px;"></div>
+                <div id="averagePriceChart" class="chart" style="width: 100%; height: 500px;"></div>
+            </div>
+            <div id="neighborhoodChart" style="width: 100%; height: 500px;"></div>
+            <div id="tableContainer" style="margin-top: 20px;"></div>
+        </section>
+        <section>
+            <h2>Logements par prix</h2>
+            <div id="priceDistributionChart" style="width: 100%; height: 500px;"></div>
+            <div id="priceScatterPlot" style="width: 100%; height: 500px;"></div>
+        </section>
+        <section>
+            <h2>Carte des logements</h2>
+            <div id="map" style="width: 100%; height: 500px;"></div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Airbnb Paris Visualisation</p>
+    </footer>
+    <script src="../scripts/app.js"></script>
+</body>
+</html>
