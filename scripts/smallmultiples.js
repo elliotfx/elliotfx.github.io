@@ -17,7 +17,6 @@ fetch("../data/listings.csv")
 
     // Grouper les données par arrondissement et type
     const groupedData = {};
-
     dataFiltered.forEach(({ arrondissement, type }) => {
       if (!groupedData[arrondissement]) groupedData[arrondissement] = {};
       if (!groupedData[arrondissement][type]) groupedData[arrondissement][type] = 0;
