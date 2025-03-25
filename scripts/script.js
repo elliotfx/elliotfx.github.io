@@ -18,7 +18,7 @@ function scrollToPresentation() {
     const elementPosition = elementRect - bodyRect;
     const offsetPosition = elementPosition + offset;
 
-    smoothScrollTo(offsetPosition, 1000); // 1000ms for a slower scroll
+    smoothScrollTo(offsetPosition, 1000); // 1000ms pour un défilement plus lent
 }
 
 function smoothScrollTo(target, duration) {
@@ -44,13 +44,14 @@ function smoothScrollTo(target, duration) {
     requestAnimationFrame(animation);
 }
 
-window.addEventListener('scroll', () => {
-    const presentationSection = document.getElementById('presentation');
-    const rect = presentationSection.getBoundingClientRect();
-    if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-        window.scrollTo({
-            top: presentationSection.offsetTop,
-            behavior: 'smooth'
-        });
-    }
-});
+// Commenter ou supprimer cet écouteur d'événement
+// window.addEventListener('scroll', () => {
+//     const presentationSection = document.getElementById('presentation');
+//     const rect = presentationSection.getBoundingClientRect();
+//     if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+//         window.scrollTo({
+//             top: presentationSection.offsetTop,
+//             behavior: 'smooth'
+//         });
+//     }
+// });

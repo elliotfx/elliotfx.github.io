@@ -115,6 +115,8 @@ h1 {
 .presentation h2 {
     margin-bottom: 20px;
     text-align: center;
+    border-bottom: none; /* Supprime le trait sous le h2 */
+    text-decoration: none; /* Assure qu'il n'y a pas de soulignement */
 }
 
 .presentation p {
@@ -172,4 +174,27 @@ h1 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Modern text styling */
+.modern-text {
+    font-size: 1.2rem; /* Taille de police légèrement plus grande */
+    line-height: 1.8; /* Espacement entre les lignes */
+    color: #333; /* Couleur moderne et lisible */
+    margin-bottom: 1.5rem; /* Espacement entre les paragraphes */
+    text-align: justify; /* Alignement justifié pour un look professionnel */
+    background: #f9f9f9; /* Fond léger pour mettre en valeur le texte */
+    padding: 1rem 1.5rem; /* Espacement interne pour aérer */
+    border-left: 4px solid #b0b0b0; /* Bordure gauche colorée pour un effet moderne */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+/* Alignement spécifique pour les textes */
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
 }
