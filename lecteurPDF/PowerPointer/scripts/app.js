@@ -10,7 +10,7 @@ let pageNum = 1;
 
 // Load the PDF document
 async function loadPDF() {
-  const url = 'exemple.pdf';
+  const url = 'ppt_vcod_airbnb.pdf';
   pdfDoc = await pdfjsLib.getDocument(url).promise;
   pageCountSpan.textContent = pdfDoc.numPages;
   pageNum = 1;
