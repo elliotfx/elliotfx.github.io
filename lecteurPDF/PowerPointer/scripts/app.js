@@ -20,7 +20,7 @@ async function loadPDF() {
 // Render a specific page of the PDF
 function renderPage(num) {
   pdfDoc.getPage(num).then((page) => {
-    const viewport = page.getViewport({ scale: 1.2 });
+    const viewport = page.getViewport({ scale: 1 });
     pdfCanvas.width = viewport.width;
     pdfCanvas.height = viewport.height;
 
