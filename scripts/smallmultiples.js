@@ -25,7 +25,7 @@ fetch("../data/listings.csv")
 
     // Couleurs en dégradé de rose
     const colorMap = {
-      "Entire home/apt": "##ff385d",  // rose vif
+      "Entire home/apt": "#ff385d",  // rose vif
       "Private room": "#c0ff38",      // rose moyen
       "Shared room": "#7638ff",       // rose clair
       "Hotel room": "#38ffda"         // rose pastel
