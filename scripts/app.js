@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const dataUrl = '../data/listings.csv'; // URL du fichier CSV contenant les données des logements
     const neighborhoodUrl = '../data/neighbourhoods.geojson'; // URL du fichier GeoJSON contenant les données des quartiers
 
+    let selectedRoomType = null; // Variable pour stocker le type de logement sélectionné
+    let selectedNeighborhood = null; // Variable pour stocker l'arrondissement sélectionné
+
     // Charger les données CSV
     fetch(dataUrl)
         .then(response => response.text())
@@ -48,17 +51,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const applyFiltersButton = document.getElementById('apply_filters'); // Bouton pour appliquer les filtres
 
         // Ajouter un événement de clic au bouton pour appliquer les filtres
-        applyFiltersButton.addEventListener('click', updateGraphs);
+        applyFiltersButton.addEventListener('click', () => updateGraphs(listings));
 
         // Fonction pour mettre à jour les graphiques en fonction des filtres
-        function updateGraphs() {
-            const roomType = roomTypeSelect.value; // Récupérer la valeur du type de logement sélectionné
+        function updateGraphs(data) {
+            const roomType = selectedRoomType || roomTypeSelect.value; // Priorité à la sélection graphique
             const minPrice = parseFloat(priceMinInput.value); // Récupérer la valeur du prix minimum
             const maxPrice = parseFloat(priceMaxInput.value); // Récupérer la valeur du prix maximum
-            const selectedNeighborhoods = Array.from(document.querySelectorAll('#neighborhoods input:checked')).map(input => input.value); // Récupérer les arrondissements sélectionnés
+            const selectedNeighborhoods = selectedNeighborhood ? [selectedNeighborhood] : Array.from(document.querySelectorAll('#neighborhoods input:checked')).map(input => input.value); // Récupérer les arrondissements sélectionnés
 
             // Filtrer les données en fonction des filtres sélectionnés
-            const filteredData = listings.filter(item => {
+            const filteredData = data.filter(item => {
                 return (roomType === 'all' || item.room_type === roomType) &&
                        item.price >= minPrice && item.price <= maxPrice &&
                        (selectedNeighborhoods.length === 0 || selectedNeighborhoods.includes(item.neighbourhood));
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 text: counts,
                 textposition: 'outside',
                 marker: {
-                    color: '#ff5a5f' // Couleur des barres
+                    color: roomTypes.map(type => (type === selectedRoomType ? '#ff5a5f' : '#ff5a5f')) // Couleur des barres
                 }
             };
 
@@ -101,6 +104,22 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             Plotly.newPlot('roomTypeCountChart', [trace], layout, config);
+
+            // Ajouter l'événement plotly_click
+            document.getElementById('roomTypeCountChart').on('plotly_click', function (event) {
+                const clickedRoomType = event.points[0].x;
+
+                // Si l'élément cliqué est déjà sélectionné, désélectionner
+                if (selectedRoomType === clickedRoomType) {
+                    selectedRoomType = null; // Réinitialiser la sélection
+                    roomTypeSelect.value = 'all'; // Réinitialiser le filtre dans la zone de filtres
+                } else {
+                    selectedRoomType = clickedRoomType; // Mettre à jour la sélection
+                    roomTypeSelect.value = selectedRoomType; // Mettre à jour la zone de filtres
+                }
+
+                updateGraphs(listings); // Mettre à jour les graphiques
+            });
         }
 
         // Fonction pour mettre à jour le graphique du prix moyen par type de chambre
@@ -119,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 text: averagePrices.map(price => price.toFixed(2)),
                 textposition: 'outside',
                 marker: {
-                    color: '#ff5a5f' // Couleur des barres
+                    color: '#ff5a5f' // Couleur constante pour toutes les barres
                 }
             };
 
@@ -135,6 +154,22 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             Plotly.newPlot('averagePriceChart', [trace], layout, config);
+
+            // Ajouter l'événement plotly_click
+            document.getElementById('averagePriceChart').on('plotly_click', function (event) {
+                const clickedRoomType = event.points[0].x;
+
+                // Si l'élément cliqué est déjà sélectionné, désélectionner
+                if (selectedRoomType === clickedRoomType) {
+                    selectedRoomType = null; // Réinitialiser la sélection
+                    roomTypeSelect.value = 'all'; // Réinitialiser le filtre dans la zone de filtres
+                } else {
+                    selectedRoomType = clickedRoomType; // Mettre à jour la sélection
+                    roomTypeSelect.value = selectedRoomType; // Mettre à jour la zone de filtres
+                }
+
+                updateGraphs(data); // Mettre à jour les graphiques
+            });
         }
 
         // Fonction pour mettre à jour le graphique du nombre de logements par arrondissement
@@ -149,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 text: counts,
                 textposition: 'outside',
                 marker: {
-                    color: '#ff5a5f' // Couleur des barres
+                    color: '#ff5a5f' // Couleur par défaut
                 }
             };
 
@@ -165,6 +200,20 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             Plotly.newPlot('neighborhoodChart', [trace], layout, config);
+
+            // Ajouter l'événement plotly_click
+            document.getElementById('neighborhoodChart').on('plotly_click', function (event) {
+                const clickedNeighborhood = event.points[0].x;
+
+                // Si l'élément cliqué est déjà sélectionné, désélectionner
+                if (selectedNeighborhood === clickedNeighborhood) {
+                    selectedNeighborhood = null; // Réinitialiser la sélection
+                } else {
+                    selectedNeighborhood = clickedNeighborhood; // Mettre à jour la sélection
+                }
+
+                updateGraphs(listings); // Mettre à jour les graphiques
+            });
         }
 
         // Fonction pour mettre à jour le graphique de la distribution des prix
@@ -242,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Charger les données initiales et mettre à jour les graphiques
-        updateGraphs();
+        updateGraphs(listings);
     }
 
     // Fonction pour remplir les cases à cocher des arrondissements
