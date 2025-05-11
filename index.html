@@ -23,7 +23,6 @@
     <input id="videoUrl" placeholder="URL YouTube (https://...)">
     <button id="loadVideo">Charger</button>
   </div>
-
   <div id="playerContainer"></div>
   <div id="controls" style="display:none;">
     <h3>Taguez vos événements :</h3>
@@ -33,14 +32,12 @@
     <button data-event="Faute" class="tagBtn">Faute</button>
     <button id="exportClips">Exporter</button>
   </div>
-
-  <table id="events" style="display:none;">
-    <thead><tr><th>#</th><th>Type</th><th>Timestamp</th></tr></thead>
-    <tbody></tbody>
-  </table>
+  <table id="events" style="display:none;"><thead><tr><th>#</th><th>Type</th><th>Timestamp</th></tr></thead><tbody></tbody></table>
   <div id="progress">En attente...</div>
 
   <script type="module">
+    import { createFFmpeg, fetchFile } from 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.esm.js';
+
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('loadVideo').addEventListener('click', initVideo);
       document.getElementById('exportClips').addEventListener('click', exportClips);
@@ -48,7 +45,6 @@
 
     let player;
     const events = [];
-
     window.onYouTubeIframeAPIReady = () => console.log('YouTube API prête');
 
     function initVideo() {
@@ -59,11 +55,8 @@
         if (!url) throw new Error('URL manquante');
         const videoId = new URL(url).searchParams.get('v');
         if (!videoId) throw new Error('ID vidéo introuvable');
-
         document.getElementById('playerContainer').innerHTML =
-          `<iframe id=\"ytplayer\" width=\"800\" height=\"450\"` +
-          ` src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1\" frameborder=\"0\"></iframe>`;
-
+          `<iframe id=\"ytplayer\" width=\"800\" height=\"450\" src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1\" frameborder=\"0\"></iframe>`;
         player = new YT.Player('ytplayer', {
           events: {
             onReady: () => {
@@ -77,14 +70,13 @@
       } catch (err) {
         console.error(err);
         alert('Erreur chargement vidéo: ' + err.message);
-        progress.innerText = 'Erreur: ' + err.message;
+        document.getElementById('progress').innerText = 'Erreur: ' + err.message;
       }
     }
 
     document.body.addEventListener('click', ev => {
       if (!ev.target.classList.contains('tagBtn')) return;
-      const time = player.getCurrentTime();
-      events.push({ type: ev.target.dataset.event, time });
+      events.push({ type: ev.target.dataset.event, time: player.getCurrentTime() });
       renderEvents();
     });
 
@@ -108,11 +100,10 @@
     async function getFFmpeg() {
       if (!ffmpeg) {
         console.log('Chargement FFmpeg...');
-        const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
         ffmpeg = createFFmpeg({
           log: true,
-          corePath: 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg-core.js',
-          locateFile: (file) => `https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/${file}`
+          corePath: 'https://unpkg.com/@ffmpeg/core@0.11.6/dist/ffmpeg-core.js',
+          locateFile: file => `https://unpkg.com/@ffmpeg/core@0.11.6/dist/${file}`
         });
         ffmpeg.fetchFile = fetchFile;
         await ffmpeg.load();
@@ -124,10 +115,10 @@
     async function exportClips() {
       const progress = document.getElementById('progress');
       try {
-        if (!events.length) throw new Error('Aucun événement tagué.');
+        if (!events.length) throw new Error('Aucun événement tagué');
         progress.innerText = 'Préparation export...';
         const ff = await getFFmpeg();
-        progress.innerText = 'Récupération du flux...';
+        progress.innerText = 'Récupération flux...';
         const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
         const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${id}`)).json();
         const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
@@ -136,22 +127,20 @@
         ff.FS('writeFile', 'in.mp4', data);
 
         for (let i = 0; i < events.length; i++) {
-          const start = events[i].time; const end = start + 5;
+          const { time: start } = events[i]; const end = start + 5;
           progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
           await ff.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
           const out = ff.FS('readFile', `clip_${i+1}.mp4`);
           const blob = new Blob([out.buffer], { type: 'video/mp4' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
           a.download = `clip_${i+1}_${events[i].type}.mp4`;
-          a.click();
-          setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+          a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 30000);
         }
         progress.innerText = 'Export terminé.';
       } catch (err) {
         console.error(err);
         alert('Erreur export: ' + err.message);
-        progress.innerText = 'Erreur: ' + err.message;
+        document.getElementById('progress').innerText = 'Erreur: ' + err.message;
       }
     }
   </script>
