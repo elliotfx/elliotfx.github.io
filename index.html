@@ -36,8 +36,7 @@
   <div id="progress">En attente...</div>
 
   <script type="module">
-    import { createFFmpeg, fetchFile } from 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.esm.js';
-
+        import { createFFmpeg, fetchFile } from './ffmpeg/ffmpeg.esm.js';
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('loadVideo').addEventListener('click', initVideo);
       document.getElementById('exportClips').addEventListener('click', exportClips);
