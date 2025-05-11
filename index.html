@@ -35,9 +35,7 @@
   </div>
 
   <table id="events" style="display:none;">
-    <thead>
-      <tr><th>#</th><th>Type</th><th>Timestamp</th></tr>
-    </thead>
+    <thead><tr><th>#</th><th>Type</th><th>Timestamp</th></tr></thead>
     <tbody></tbody>
   </table>
   <div id="progress">En attente...</div>
@@ -56,25 +54,24 @@
     function initVideo() {
       const progress = document.getElementById('progress');
       try {
-        progress.innerText = 'Init vidéo...';
+        progress.innerText = 'Initialisation vidéo...';
         const url = document.getElementById('videoUrl').value.trim();
         if (!url) throw new Error('URL manquante');
         const videoId = new URL(url).searchParams.get('v');
         if (!videoId) throw new Error('ID vidéo introuvable');
 
         document.getElementById('playerContainer').innerHTML =
-          `<iframe id=\"ytplayer\" width=\"800\" height=\"450\"
-            src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1\"
-            frameborder=\"0\"></iframe>`;
+          `<iframe id=\"ytplayer\" width=\"800\" height=\"450\"` +
+          ` src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1\" frameborder=\"0\"></iframe>`;
 
         player = new YT.Player('ytplayer', {
           events: {
             onReady: () => {
-              progress.innerText = 'Vidéo prête, taguez !';
+              progress.innerText = 'Vidéo prête, vous pouvez taguer.';
               document.getElementById('controls').style.display = 'block';
               document.getElementById('events').style.display = 'table';
             },
-            onError: e => { throw new Error('YT API: ' + e.data); }
+            onError: e => { throw new Error('YouTube API erreur: ' + e.data); }
           }
         });
       } catch (err) {
@@ -92,8 +89,7 @@
     });
 
     function renderEvents() {
-      const tbody = document.querySelector('#events tbody');
-      tbody.innerHTML = '';
+      const tbody = document.querySelector('#events tbody'); tbody.innerHTML = '';
       events.forEach((e, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>${i+1}</td><td>${e.type}</td><td>${formatTime(e.time)}</td>`;
@@ -102,9 +98,9 @@
     }
 
     function formatTime(sec) {
-      const h = Math.floor(sec/3600).toString().padStart(2,'0');
-      const m = Math.floor((sec%3600)/60).toString().padStart(2,'0');
-      const s = Math.floor(sec%60).toString().padStart(2,'0');
+      const h = String(Math.floor(sec/3600)).padStart(2,'0');
+      const m = String(Math.floor((sec%3600)/60)).padStart(2,'0');
+      const s = String(Math.floor(sec%60)).padStart(2,'0');
       return `${h}:${m}:${s}`;
     }
 
@@ -115,7 +111,8 @@
         const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
         ffmpeg = createFFmpeg({
           log: true,
-          corePath: 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg-core.js'
+          corePath: 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg-core.js',
+          locateFile: (file) => `https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/${file}`
         });
         ffmpeg.fetchFile = fetchFile;
         await ffmpeg.load();
@@ -127,22 +124,22 @@
     async function exportClips() {
       const progress = document.getElementById('progress');
       try {
-        if (!events.length) throw new Error('Pas d\'événement.');
-        progress.innerText = 'Préparation...';
+        if (!events.length) throw new Error('Aucun événement tagué.');
+        progress.innerText = 'Préparation export...';
         const ff = await getFFmpeg();
-        progress.innerText = 'Récupération flux...';
+        progress.innerText = 'Récupération du flux...';
         const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
         const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${id}`)).json();
-        const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
-        if (!mp4) throw new Error('Flux MP4 non trouvé');
-        const data = await ff.fetchFile(mp4);
+        const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
+        if (!mp4Info || !mp4Info.url) throw new Error('Flux MP4 indisponible');
+        const data = await ff.fetchFile(mp4Info.url);
         ff.FS('writeFile', 'in.mp4', data);
 
         for (let i = 0; i < events.length; i++) {
-          const start = events[i].time, end = start + 5;
-          progress.innerText = `Découpe ${i+1}/${events.length}...`;
-          await ff.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `c${i}.mp4`);
-          const out = ff.FS('readFile', `c${i}.mp4`);
+          const start = events[i].time; const end = start + 5;
+          progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
+          await ff.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
+          const out = ff.FS('readFile', `clip_${i+1}.mp4`);
           const blob = new Blob([out.buffer], { type: 'video/mp4' });
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
@@ -160,4 +157,3 @@
   </script>
 </body>
 </html>
-
