@@ -11,13 +11,18 @@
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
     th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
     #progress { margin-top: 1rem; font-style: italic; color: #555; }
+    #urlContainer { display: flex; margin-bottom: 1rem; }
+    #videoUrl { flex: 1; padding: 0.5rem; font-size: 1rem; }
+    #loadVideo { margin-left: 0.5rem; }
   </style>
   <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <h1>Basket Clipper - Mode LongoMatch</h1>
-  <input id="videoUrl" placeholder="URL YouTube (https://...)" style="width:calc(100% - 110px);">
-  <button id="loadVideo" style="width:100px;">Charger</button>
+  <div id="urlContainer">
+    <input id="videoUrl" placeholder="URL YouTube (https://...)" />
+    <button id="loadVideo">Charger</button>
+  </div>
 
   <div id="playerContainer"></div>
   <div id="controls" style="display:none;">
@@ -61,6 +66,7 @@
           `<iframe id="ytplayer" width="800" height="450"
             src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
             frameborder="0"></iframe>`;
+
         player = new YT.Player('ytplayer', {
           events: {
             onReady: () => {
@@ -106,7 +112,7 @@
     async function getFFmpeg() {
       if (!ffmpeg) {
         console.log('Chargement FFmpeg...');
-        const {{ createFFmpeg, fetchFile }} = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
+        const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
         ffmpeg = createFFmpeg({
           log: true,
           corePath: 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg-core.js'
@@ -121,13 +127,14 @@
     async function exportClips() {
       const progress = document.getElementById('progress');
       try {
-        if (!events.length) throw new Error('Pas d'événement.');
+        if (!events.length) throw new Error('Pas d\'événement.');
         progress.innerText = 'Préparation...';
         const ff = await getFFmpeg();
         progress.innerText = 'Récupération flux...';
         const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
         const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${id}`)).json();
         const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
+        if (!mp4) throw new Error('Flux MP4 non trouvé');
         const data = await ff.fetchFile(mp4);
         ff.FS('writeFile', 'in.mp4', data);
 
