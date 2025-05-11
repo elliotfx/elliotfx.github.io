@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basket Clipper - Mode LongoMatch</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 1rem; }
@@ -16,8 +16,8 @@
 </head>
 <body>
   <h1>Basket Clipper - Mode LongoMatch</h1>
-  <input id="videoUrl" placeholder="URL YouTube (https://...)" />
-  <button id="loadVideo">Charger la vidéo</button>
+  <input id="videoUrl" placeholder="URL YouTube (https://...)" style="width:calc(100% - 110px);">
+  <button id="loadVideo" style="width:100px;">Charger</button>
 
   <div id="playerContainer"></div>
   <div id="controls" style="display:none;">
@@ -26,7 +26,7 @@
     <button data-event="Passe" class="tagBtn">Passe</button>
     <button data-event="Dribble" class="tagBtn">Dribble</button>
     <button data-event="Faute" class="tagBtn">Faute</button>
-    <button id="exportClips">Exporter les clips</button>
+    <button id="exportClips">Exporter</button>
   </div>
 
   <table id="events" style="display:none;">
@@ -35,29 +35,28 @@
     </thead>
     <tbody></tbody>
   </table>
-  <div id="progress">En attente d'une action...</div>
+  <div id="progress">En attente...</div>
 
   <script type="module">
-    console.log('Module chargé');
-
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('loadVideo').addEventListener('click', initVideo);
       document.getElementById('exportClips').addEventListener('click', exportClips);
     });
 
     let player;
-    window.onYouTubeIframeAPIReady = () => console.log('API YouTube prête');
+    const events = [];
+
+    window.onYouTubeIframeAPIReady = () => console.log('YouTube API prête');
 
     function initVideo() {
       const progress = document.getElementById('progress');
       try {
-        progress.innerText = 'Initialisation de la vidéo...';
+        progress.innerText = 'Init vidéo...';
         const url = document.getElementById('videoUrl').value.trim();
         if (!url) throw new Error('URL manquante');
         const videoId = new URL(url).searchParams.get('v');
         if (!videoId) throw new Error('ID vidéo introuvable');
 
-        // Crée l'iframe et le player
         document.getElementById('playerContainer').innerHTML =
           `<iframe id="ytplayer" width="800" height="450"
             src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
@@ -65,31 +64,30 @@
         player = new YT.Player('ytplayer', {
           events: {
             onReady: () => {
-              progress.innerText = 'Vidéo chargée. Vous pouvez taguer maintenant.';
+              progress.innerText = 'Vidéo prête, taguez !';
               document.getElementById('controls').style.display = 'block';
               document.getElementById('events').style.display = 'table';
             },
-            onError: e => { throw new Error('Erreur YouTube API: ' + e.data); }
+            onError: e => { throw new Error('YT API: ' + e.data); }
           }
         });
       } catch (err) {
         console.error(err);
-        progress.innerText = 'Erreur : ' + err.message;
-        alert('Erreur lors du chargement : ' + err.message);
+        alert('Erreur chargement vidéo: ' + err.message);
+        progress.innerText = 'Erreur: ' + err.message;
       }
     }
 
-    const events = [];
     document.body.addEventListener('click', ev => {
       if (!ev.target.classList.contains('tagBtn')) return;
-      const type = ev.target.dataset.event;
-      const time = (player && player.getCurrentTime) ? player.getCurrentTime() : 0;
-      events.push({ type, time });
+      const time = player.getCurrentTime();
+      events.push({ type: ev.target.dataset.event, time });
       renderEvents();
     });
 
     function renderEvents() {
-      const tbody = document.querySelector('#events tbody'); tbody.innerHTML = '';
+      const tbody = document.querySelector('#events tbody');
+      tbody.innerHTML = '';
       events.forEach((e, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>${i+1}</td><td>${e.type}</td><td>${formatTime(e.time)}</td>`;
@@ -104,53 +102,52 @@
       return `${h}:${m}:${s}`;
     }
 
-    let ffmpegModule;
+    let ffmpeg;
     async function getFFmpeg() {
-      if (!ffmpegModule) {
-        console.log('Chargement de FFmpeg...');
-        const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
-        ffmpegModule = createFFmpeg({ log: true });
-        ffmpegModule.fetchFile = fetchFile;
-        await ffmpegModule.load();
+      if (!ffmpeg) {
+        console.log('Chargement FFmpeg...');
+        const {{ createFFmpeg, fetchFile }} = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
+        ffmpeg = createFFmpeg({
+          log: true,
+          corePath: 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg-core.js'
+        });
+        ffmpeg.fetchFile = fetchFile;
+        await ffmpeg.load();
         console.log('FFmpeg prêt');
       }
-      return ffmpegModule;
+      return ffmpeg;
     }
 
     async function exportClips() {
       const progress = document.getElementById('progress');
       try {
-        if (!events.length) throw new Error('Aucun événement tagué.');
-        progress.innerText = 'Préparation de l'export...';
-        const ffmpeg = await getFFmpeg();
-        const videoId = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
-        progress.innerText = 'Récupération du flux vidéo...';
-        const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${videoId}`)).json();
-        const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
-        if (!mp4Info || !mp4Info.url) throw new Error('Flux MP4 non disponible.');
-        const data = await ffmpeg.fetchFile(mp4Info.url);
-        ffmpeg.FS('writeFile', 'in.mp4', data);
+        if (!events.length) throw new Error('Pas d'événement.');
+        progress.innerText = 'Préparation...';
+        const ff = await getFFmpeg();
+        progress.innerText = 'Récupération flux...';
+        const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
+        const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${id}`)).json();
+        const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
+        const data = await ff.fetchFile(mp4);
+        ff.FS('writeFile', 'in.mp4', data);
 
         for (let i = 0; i < events.length; i++) {
-          const start = events[i].time;
-          const end = start + 5;
-          progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
-          await ffmpeg.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
-          const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
+          const start = events[i].time, end = start + 5;
+          progress.innerText = `Découpe ${i+1}/${events.length}...`;
+          await ff.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `c${i}.mp4`);
+          const out = ff.FS('readFile', `c${i}.mp4`);
           const blob = new Blob([out.buffer], { type: 'video/mp4' });
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
-          a.download = `clip_${i+1}_${events[i].type}_${formatTime(events[i].time).replace(/:/g,'')}.mp4`;
-          document.body.appendChild(a);
-          // Téléchargement automatique
+          a.download = `clip_${i+1}_${events[i].type}.mp4`;
           a.click();
           setTimeout(() => URL.revokeObjectURL(a.href), 30000);
         }
         progress.innerText = 'Export terminé.';
       } catch (err) {
         console.error(err);
-        progress.innerText = 'Erreur : ' + err.message;
-        alert('Erreur export : ' + err.message);
+        alert('Erreur export: ' + err.message);
+        progress.innerText = 'Erreur: ' + err.message;
       }
     }
   </script>
