@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basket Clipper - Mode LongoMatch</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 1rem; }
+    #controls, #events { margin-top: 1rem; }
+    button { margin: 0.2rem; padding: 0.5rem 1rem; font-size: 1rem; }
+    #timeline { width: 100%; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Basket Clipper - Mode LongoMatch</h1>
+  <input id="videoUrl" placeholder="URL YouTube" />
+  <button id="loadVideo">Charger la vidéo</button>
+
+  <div id="playerContainer"></div>
+  <div id="controls" style="display:none;">
+    <h3>Taguez vos événements :</h3>
+    <button data-event="But" class="tagBtn">But</button>
+    <button data-event="Passe" class="tagBtn">Passe</button>
+    <button data-event="Dribble" class="tagBtn">Dribble</button>
+    <button data-event="Fautes" class="tagBtn">Faute</button>
+    <button id="exportClips">Exporter les clips</button>
+  </div>
+
+  <table id="events" style="display:none;">
+    <thead>
+      <tr><th>#</th><th>Type</th><th>Timestamp</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div id="progress"></div>
+
+  <script type="module">
+    import { createFFmpeg, fetchFile } from 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js';
+    const ffmpeg = createFFmpeg({ log: true });
+    const invidiousApi = 'https://yewtu.cafe/api/v1/videos/';
+
+    let player;
+    let events = [];
+
+    document.getElementById('loadVideo').addEventListener('click', () => {
+      const url = document.getElementById('videoUrl').value.trim();
+      const id = new URL(url).searchParams.get('v');
+      if (!id) return alert('URL YouTube invalide');
+      // Créer le player YouTube
+      document.getElementById('playerContainer').innerHTML = 
+        `<iframe id="ytplayer" type="text/html" width="800" height="450"
+          src="https://www.youtube.com/embed/${id}?enablejsapi=1"
+          frameborder="0"></iframe>`;
+      // Charger API
+      window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player('ytplayer', { events: {
+          onReady: () => {
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('events').style.display = 'table';
+          }
+        }});
+      };
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+    });
+
+    // Gestion des tags
+    document.querySelectorAll('.tagBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.event;
+        const time = player.getCurrentTime();
+        events.push({ type, time });
+        renderEvents();
+      });
+    });
+
+    function renderEvents() {
+      const tbody = document.querySelector('#events tbody');
+      tbody.innerHTML = '';
+      events.forEach((e, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${i+1}</td><td>${e.type}</td><td>${formatTime(e.time)}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function formatTime(sec) {
+      const h = Math.floor(sec/3600).toString().padStart(2,'0');
+      const m = Math.floor((sec%3600)/60).toString().padStart(2,'0');
+      const s = Math.floor(sec%60).toString().padStart(2,'0');
+      return `${h}:${m}:${s}`;
+    }
+
+    // Export clips
+    document.getElementById('exportClips').addEventListener('click', async () => {
+      if (!events.length) return alert('Aucun événement tagué');
+      document.getElementById('progress').innerText = 'Chargement FFmpeg...';
+      if (!ffmpeg.isLoaded()) await ffmpeg.load();
+
+      // Récupérer URL vidéo
+      const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
+      const info = await (await fetch(invidiousApi + id)).json();
+      const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
+      const data = await fetchFile(mp4);
+      ffmpeg.FS('writeFile', 'in.mp4', data);
+
+      // Créer chaque clip
+      for (let i = 0; i < events.length; i++) {
+        const start = events[i].time;
+        // 5s par défaut après l'événement
+        const end = start + 5;
+        document.getElementById('progress').innerText = `Découpe clip ${i+1}/${events.length}...`;
+        await ffmpeg.run(
+          '-ss', start.toString(),
+          '-to', end.toString(),
+          '-i', 'in.mp4',
+          '-c', 'copy',
+          `clip_${i+1}.mp4`
+        );
+        const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
+        const blob = new Blob([out.buffer], { type: 'video/mp4' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `clip_${i+1}_${events[i].type}_${formatTime(events[i].time).replace(/:/g,'')}.mp4`;
+        a.innerText = `Télécharger clip ${i+1}`;
+        document.body.appendChild(a);
+      }
+      document.getElementById('progress').innerText = 'Terminé.';
+    });
+  </script>
+</body>
+</html>
