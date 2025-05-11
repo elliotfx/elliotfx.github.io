@@ -10,7 +10,7 @@
     button { margin: 0.2rem; padding: 0.5rem 1rem; font-size: 1rem; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
     th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
-    #progress { margin-top: 1rem; font-style: italic; }
+    #progress { margin-top: 1rem; font-style: italic; color: #555; }
   </style>
   <script src="https://www.youtube.com/iframe_api"></script>
 </head>
@@ -35,13 +35,13 @@
     </thead>
     <tbody></tbody>
   </table>
-  <div id="progress"></div>
+  <div id="progress">En attente d'une action...</div>
 
   <script type="module">
     console.log('Module chargé');
+
     document.addEventListener('DOMContentLoaded', () => {
-      const loadBtn = document.getElementById('loadVideo');
-      loadBtn.addEventListener('click', initVideo);
+      document.getElementById('loadVideo').addEventListener('click', initVideo);
       document.getElementById('exportClips').addEventListener('click', exportClips);
     });
 
@@ -49,36 +49,41 @@
     window.onYouTubeIframeAPIReady = () => console.log('API YouTube prête');
 
     function initVideo() {
-      console.log('Clic sur Charger la vidéo');
-      const url = document.getElementById('videoUrl').value.trim();
-      if (!url) return alert('Veuillez saisir une URL YouTube.');
-      let videoId;
-      try { videoId = new URL(url).searchParams.get('v'); }
-      catch { return alert('URL invalide.'); }
-      if (!videoId) return alert('URL YouTube invalide.');
+      const progress = document.getElementById('progress');
+      try {
+        progress.innerText = 'Initialisation de la vidéo...';
+        const url = document.getElementById('videoUrl').value.trim();
+        if (!url) throw new Error('URL manquante');
+        const videoId = new URL(url).searchParams.get('v');
+        if (!videoId) throw new Error('ID vidéo introuvable');
 
-      document.getElementById('playerContainer').innerHTML =
-        `<iframe id="ytplayer" width="800" height="450"
-          src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
-          frameborder="0"></iframe>`;
-
-      player = new YT.Player('ytplayer', {
-        events: {
-          onReady: () => {
-            console.log('Player prêt');
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('events').style.display = 'table';
-          },
-          onError: e => console.error('Erreur YouTube', e)
-        }
-      });
+        // Crée l'iframe et le player
+        document.getElementById('playerContainer').innerHTML =
+          `<iframe id="ytplayer" width="800" height="450"
+            src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+            frameborder="0"></iframe>`;
+        player = new YT.Player('ytplayer', {
+          events: {
+            onReady: () => {
+              progress.innerText = 'Vidéo chargée. Vous pouvez taguer maintenant.';
+              document.getElementById('controls').style.display = 'block';
+              document.getElementById('events').style.display = 'table';
+            },
+            onError: e => { throw new Error('Erreur YouTube API: ' + e.data); }
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        progress.innerText = 'Erreur : ' + err.message;
+        alert('Erreur lors du chargement : ' + err.message);
+      }
     }
 
     const events = [];
     document.body.addEventListener('click', ev => {
       if (!ev.target.classList.contains('tagBtn')) return;
       const type = ev.target.dataset.event;
-      const time = player.getCurrentTime();
+      const time = (player && player.getCurrentTime) ? player.getCurrentTime() : 0;
       events.push({ type, time });
       renderEvents();
     });
@@ -113,36 +118,40 @@
     }
 
     async function exportClips() {
-      if (!events.length) return alert('Aucun événement tagué.');
       const progress = document.getElementById('progress');
-      const ffmpeg = await getFFmpeg();
-      
-      const videoId = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
-      progress.innerText = 'Récupération des formats vidéo...';
-      const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${videoId}`)).json();
-      const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
-      if (!mp4Info || !mp4Info.url) return alert('Flux MP4 non disponible.');
-      const mp4Url = mp4Info.url;
+      try {
+        if (!events.length) throw new Error('Aucun événement tagué.');
+        progress.innerText = 'Préparation de l'export...';
+        const ffmpeg = await getFFmpeg();
+        const videoId = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
+        progress.innerText = 'Récupération du flux vidéo...';
+        const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${videoId}`)).json();
+        const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
+        if (!mp4Info || !mp4Info.url) throw new Error('Flux MP4 non disponible.');
+        const data = await ffmpeg.fetchFile(mp4Info.url);
+        ffmpeg.FS('writeFile', 'in.mp4', data);
 
-      progress.innerText = 'Téléchargement de la vidéo...';
-      const videoData = await ffmpeg.fetchFile(mp4Url);
-      ffmpeg.FS('writeFile', 'in.mp4', videoData);
-
-      for (let i = 0; i < events.length; i++) {
-        const start = events[i].time;
-        const end = start + 5;
-        progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
-        await ffmpeg.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
-        const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
-        const blob = new Blob([out.buffer], { type: 'video/mp4' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `clip_${i+1}_${events[i].type}_${formatTime(events[i].time).replace(/:/g,'')}.mp4`;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+        for (let i = 0; i < events.length; i++) {
+          const start = events[i].time;
+          const end = start + 5;
+          progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
+          await ffmpeg.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
+          const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
+          const blob = new Blob([out.buffer], { type: 'video/mp4' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `clip_${i+1}_${events[i].type}_${formatTime(events[i].time).replace(/:/g,'')}.mp4`;
+          document.body.appendChild(a);
+          // Téléchargement automatique
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+        }
+        progress.innerText = 'Export terminé.';
+      } catch (err) {
+        console.error(err);
+        progress.innerText = 'Erreur : ' + err.message;
+        alert('Erreur export : ' + err.message);
       }
-      progress.innerText = 'Export terminé.';
     }
   </script>
 </body>
