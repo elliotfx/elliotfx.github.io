@@ -11,11 +11,14 @@
     #timeline { width: 100%; margin-top: 1rem; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
     th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
+    #progress { margin-top: 1rem; font-style: italic; }
   </style>
+  <!-- Charge l'API YouTube avant le module -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <h1>Basket Clipper - Mode LongoMatch</h1>
-  <input id="videoUrl" placeholder="URL YouTube" />
+  <input id="videoUrl" placeholder="URL YouTube (https://...)" />
   <button id="loadVideo">Charger la vidéo</button>
 
   <div id="playerContainer"></div>
@@ -37,44 +40,63 @@
   <div id="progress"></div>
 
   <script type="module">
-    import { createFFmpeg, fetchFile } from 'https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js';
-    const ffmpeg = createFFmpeg({ log: true });
-    const invidiousApi = 'https://yewtu.cafe/api/v1/videos/';
+    console.log('Module FFmpeg + YouTube Clipper chargé');
 
-    let player;
-    let events = [];
-
-    document.getElementById('loadVideo').addEventListener('click', () => {
-      const url = document.getElementById('videoUrl').value.trim();
-      const id = new URL(url).searchParams.get('v');
-      if (!id) return alert('URL YouTube invalide');
-      // Créer le player YouTube
-      document.getElementById('playerContainer').innerHTML = 
-        `<iframe id="ytplayer" type="text/html" width="800" height="450"
-          src="https://www.youtube.com/embed/${id}?enablejsapi=1"
-          frameborder="0"></iframe>`;
-      // Charger API
-      window.onYouTubeIframeAPIReady = () => {
-        player = new YT.Player('ytplayer', { events: {
-          onReady: () => {
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('events').style.display = 'table';
-          }
-        }});
-      };
-      const tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
+    // Initialisation DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM prêt');
+      const loadBtn = document.getElementById('loadVideo');
+      loadBtn.addEventListener('click', initVideo);
     });
 
-    // Gestion des tags
-    document.querySelectorAll('.tagBtn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const type = btn.dataset.event;
-        const time = player.getCurrentTime();
-        events.push({ type, time });
-        renderEvents();
+    // YouTube IFrame API callback
+    let player;
+    window.onYouTubeIframeAPIReady = () => {
+      console.log('API YouTube prête');
+    };
+
+    function initVideo() {
+      console.log('Clic sur Charger la vidéo');
+      const url = document.getElementById('videoUrl').value.trim();
+      if (!url) return alert('Veuillez saisir une URL YouTube.');
+
+      let videoId;
+      try {
+        videoId = new URL(url).searchParams.get('v');
+      } catch (e) {
+        console.error('URL invalide', url, e);
+      }
+      if (!videoId) {
+        return alert('URL YouTube invalide.');
+      }
+
+      // Crée l'iframe
+      const container = document.getElementById('playerContainer');
+      container.innerHTML = `<iframe id="ytplayer" width="800" height="450"
+        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+        frameborder="0"></iframe>`;
+
+      // Initialise le player
+      player = new YT.Player('ytplayer', {
+        events: {
+          onReady: () => {
+            console.log('Player prêt');
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('events').style.display = 'table';
+          },
+          onError: (e) => console.error('Erreur YouTube', e)
+        }
       });
+    }
+
+    // Gestion des événements tagués
+    const events = [];
+    document.addEventListener('click', ev => {
+      if (!ev.target.classList.contains('tagBtn')) return;
+      const type = ev.target.dataset.event;
+      const time = player.getCurrentTime();
+      events.push({ type, time });
+      renderEvents();
     });
 
     function renderEvents() {
@@ -94,32 +116,39 @@
       return `${h}:${m}:${s}`;
     }
 
-    // Export clips
-    document.getElementById('exportClips').addEventListener('click', async () => {
-      if (!events.length) return alert('Aucun événement tagué');
-      document.getElementById('progress').innerText = 'Chargement FFmpeg...';
-      if (!ffmpeg.isLoaded()) await ffmpeg.load();
+    // Import dynamique de FFmpeg
+    let ffmpegModule;
+    async function getFFmpeg() {
+      if (!ffmpegModule) {
+        console.log('Chargement dynamique de FFmpeg...');
+        const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
+        ffmpegModule = createFFmpeg({ log: true });
+        ffmpegModule.fetchFile = fetchFile;
+        await ffmpegModule.load();
+        console.log('FFmpeg prêt');
+      }
+      return ffmpegModule;
+    }
 
-      // Récupérer URL vidéo
-      const id = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
-      const info = await (await fetch(invidiousApi + id)).json();
+    // Export des clips
+    document.getElementById('exportClips').addEventListener('click', async () => {
+      if (!events.length) return alert('Aucun événement tagué.');
+      const progress = document.getElementById('progress');
+      const ffmpeg = await getFFmpeg();
+
+      // Récupère flux MP4 via Invidious
+      const videoId = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
+      const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${videoId}`)).json();
       const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
-      const data = await fetchFile(mp4);
+      const data = await ffmpeg.fetchFile(mp4);
       ffmpeg.FS('writeFile', 'in.mp4', data);
 
-      // Créer chaque clip
+      // Découpe et propose téléchargement
       for (let i = 0; i < events.length; i++) {
         const start = events[i].time;
-        // 5s par défaut après l'événement
         const end = start + 5;
-        document.getElementById('progress').innerText = `Découpe clip ${i+1}/${events.length}...`;
-        await ffmpeg.run(
-          '-ss', start.toString(),
-          '-to', end.toString(),
-          '-i', 'in.mp4',
-          '-c', 'copy',
-          `clip_${i+1}.mp4`
-        );
+        progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
+        await ffmpeg.run('-ss', start.toString(), '-to', end.toString(), '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
         const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
         const blob = new Blob([out.buffer], { type: 'video/mp4' });
         const a = document.createElement('a');
@@ -128,7 +157,7 @@
         a.innerText = `Télécharger clip ${i+1}`;
         document.body.appendChild(a);
       }
-      document.getElementById('progress').innerText = 'Terminé.';
+      progress.innerText = 'Terminé.';
     });
   </script>
 </body>
