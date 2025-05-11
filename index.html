@@ -20,7 +20,7 @@
 <body>
   <h1>Basket Clipper - Mode LongoMatch</h1>
   <div id="urlContainer">
-    <input id="videoUrl" placeholder="URL YouTube (https://...)" />
+    <input id="videoUrl" placeholder="URL YouTube (https://...)">
     <button id="loadVideo">Charger</button>
   </div>
 
@@ -63,9 +63,9 @@
         if (!videoId) throw new Error('ID vidéo introuvable');
 
         document.getElementById('playerContainer').innerHTML =
-          `<iframe id="ytplayer" width="800" height="450"
-            src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
-            frameborder="0"></iframe>`;
+          `<iframe id=\"ytplayer\" width=\"800\" height=\"450\"
+            src=\"https://www.youtube.com/embed/${videoId}?enablejsapi=1\"
+            frameborder=\"0\"></iframe>`;
 
         player = new YT.Player('ytplayer', {
           events: {
