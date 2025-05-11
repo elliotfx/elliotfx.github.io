@@ -25,7 +25,7 @@
     <button data-event="But" class="tagBtn">But</button>
     <button data-event="Passe" class="tagBtn">Passe</button>
     <button data-event="Dribble" class="tagBtn">Dribble</button>
-    <button data-event="Fautes" class="tagBtn">Faute</button>
+    <button data-event="Faute" class="tagBtn">Faute</button>
     <button id="exportClips">Exporter les clips</button>
   </div>
 
@@ -38,10 +38,11 @@
   <div id="progress"></div>
 
   <script type="module">
-    console.log('Module FFmpeg + YouTube Clipper chargé');
+    console.log('Module chargé');
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM prêt');
-      document.getElementById('loadVideo').addEventListener('click', initVideo);
+      const loadBtn = document.getElementById('loadVideo');
+      loadBtn.addEventListener('click', initVideo);
+      document.getElementById('exportClips').addEventListener('click', exportClips);
     });
 
     let player;
@@ -53,13 +54,13 @@
       if (!url) return alert('Veuillez saisir une URL YouTube.');
       let videoId;
       try { videoId = new URL(url).searchParams.get('v'); }
-      catch (e) { console.error('URL invalide', url, e); }
+      catch { return alert('URL invalide.'); }
       if (!videoId) return alert('URL YouTube invalide.');
 
-      const container = document.getElementById('playerContainer');
-      container.innerHTML = `<iframe id="ytplayer" width="800" height="450"
-        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
-        frameborder="0"></iframe>`;
+      document.getElementById('playerContainer').innerHTML =
+        `<iframe id="ytplayer" width="800" height="450"
+          src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+          frameborder="0"></iframe>`;
 
       player = new YT.Player('ytplayer', {
         events: {
@@ -74,11 +75,12 @@
     }
 
     const events = [];
-    document.addEventListener('click', ev => {
+    document.body.addEventListener('click', ev => {
       if (!ev.target.classList.contains('tagBtn')) return;
       const type = ev.target.dataset.event;
       const time = player.getCurrentTime();
-      events.push({ type, time }); renderEvents();
+      events.push({ type, time });
+      renderEvents();
     });
 
     function renderEvents() {
@@ -101,42 +103,47 @@
     async function getFFmpeg() {
       if (!ffmpegModule) {
         console.log('Chargement de FFmpeg...');
-        const {{ createFFmpeg, fetchFile }} = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
+        const { createFFmpeg, fetchFile } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
         ffmpegModule = createFFmpeg({ log: true });
         ffmpegModule.fetchFile = fetchFile;
-        await ffmpegModule.load(); console.log('FFmpeg prêt');
+        await ffmpegModule.load();
+        console.log('FFmpeg prêt');
       }
       return ffmpegModule;
     }
 
-    document.getElementById('exportClips').addEventListener('click', async () => {
+    async function exportClips() {
       if (!events.length) return alert('Aucun événement tagué.');
       const progress = document.getElementById('progress');
       const ffmpeg = await getFFmpeg();
+      
       const videoId = new URL(document.getElementById('videoUrl').value).searchParams.get('v');
+      progress.innerText = 'Récupération des formats vidéo...';
       const info = await (await fetch(`https://yewtu.cafe/api/v1/videos/${videoId}`)).json();
-      const mp4 = info.formats.find(f => f.mimeType.includes('mp4')).url;
-      const data = await ffmpeg.fetchFile(mp4);
-      ffmpeg.FS('writeFile', 'in.mp4', data);
+      const mp4Info = info.formats.find(f => f.mimeType.includes('mp4'));
+      if (!mp4Info || !mp4Info.url) return alert('Flux MP4 non disponible.');
+      const mp4Url = mp4Info.url;
+
+      progress.innerText = 'Téléchargement de la vidéo...';
+      const videoData = await ffmpeg.fetchFile(mp4Url);
+      ffmpeg.FS('writeFile', 'in.mp4', videoData);
 
       for (let i = 0; i < events.length; i++) {
         const start = events[i].time;
         const end = start + 5;
         progress.innerText = `Découpe clip ${i+1}/${events.length}...`;
-        await ffmpeg.run('-ss', start.toString(), '-to', end.toString(), '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
+        await ffmpeg.run('-ss', `${start}`, '-to', `${end}`, '-i', 'in.mp4', '-c', 'copy', `clip_${i+1}.mp4`);
         const out = ffmpeg.FS('readFile', `clip_${i+1}.mp4`);
         const blob = new Blob([out.buffer], { type: 'video/mp4' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = `clip_${i+1}_${events[i].type}_${formatTime(events[i].time).replace(/:/g,'')}.mp4`;
         document.body.appendChild(a);
-        // Déclenche automatiquement le téléchargement
         a.click();
-        // Libère l'URL après quelques secondes
         setTimeout(() => URL.revokeObjectURL(a.href), 30000);
       }
-      progress.innerText = 'Terminé.';
-    });
+      progress.innerText = 'Export terminé.';
+    }
   </script>
 </body>
 </html>
