@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Elliot FEROUX" />
+  <meta name="description" content="Portfolio de Elliot FEROUX" />
+  <title>Mes Projets (Portfolio Elliot FEROUX)</title>
+
+  <!-- Chemin vers votre CSS des projets -->
+  <link rel="stylesheet" type="text/css" href="./../css/projet.css" media="screen" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet" />
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="SD.png" type="image/x-icon" />
+  <!-- Votre fichier JS pour toggler les projets et filtres -->
+  <script src="../JS/script_projets.js"></script>
+</head>
+
+<body>
+  <!-- =========================================
+       HEADER
+       ========================================= -->
+  <header>
+    <div class="navbar" id="nav">
+      <div class="burger-container">
+        <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+      </div>
+      <ul class="navbar-menu">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+        <li class="link-nav-underline-projet"><a href="projets.html">PROJETS</a></li>
+        <li class="logo">
+          <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+            <img src="./../Images/SD.png" alt="Logo BUT Sciences des Données" />
+          </a>
+        </li>
+        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+
+    <div id="burgerbar">
+      <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+        <img src="./../Images/SD.png" alt="Logo BUT Sciences des Données" class="logo-burger" />
+      </a>
+      <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+      <ul class="burger-menu-list">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li><br />
+        <li class="link-nav-underline"><a href="projets1.html">PROJETS</a></li><br />
+        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li><br />
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =========================================
+       FILTRES
+       ========================================= -->
+  <div class="filter-container" id="filter-container">
+    <div class="filter-header" onclick="toggleFilters()">
+      <i class="fa fa-filter"></i> Filtres
+      <i class="fa fa-chevron-down toggle-icon"></i>
+    </div>
+    <div class="filters" id="filters">
+      <label><input type="checkbox" value="Premiere-annee" onchange="filterProjects()" /> Première Année</label>
+      <label><input type="checkbox" value="Deuxieme-annee" onchange="filterProjects()" /> Deuxième Année</label>
+      <label><input type="checkbox" value="Anglais" onchange="filterProjects()" /> Anglais</label>
+      <label><input type="checkbox" value="Oral" onchange="filterProjects()" /> Oral</label>
+      <label><input type="checkbox" value="Python" onchange="filterProjects()" /> Python</label>
+      <label><input type="checkbox" value="JavaScript" onchange="filterProjects()" /> JavaScript</label>
+      <label><input type="checkbox" value="Excel" onchange="filterProjects()" /> Excel</label>
+      <label><input type="checkbox" value="VBA" onchange="filterProjects()" /> VBA</label>
+      <label><input type="checkbox" value="HTML" onchange="filterProjects()" /> HTML</label>
+      <label><input type="checkbox" value="CSS" onchange="filterProjects()" /> CSS</label>
+      <label><input type="checkbox" value="JSON" onchange="filterProjects()" /> JSON</label>
+      <label><input type="checkbox" value="Plotly" onchange="filterProjects()" /> plotlyjs </label>
+      <label><input type="checkbox" value="PhP" onchange="filterProjects()" /> PhP </label>
+      <label><input type="checkbox" value="SQL" onchange="filterProjects()" /> SQL </label>
+      <label><input type="checkbox" value="WebScrapping" onchange="filterProjects()" /> WebScrapping </label>
+      <label><input type="checkbox" value="Power-BI" onchange="filterProjects()" /> Power-BI</label>
+      <label><input type="checkbox" value="Regression" onchange="filterProjects()" /> Régression</label>
+      <label><input type="checkbox" value="R" onchange="filterProjects()" /> R</label>
+      <label><input type="checkbox" value="serietemp" onchange="filterProjects()" /> Série Temporelle</label>
+
+
+
+    </div>
+  </div>
+
+  <!-- =========================================
+       PROJETS EXISTANTS
+       ========================================= -->
+
+  <!-- PROJET 1 : Oral & Anglais -->
+  <div class="project" data-themes="Anglais,Premiere-annee,Oral" data-color="noir">
+    <div class="text-block">
+      <h2><a href="test.html">Oral & Anglais</a></h2>
+      <p>Dans le cadre de nos cours de Communication et d'Anglais, nous devions faire un exposé sur une destination touristique en Anglais.</p>
+      <!-- L’ID du bouton doit être unique et correspondre à l’ID du détail  -->
+      <button class="go-to" id="btn-light-green" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/NYC.jpeg" alt="Photo de la statue de la liberté" />
+    </div>
+    <div class="project-detail" id="display-btn-light-green">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Présentation en anglais d'un territoire économique et culturel</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li> &#8901;
+              <li>CHABOT Quentin</li> &#8901;
+              <li>COURTABAN Erwan</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Ce projet fût relativement stressant. Après une phase de recherche sur New-York, l'oral en anglais m'a permis de prendre confiance en moi et de comprendre l'importance du travail en équipe.</p>
+          </div>
+        </div>
+        <embed src="../Images/NYC.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 2 : Python & JSON & CSV -->
+  <div class="project" data-themes="Python,Premiere-annee,JSON,CSV" data-color="blanc">
+    <div class="text-block">
+      <h2>Python & JSON & CSV</h2>
+      <p>Dans le cadre de notre apprentissage du langage Python, nous avons dû traiter un fichier JSON pour le convertir en CSV.</p>
+      <button class="go-to" id="btn-yellow" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/json.png" alt="Image du projet JSON" />
+    </div>
+    <div class="project-detail" id="display-btn-yellow">
+      <hr class="clair" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Gestion de fichier Python</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li> &#8901;
+              <li>DUJOUR Valentin</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Nous avons transformé un fichier JSON en CSV en utilisant les librairies json et csv de Python. Ce projet m'a permis de comprendre les structures algorithmiques de base.</p>
+          </div>
+        </div>
+        <embed src="../Images/gestion fichiers.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 3 : Excel & VBA -->
+  <div class="project" data-themes="Excel,Premiere-annee,VBA" data-color="noir">
+    <div class="text-block">
+      <h2>Excel & VBA</h2>
+      <p>Dans le cadre de l'apprentissage du langage VBA, nous avons réalisé un outil de gestion de notes en une semaine.</p>
+      <button class="go-to" id="btn-dark-purple" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/VBA.png" alt="Image VBA" />
+    </div>
+    <div class="project-detail" id="display-btn-dark-purple">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Création d'un reporting</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li> &#8901;
+              <li>DUJOUR Valentin</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Ce projet nous a permis de maîtriser les outils graphiques et algorithmiques de VBA pour réaliser un reporting sous Excel.</p>
+          </div>
+        </div>
+        <embed src="../Images/VBA.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 4 : Régression Linéaire (R & Excel) -->
+  <div class="project" data-themes="Regression,Premiere-annee,R,Excel" data-color="blanc">
+    <div class="text-block">
+      <h2>Régression Linéaire (R & Excel)</h2>
+      <p>Nous avons appliqué un modèle linéaire pour prédire des prix d'appartements à Paris.</p>
+      <button class="go-to" id="btn-orange" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/reg.png" alt="Image régression" />
+    </div>
+    <div class="project-detail" id="display-btn-orange">
+      <hr class="clair" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Régression sur des données réelles</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li> &#8901;
+              <li>FORESTIER Julien</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Malgré quelques difficultés en mathématiques et avec le langage R, ce projet m'a permis de comprendre l'importance des modèles prédictifs.</p>
+          </div>
+        </div>
+        <embed src="../Images/Régression.pdf" type="application/pdf" class="image-project" width="800" height="500" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 5 : SAE - Portfolio -->
+  <div class="project" data-themes="Premiere-annee,HTML,CSS,JavaScript" data-color="noir">
+    <div class="text-block">
+      <h2>SAE - Portfolio</h2>
+      <p>Création d'un portfolio numérique pour prendre en main HTML, CSS et JavaScript.</p>
+      <button class="go-to" id="btn-pink" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/portfolio.png" alt="Image Portfolio" />
+    </div>
+    <div class="project-detail" id="display-btn-pink">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Portfolio</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Réalisation manuelle complète du portfolio pour comprendre en profondeur le fonctionnement du HTML, CSS et JavaScript. </p>
+            <p>Sur cette année j'ai essayé de regler tout les problèmes de responsive. Deplus j'ai revu totalement les projets en changeant les détails et en ajoutant des filtres, j'ai pu creer des visualisations sur mes matchs de basket</p>
+          </div>
+        </div>
+        <embed src="../Images/pf.pdf" type="application/pdf" class="image-project" width="800" height="500" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 6 : Power Bi & Python -->
+  <div class="project" data-themes="Power-BI,Premiere-annee,Python" data-color="blanc">
+    <div class="text-block">
+      <h2>Power Bi & Python</h2>
+      <p>Création d'un outil interactif d'analyse de données pour évaluer les caractéristiques des AcVC en France.</p>
+      <button class="go-to" id="btn-dark-green" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/pb.png" alt="Image Power BI" />
+    </div>
+    <div class="project-detail" id="display-btn-dark-green">
+      <hr class="clair" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Analyse de données, reporting et datavisualisation</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li> &#8901;
+              <li>ANDREOLI Andrea</li> &#8901;
+              <li>BERRUYER Justin</li> &#8901;
+              <li>BADOZ Marius</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Ce projet m'a permis d'aborder la représentativité des données ainsi que la coordination en équipe, malgré quelques retards.</p>
+          </div>
+        </div>
+        <iframe class="image-project" width="560" height="315"
+          src="https://www.youtube.com/embed/YTrEuMzms54?si=PDIz5C_v3B9qgtbQ" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJET 7 : Série Temporelle -->
+  <div class="project" data-themes="Deuxieme-annee,serietemp,Excel" data-color="noir">
+    <div class="text-block">
+      <h2>Série Temporelle</h2>
+      <p>Rédaction d'un rapport sur les importations au Danemark</p>
+      <button class="go-to" id="btn-blue" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <img src="./../Images/statinf.png" alt="graphique" />
+    </div>
+    <div class="project-detail" id="display-btn-blue">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">SAÉ - Série Temporelle</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <li>FEROUX Elliot</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>Dans le cadre de ce projet, j’ai réalisé une analyse statistique approfondie des importations danoises sur la période 2000-2024, en utilisant des données mensuelles provenant de l’OCDE. J’ai commencé par une analyse descriptive qui a mis en évidence une croissance significative des importations, accompagnée de fluctuations saisonnières récurrentes. Pour modéliser cette évolution, j’ai testé plusieurs approches (modèle linéaire, exponentiel et quadratique) et retenu le modèle linéaire, qui s’est avéré le plus adapté aux données. En appliquant une décomposition additive et la méthode de Buys-Ballot, j’ai pu isoler les composantes de tendance et de saisonnalité, et ainsi réaliser des prévisions précises pour 2024 et 2025. Ce travail a permis non seulement de mieux comprendre les dynamiques économiques sous-jacentes, mais également de fournir aux décideurs des outils stratégiques pour anticiper les évolutions futures du marché.</p>
+          </div>
+        </div>
+        <embed src="../Images/Ali.pdf" type="application/pdf" class="image-project" width="800" height="500" />
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       MODÈLES DE PROJET (À COPIER/COLLER)
+       ========================================= -->
+
+
+  <!-- Modèle 1 -->
+  <div class="project" data-themes="Excel,VBA, Deuxieme-annee" data-color="blanc">
+    <div class="text-block">
+      <h2>VBA & Excel</h2>
+      <p>Notre mission consistait à développer une application Excel intuitive permettant de saisir les données des joueurs de football et de les classer automatiquement selon plusieurs critères. L’interface conviviale devait permettre aux utilisateurs d’entrer facilement les informations et d’obtenir en retour un classement personnalisé basé sur ces données.</p>
+      <!-- 
+        - Remplacez `btn-model-1` par un ID unique (par ex. `btn-monprojet1`)
+        - L’ID du div .project-detail doit être `display-` + l’ID du bouton
+      -->
+      <button class="go-to" id="btn-vba2" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <!-- Remplacez le src par le chemin vers votre image / illustration -->
+      <img src="./../Images/chamois.png" alt="Illustration Projet 1 (modèle)" />
+    </div>
+    <div class="project-detail" id="display-btn-vba2">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">Application VBA : Recrutement de la section sportive du lycée de la Venise Verte</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <!-- Liste des membres / auteurs -->
+              <li>Lola Dixneuf</li> &#8901;
+              <li>Elliot Feroux</li>
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>
+              Ce projet avait pour ambition de développer, sous Excel, une application VBA destinée à faciliter la sélection des candidats de la section sportive Football du lycée de la Venise Verte. Nous avons structuré le classeur autour de feuilles clés : “Candidats2024” pour la liste des postulants et “Barème2024” pour le calcul automatique des notes et ajouté des modules pour enregistrer les performances et générer un classement.
+
+              <br><br>Toutefois, nos difficultés d’organisation et une vision initiale trop ambitieuse ont parfois freiné notre élan : la coordination du travail en équipe et la définition des priorités se sont révélées plus complexes que prévu, et nous ont parfois découragés. Malgré ces obstacles, nous avons réussi à implémenter les fonctionnalités essentielles — saisie des résultats, répartition alphabétique des joueurs, génération du classement final et tableau de bord de suivi.
+
+              <br><br>Ce projet m’a surtout permis de renouer avec VBA, un langage que j’affectionne particulièrement. J’ai pris beaucoup de plaisir à écrire des macros optimisées et commentées, et à automatiser ce processus de sélection de A à Z.
+
+
+            </p>
+            </div>
+
+
+        </div>
+        <!-- 
+          Exemple d’inclusion de PDF, vidéo ou autre média :
+          - PDF : <embed src="chemin/monfichier.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+          - Vidéo YouTube : <iframe class="image-project" width="560" height="315"
+              src="https://www.youtube.com/embed/ID_VIDEO" frameborder="0" allowfullscreen></iframe>
+        -->
+        <!-- Exemple : PDF embarqué -->
+        <!-- <embed src="../Images/monfichier1.pdf" width="800" height="500" type="application/pdf" class="image-project" /> -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="project" data-themes="JavaScript,CSS,HTML,Deuxieme-annee,Plotly" data-color="noir">
+    <div class="text-block">
+      <h2>Plotly.js - Site WEB</h2>
+      <p>Dans le cadre de notre quatrième semestre en BUT Sciences et Données, nous avons réalisé ce premier projet de Programmation Web : concevoir une application interactive exploitant les données Airbnb de Paris (snapshot 6 septembre 2024). L’objectif était de proposer un outil de visualisation et d’analyse permettant de filtrer par type de logement, prix et arrondissement, d’explorer à la fois des graphiques dynamiques, une carte ponctuelle et une carte choroplèthe, ainsi que des small multiples pour comparer facilement les distributions.</p>
+      <!-- 
+        - Remplacez `btn-model-1` par un ID unique (par ex. `btn-monprojet1`)
+        - L’ID du div .project-detail doit être `display-` + l’ID du bouton
+      -->
+      <button class="go-to" id="btn-plotly" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <!-- Remplacez le src par le chemin vers votre image / illustration -->
+      <img src="./../Images/rbnb.png" alt="Screenshot du Projet" />
+    </div>
+    <div class="project-detail" id="display-btn-plotly">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">Application VBA : Recrutement de la section sportive du lycée de la Venise Verte</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <!-- Liste des membres / auteurs -->
+              <li>Lola Dixneuf</li> &#8901;
+              <li>Elliot Feroux</li>&#8901;
+              <li>Jules DUBUY</li>&#8901;
+              <li>Remi Pierron</li>
+ 
+
+
+              
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>
+              Nous avons développé une application web interactive exploitant les données AirBnB de Paris (snapshot du 6 septembre 2024) pour offrir aux décideurs un outil de visualisation et d’analyse performant. Le projet comprend trois volets : un premier onglet regroupant graphiques et tableaux dynamiques filtrables par type de logement, prix et autres indicateurs clés, avec carte ponctuelle de la ville ; un deuxième onglet présentant une carte choroplèthe par arrondissement affichant tour à tour le nombre de logements, le prix moyen ou la part de logements entiers ; et un troisième onglet proposant des small multiples illustrant la répartition des types de logement dans chaque arrondissement. Le tout a été réalisé en choisissant la technologie Plotly.js, avec un soin particulier apporté à l’ergonomie et à la clarté des visualisations.
+              Côté difficultés, nous n’en avons pas rencontré de majeures : notre méthodologie Kanban fluide et l’usage de Discord pour la communication ont grandement facilité la coordination. Ce travail nous a permis de monter en compétence sur Plotly.js tout en nous remettant en mémoire les fondamentaux du HTML, du CSS et du JavaScript.
+            </p>
+            </div>
+
+
+        </div>
+
+        <embed src="./../Images/airbnb.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+        <!-- 
+          Exemple d’inclusion de PDF, vidéo ou autre média :
+          - PDF : <embed src="chemin/monfichier.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+          - Vidéo YouTube : <iframe class="image-project" width="560" height="315"
+              src="https://www.youtube.com/embed/ID_VIDEO" frameborder="0" allowfullscreen></iframe>
+        -->
+        <!-- Exemple : PDF embarqué -->
+        <!-- <embed src="../Images/monfichier1.pdf" width="800" height="500" type="application/pdf" class="image-project" /> -->
+      </div>
+    </div>
+  </div>
+
+     <div class="project" data-themes="JavaScript,CSS,HTML,Deuxieme-annee,PhP,SQL" data-color="blanc">
+    <div class="text-block">
+      <h2>EasyPhp - Site WEB</h2>
+        <p>Dans le cadre de notre troisième semestre en BUT Sciences et Données, nous avons réalisé ce projet de Programmation Web : développer un site dynamique en PHP/MySQL sous XAMPP, exploitant les données OpenData des performances des joueurs de basketball (table « Player_stat_by_season_full_detail »). L’objectif était de proposer une interface HTML/CSS ergonomique dotée de fonctionnalités PHP pour consulter et gérer les statistiques par saison, d’un mode « MyCareer » simulant la progression d’un avatar, et d’un mode « VS » permettant de comparer deux joueurs sur une saison donnée</p>      <!-- 
+        - Remplacez `btn-model-1` par un ID unique (par ex. `btn-monprojet1`)
+        - L’ID du div .project-detail doit être `display-` + l’ID du bouton
+      -->
+      <button class="go-to" id="btn-php" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <!-- Remplacez le src par le chemin vers votre image / illustration -->
+      <img src="./../Images/nba.png" alt="Screenshot du Projet" />
+    </div>
+    <div class="project-detail" id="display-btn-php">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">Site WEB : OpenData et EasyPhP</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <!-- Liste des membres / auteurs -->
+              <li>Charles Auvrai</li> &#8901;
+              <li>Elliot Feroux</li>&#8901;
+              <li>Jules DUBUY</li>
+ 
+
+
+              
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>
+              
+              Le projet consistait à développer un site web dynamique en PHP/MySQL/JavaScript, fondé sur un jeu de données OpenData sur les performances de joueurs de basketball. Après une modélisation UML des cas d’utilisation, nous avons importé massivement la table « Player_stat_by_season_full_detail » dans MySQL via un script SQL (en contournant les limitations d’EasyPHP), puis mis en place une interface HTML/CSS ergonomique. Côté back-end, des fonctionnalités PHP CRUD permettent d’ajouter, modifier ou supprimer des données, tandis qu’un mode « MyCareer » simule la progression d’un avatar et un mode « VS » compare deux joueurs sur une saison donnée.
+              <br><br>Ce projet m’a vraiment permis de maîtriser XAMPP et EasyPHP. J’ai particulièrement progressé en PHP, tant sur la gestion des bases de données que sur les bonnes pratiques de codage. En revanche, la configuration matérielle de l’IUT (versions divergentes de PHP/MySQL, accès restreints aux ports locaux) a parfois compliqué l’import et les tests, rendant certaines étapes plus laborieuses.
+            
+            </p>
+            </div>
+
+
+        </div>
+
+        <embed src="./../Images/CRphp.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+        <!-- 
+          Exemple d’inclusion de PDF, vidéo ou autre média :
+          - PDF : <embed src="chemin/monfichier.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+          - Vidéo YouTube : <iframe class="image-project" width="560" height="315"
+              src="https://www.youtube.com/embed/ID_VIDEO" frameborder="0" allowfullscreen></iframe>
+        -->
+        <!-- Exemple : PDF embarqué -->
+        <!-- <embed src="../Images/monfichier1.pdf" width="800" height="500" type="application/pdf" class="image-project" /> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="project" data-themes="WebScrapping,Deuxieme-annee,Python" data-color="noir">
+    <div class="text-block">
+      <h2>Python : WebScrapping</h2>
+      <p>Avec Chloé, nous avons d’abord tenté de scraper le site dynamique de la FFBB (JavaScript) avec Beautiful Soup, sans succès. Nous nous sommes alors orientés vers les pages Wikipédia de la NBA pour extraire, par saison et par conférence, les statistiques clés de chaque équipe, avant de nettoyer et structurer ces données dans un DataFrame pandas. Parallèlement, je me suis intéressé à l’API GeoNames, apprenant à formuler et filtrer les requêtes pour enrichir notre tableau de bord interactif.</p>
+        <!-- 
+        - Remplacez `btn-model-1` par un ID unique (par ex. `btn-monprojet1`)
+        - L’ID du div .project-detail doit être `display-` + l’ID du bouton
+      -->
+      <button class="go-to" id="btn-webscrap" type="button" onclick="toggle_project(this.id)">En savoir plus</button>
+    </div>
+    <div class="img-block">
+      <!-- Remplacez le src par le chemin vers votre image / illustration -->
+      <img src="./../Images/webscrapping.png" alt="Screenshot du Projet" />
+    </div>
+  <div class="project-detail" id="display-btn-webscrap">
+      <hr class="foncé" />
+      <div class="all-project-container">
+        <div class="details-project">
+          <div class="title">
+            <h1 class="diplayed-title">Application python : WebScrapping</h1>
+          </div>
+          <div class="group-member">
+            <ul>
+              <!-- Liste des membres / auteurs -->
+              <li>Chloe Decoust</li> &#8901;
+              <li>Elliot Feroux</li>&#8901;
+              <li>Xavier Barbeau</li>&#8901;
+              <li>Andrea Andreoli</li>
+
+
+              
+            </ul>
+          </div>
+          <div class="text-details">
+            <p>
+              
+              Avec Chloé, nous étions en charge de la partie web scraping. Nous avons d’abord choisi de cibler le site de la Fédération Française de Basket-Ball (FFBB) pour extraire des données sur les matchs et les classements. Très vite, nous nous sommes heurtés à la nature dynamique du site : les contenus étaient générés par JavaScript, ce qui rendait Beautiful Soup inopérant pour récupérer les informations souhaitées.
+
+              <br><br>Face à cette impasse, nous avons décidé de changer de source et de nous tourner vers la NBA. Nous avons alors mis en place un script de scraping des pages Wikipédia correspondant à chaque saison NBA. Pour chaque conférence et chaque équipe, nous avons extrait les statistiques clés (titres remportés, nombre de victoires, effectifs, etc.).
+
+              <br><br>Une fois les données récupérées, nous les avons traitées dans un DataFrame pandas : nettoyage des lignes vides ou aberrantes, normalisation des formats et conversion des champs numériques. Le résultat est un fichier de données propre et structuré, directement exploitable dans la phase de visualisation.
+
+              <br><br>Parallèlement, je me suis également intéressé à l’utilisation de l’API GeoNames. J’ai exploré ses différentes méthodes de requête et appris à filtrer et à mettre en forme les données renvoyées pour les intégrer dans notre tableau de bord interactif. Cette expérience m’a permis de comprendre les enjeux de l’utilisation d’une API tierce et d’enrichir significativement mes compétences techniques.
+              </p>
+            </div>
+
+
+        </div>
+
+        <embed src="./../Images/webscrap.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+        <!-- 
+          Exemple d’inclusion de PDF, vidéo ou autre média :
+          - PDF : <embed src="chemin/monfichier.pdf" width="800" height="500" type="application/pdf" class="image-project" />
+          - Vidéo YouTube : <iframe class="image-project" width="560" height="315"
+              src="https://www.youtube.com/embed/ID_VIDEO" frameborder="0" allowfullscreen></iframe>
+        -->
+        <!-- Exemple : PDF embarqué -->
+        <!-- <embed src="../Images/monfichier1.pdf" width="800" height="500" type="application/pdf" class="image-project" /> -->
+      </div>
+    </div>
+  </div>
+
+  
+
+</body>
+
+</html>

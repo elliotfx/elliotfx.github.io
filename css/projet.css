@@ -1,0 +1,379 @@
+@import "navbar_stylesheet.css";
+
+/* Remise à zéro de base */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Kanit', sans-serif;
+}
+
+/* Décalage pour ne pas que le contenu soit caché derrière le header fixé */
+/* Ajustez la valeur de 80px selon la hauteur réelle de votre header */
+body {
+  padding-top: 80px;
+}
+
+/* Bouton "En savoir plus" */
+.go-to {
+  display: inline-block;
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: 1vh;
+  background-color: inherit;
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Conteneur principal d'un projet : pleine largeur */
+.project {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Styles de couleur via data-color */
+/* Pour les projets à fond sombre */
+.project[data-color="noir"] {
+  background-color: #0B1616;
+  color: antiquewhite;
+}
+
+/* Pour les projets à fond clair */
+.project[data-color="blanc"] {
+  background-color: antiquewhite;
+  color: black;
+}
+
+/* Bloc texte : ~50% */
+.text-block {
+  flex: 1 1 45%;
+  min-width: 280px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* Titre dans le bloc texte */
+.text-block h2 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Bloc image : ~50% */
+.img-block {
+  flex: 1 1 20%;
+  text-align: center;
+  height: auto;
+  margin-bottom: 1rem;
+  box-shadow: 8px 8px 10px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+
+.img-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Pour les projets d'ordre pair, inverse l'ordre (quinconce) */
+.project:nth-of-type(even) {
+  flex-direction: row-reverse;
+}
+
+/* Conteneur des détails du projet (par défaut masqué) */
+.project-detail {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
+
+/* Quand le détail est actif */
+.project-detail.active {
+  max-height: 2000px;
+}
+
+/* Conteneur interne du détail */
+.all-project-container {
+  padding: 0 1rem;
+}
+
+/* Titre et infos du détail */
+.details-project {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.details-project .title {
+  text-align: center;
+}
+
+.group-member {
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
+.group-member > ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.group-member > ul li {
+  margin: 0 1rem;
+}
+
+/* Texte descriptif */
+.text-details {
+  margin-top: 1rem;
+  text-align: left;
+  text-align-last: left;
+}
+
+.text-details p {
+  font-size: 18px;
+  text-align: justify;
+  margin: 0;
+}
+
+/* Image ou PDF intégré dans le détail */
+.image-project {
+  display: block;
+  margin: 1rem auto;
+  width: 60vh;
+  height: 50vh;
+  border-radius: 5%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== FILTRES AMÉLIORÉS ===== */
+
+/* Conteneur principal des filtres */
+.filter-container {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  z-index: 1000;
+}
+
+/* En-tête du filtre avec design moderne */
+.filter-header {
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  color: #0B1616;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+.filter-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.filter-header:active {
+  transform: translateY(0);
+}
+
+/* Icône de toggle avec animation */
+.filter-header .toggle-icon {
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+}
+
+.filter-header .toggle-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Conteneur des filtres avec animation d'ouverture */
+#filters {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: -2px;
+}
+
+#filters.show {
+  max-height: 400px;
+  padding: 1.5rem;
+}
+
+/* Grille des filtres */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 0;
+}
+
+/* Labels des filtres avec style moderne */
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #4a5568;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filters label:hover {
+  border-color: #667eea;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+/* Checkboxes personnalisées */
+.filters input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.filters input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  border-color: #667eea;
+}
+
+.filters input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Labels sélectionnés */
+.filters label:has(input:checked) {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-color: #667eea;
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* Animation de focus */
+.filters input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive pour les filtres */
+@media (max-width: 768px) {
+  .filter-container {
+    margin: 1rem;
+  }
+  
+  .filters {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .filters label {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  #filters.show {
+    max-height: 500px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .filter-header {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* ===== FIN DES FILTRES AMÉLIORÉS ===== */
+
+/* Icônes */
+i {
+  font-family: "Tahoma";
+}
+
+/* Burger icon */
+.iconeburger2 {
+  margin-left: 50%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
+.foncé {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgb(78, 78, 78),
+    rgba(255, 255, 255, 0.466),
+    rgb(78, 78, 78)
+  );
+  width: 70%;
+}
+
+.clair {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.466),
+    rgb(78, 78, 78),
+    rgba(255, 255, 255, 0.466)
+  );
+  width: 70%;
+}

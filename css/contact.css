@@ -1,0 +1,104 @@
+@import "navbar_stylesheet.css";
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', sans-serif;
+    background-color: #0B1616;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Header fixé en haut --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff; /* ou la couleur de fond de votre navbar */
+}
+
+/* --- Décalage du contenu sous le header --- */
+/* Ajustez la valeur 60px à la hauteur réelle de votre header */
+main,
+.remerciments {
+    padding-top: 60px;
+}
+
+p {
+    color: antiquewhite;
+    font-family: 'Tahoma', sans-serif;
+}
+
+i {
+    color: antiquewhite;
+}
+
+/* --- Section Merci --- */
+.remerciments .merci {
+    text-align: center;
+    margin: 3rem 0;
+    font-size: 3rem;
+    font-weight: bold;
+    color: antiquewhite;
+}
+
+/* --- Contact --- */
+.contact {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+}
+
+.contact-item i {
+    margin-right: 0.5rem;
+}
+
+.contact-item a {
+    color: antiquewhite;
+    text-decoration: underline;
+}
+
+/* --- Conteneur CV (PDF) --- */
+.CV {
+    display: block;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    height: 100% ;
+}
+
+.CV .cvimg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 600px) {
+    .merci {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+    }
+    .contact {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem;
+    }
+    .CV {
+        margin: 1rem;
+        padding: 0.5rem;
+    }
+}

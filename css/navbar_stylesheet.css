@@ -1,0 +1,145 @@
+/* ====================================================
+   style.css – Votre CSS externe (header, menu, etc.)
+   ==================================================== */
+
+/* Empêche le débordement horizontal */
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* Corps de la page : bleu « océan » */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 1) HEADER FIXÉ EN HAUT */
+header {
+    position: fixed;      /* Reste collé en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;         /* Hauteur fixe du header pour placer les filtres dessous */
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;      /* Plus de padding vertical, pour contrôler exactement la hauteur */
+    z-index: 2000;
+}
+
+/* Navigation principale */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Répartition équitable des liens */
+.navbar-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Effet souligné au survol sur les liens */
+.link-nav-underline,
+.link-nav-underline-projet {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.link-nav-underline::after,
+.link-nav-underline-projet::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #000;
+    transform: scaleX(0);
+    transition: transform 0.2s ease-in-out;
+    transform-origin: left;
+}
+
+.link-nav-underline:hover::after,
+.link-nav-underline-projet:hover::after {
+    transform: scaleX(1);
+}
+
+/* 2) MENU BURGER (responsive) */
+.burger-container {
+    display: none; /* Caché sur desktop */
+    cursor: pointer;
+}
+
+#burgerbar {
+    height: 100vh;
+    width: 50%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: -100%;    /* Masqué par défaut (hors écran) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    transition: left 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Styles de la liste à l’intérieur du menu burger */
+.burger-menu-list {
+    display: none; /* Caché par défaut (s’affiche en mobile) */
+    text-align: center;
+}
+
+.burger-menu-list li {
+    margin: 15px 0;
+}
+
+/* Lorsque l’écran est inférieur à 900px, on affiche le burger et on cache les liens classiques */
+@media screen and (max-width: 900px) {
+    .navbar-menu {
+        display: none;
+    }
+    .burger-container {
+        display: flex;
+    }
+    .burger-menu-list {
+        display: block;
+    }
+}
+
+/* Liens et images du menu burger */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+.logo-burger {
+    width: 50px;
+    height: 50px;
+}
+
+/* Liste sans puces ni marges */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

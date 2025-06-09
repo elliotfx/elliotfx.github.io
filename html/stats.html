@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carte des matchs (Nouvelle-Aquitaine) – Plotly.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Elliot FEROUX" />
+  <meta name="description" content="Portfolio de Elliot FEROUX" />
+  <link rel="shortcut icon" href="SD.png" type="image/x-icon" />
+
+  <!-- Plotly.js et D3.js pour la carte et les graphiques -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Vos CSS existants -->
+  <link rel="stylesheet" href="../css/style.css" media="screen" />
+  <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@100..800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Nouveau CSS pour header, bandeau de filtres, carte et graphiques -->
+  <link rel="stylesheet" href="../css/matchmap.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER (statique, dans le flux) ===================== -->
+  <header>
+    <div class="navbar" id="nav">
+      <div class="burger-container">
+        <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+      </div>
+      <ul class="navbar-menu">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+        <li class="link-nav-underline-projet"><a href="projets.html">PROJETS</a></li>
+        <li class="logo">
+          <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+            <img src="../Images/SD.png" alt="Logo BUT Sciences des Données" />
+          </a>
+        </li>
+        <li class="link-nav-underline"><a href="apropos.html">À PROPOS</a></li>
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+
+    <!-- Menu burger (inchangé) -->
+    <div id="burgerbar">
+      <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+        <img src="../Images/SD.png" alt="Logo BUT Sciences des Données" class="logo-burger" />
+      </a>
+      <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+      <ul class="burger-menu-list">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+        <li class="link-nav-underline"><a href="apropos.html">À PROPOS</a></li>
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================== BARRE DE FILTRES (dans le flux, juste après le header) ===================== -->
+  <div id="filters">
+    <!-- 1) Filtre TYPE (multisélection) -->
+    <div class="filter-group">
+      <label for="typeFilter">Type de match</label>
+      <select id="typeFilter" multiple></select>
+    </div>
+
+    <!-- 2) Filtre CATÉGORIE (multisélection + recherche) -->
+    <div class="filter-group">
+      <label for="categorySearch">Rechercher catégorie</label>
+      <input type="text" id="categorySearch" placeholder="Tapez pour filtrer…" />
+      <select id="categoryFilter" multiple></select>
+    </div>
+
+    <!-- 3) Filtre DISTANCE (slider) -->
+    <div class="filter-group">
+      <label for="kmSlider">Distance (km) ≤ <span id="kmValue">0</span></label>
+      <input type="range" id="kmSlider" min="0" max="100" step="1" value="100" />
+    </div>
+
+    <!-- 4) Filtre ÉQUIPE (multisélection + recherche) -->
+    <div class="filter-group">
+      <label for="teamSearch">Rechercher équipe</label>
+      <input type="text" id="teamSearch" placeholder="Tapez pour filtrer…" />
+      <select id="teamFilter" multiple></select>
+    </div>
+  </div>
+
+  <!-- ===================== CONTENU PRINCIPAL (map + statistiques) ===================== -->
+  <div id="main-content">
+    <!-- 1) Carte Plotly -->
+    <div id="map"></div>
+
+    <!-- 2) Statistiques (on place “Total des distances” en premier) -->
+    <div id="stats-container">
+
+      <!-- Total des distances (premier élément, centré verticalement + horizontalement) -->
+      <div class="chart-box total-box">
+        <div id="totalKm">0&nbsp;km</div>
+        <div class="chart-title">Total des distances</div>
+      </div>
+
+      <!-- Équipes les plus arbitrées -->
+      <div class="chart-box">
+        <div class="chart-title">Équipes les plus arbitrées</div>
+        <div id="teamChart"></div>
+      </div>
+
+      <!-- Catégories les plus arbitrées -->
+      <div class="chart-box">
+        <div class="chart-title">Catégories les plus arbitrées</div>
+        <div id="categoryChart"></div>
+      </div>
+
+      <!-- Arbitres ayant officié avec « FEROUX Elliot » -->
+      <div class="chart-box">
+        <div class="chart-title">Arbitres ayant officié avec moi</div>
+        <div id="refereeChart"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <!-- 1) Votre script principal (sans JS pour positionner/masquer #filters) -->
+  <script src="../JS/matchmap.js"></script>
+
+  <!-- 2) Scripts du header/menu (inchangés) -->
+  <script src="../JS/headerloader.js"></script>
+  <script src="../JS/script_projets.js"></script>
+</body>
+</html>

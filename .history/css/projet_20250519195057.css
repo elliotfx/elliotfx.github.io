@@ -1,0 +1,214 @@
+@import "navbar_stylesheet.css";
+
+/* Remise à zéro de base */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Kanit', sans-serif;
+}
+
+/* Bouton "En savoir plus" */
+.go-to {
+  display: inline-block;
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: 1vh;
+  background-color: inherit;
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Conteneur principal d'un projet : pleine largeur */
+.project {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;         
+  flex-wrap: wrap;       
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Styles de couleur via data-color */
+/* Pour les projets à fond sombre */
+.project[data-color="noir"] {
+  background-color: #0B1616;
+  color: antiquewhite;
+}
+
+/* Pour les projets à fond clair */
+.project[data-color="blanc"] {
+  background-color: antiquewhite;
+  color: black;
+}
+
+/* Bloc texte : ~50% */
+.text-block {
+  flex: 1 1 45%;
+  min-width: 280px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+/* Titre dans le bloc texte */
+.text-block h2 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Bloc image : ~50% */
+.img-block {
+  flex: 1 1 20%;
+  text-align: center;
+  height: auto;
+  margin-bottom: 1rem;
+  box-shadow: 8px 8px 10px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left:5%;
+  margin-right:5%;
+  margin-top: 3%;
+}
+
+.img-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Pour les projets d'ordre pair, inverse l'ordre (quinconce) */
+.project:nth-of-type(even) {
+  flex-direction: row-reverse;
+}
+
+/* Conteneur des détails du projet (par défaut masqué) */
+.project-detail {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
+
+/* Quand le détail est actif */
+.project-detail.active {
+  max-height: 2000px;
+}
+
+/* Conteneur interne du détail */
+.all-project-container {
+  padding: 0 1rem;
+}
+
+/* Titre et infos du détail */
+.details-project {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.details-project .title {
+  text-align: center;
+}
+
+.group-member {
+  width: 100%;
+  padding-bottom: 1rem;
+}
+
+.group-member > ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.group-member > ul li {
+  margin: 0 1rem;
+}
+
+/* Texte descriptif */
+.text-details {
+  margin-top: 1rem;
+  text-align: center;
+  text-align-last: center;
+}
+
+.text-details p {
+  font-size: 18px;
+  text-align: justify;
+  margin: 0;
+}
+
+/* Image ou PDF intégré dans le détail */
+.image-project {
+  display: block;
+  margin: 1rem auto;
+  width: 60vh;
+  height: 50vh;
+  border-radius: 5%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Filtres masqués par défaut, visibles via toggle */
+#filters {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  margin-top: 1rem;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Classe "show" pour les filtres */
+#filters.show {
+  max-height: 500px;
+  user-select: none;
+}
+
+/* Icônes */
+i {
+  font-family: "Tahoma";
+}
+
+/* Conteneur des filtres */
+.filter-container {
+  position: relative;
+  height: auto;
+  margin: 1rem;
+  user-select: none;
+}
+
+.iconeburger2 {
+  margin-left: 50%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
+.foncé {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgb(78, 78, 78), rgba(255, 255, 255, 0.466), rgb(78, 78, 78));
+  width: 70%;
+}
+
+.clair {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.466), rgb(78, 78, 78), rgba(255, 255, 255, 0.466));
+  width: 70%;
+}

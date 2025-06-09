@@ -1,0 +1,103 @@
+@import "navbar_stylesheet.css";
+
+/* 1) Variables pour centraliser couleurs & typo */
+:root {
+  --color-dark: #0B1616;
+  --color-light: antiquewhite;
+  --font-base: 'Kanit', sans-serif;
+  --font-heading: 'Tahoma', sans-serif;
+  --max-content-width: 800px;
+  --line-height-body: 1.6;
+  --spacing-lg: 2rem;
+  --spacing-md: 1rem;
+}
+
+/* 2) Reset & typo globales */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+  line-height: var(--line-height-body);
+  color: var(--color-dark);
+  background: var(--color-light);
+}
+
+/* 3) Sections pleine page */
+.bilan,
+.bilan2 {
+  padding-top: 5%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centre horizontalement .bibi */
+  align-items: flex-start; /* top align */
+}
+
+.bilan {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.bilan2 {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+/* 4) Bloc intérieur */
+.bibi {
+  width: 90%;
+  max-width: var(--max-content-width);
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin: 0 auto;
+}
+
+/* 5) Titres */
+.titre {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* trait décor sous le titre */
+.titre::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: currentColor;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* 6) Contenu texte */
+.contenu {
+  /* plus besoin de position relative */
+  width: 100%;
+}
+
+/* Paragraphes */
+.contenu p {
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+  font-size: 1rem;
+}
+
+/* 7) Responsive tweaks */
+@media (max-width: 600px) {
+  .titre {
+    font-size: 2rem;
+  }
+  .bibi {
+    padding: var(--spacing-md);
+  }
+  .contenu p {
+    font-size: 0.9rem;
+  }
+}

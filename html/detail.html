@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Détails des matchs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Import CSS de la navbar (si vous l’avez) -->
+  <style>
+    @import "../css/navbar_stylesheet.css";
+  </style>
+
+  <!-- Plotly.js pour les diagrammes -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- D3.js pour charger le CSV et manipuler les données -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Styles personnalisés pour cette page -->
+  <style>
+    /* ---------------------------------------
+       Reset + police Kanit
+    --------------------------------------- */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Kanit', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    /* Conteneur principal */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    /* Tableau des matchs */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: 600;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef6ff;
+    }
+
+    /* Conteneur des statistiques */
+    #stats {
+      margin-top: 2rem;
+    }
+
+    /* Total km */
+    #totalKm {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Conteneurs “chart-container” */
+    .chart-container {
+      width: 100%;
+      margin-bottom: 2rem;
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #007bff;
+    }
+    .chart-container > div {
+      width: 100%;
+      height: 350px;
+    }
+
+    /* Message “aucun match” */
+    #noMatchMessage {
+      text-align: center;
+      padding: 1rem;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- =================HEADER / NAVBAR================= -->
+  <header>
+    <div class="navbar" id="nav">
+      <div class="burger-container">
+        <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+      </div>
+      <ul class="navbar-menu">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+        <li class="link-nav-underline-projet"><a href="projets.html">PROJETS</a></li>
+        <li class="logo">
+          <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+            <img src="../Images/SD.png" alt="Logo BUT Sciences des Données" />
+          </a>
+        </li>
+        <li class="link-nav-underline"><a href="apropos.html">À PROPOS</a></li>
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+    <div id="burgerbar">
+      <a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">
+        <img src="../Images/SD.png" alt="Logo BUT Sciences des Données" class="logo-burger" />
+      </a>
+      <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+      <ul class="burger-menu-list">
+        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+        <li class="link-nav-underline"><a href="apropos.html">À PROPOS</a></li>
+        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =================CONTENU PRINCIPAL================= -->
+  <div class="container">
+    <h2>Détails des matchs</h2>
+
+    <!-- ======= Tableau des matchs filtrés ======= -->
+    <table id="matches-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Heure</th>
+          <th>Catégorie</th>
+          <th>Arbitre(s)</th>
+          <th>Équipe 1</th>
+          <th>Équipe 2</th>
+          <th>Distance (km)</th>
+          <th>Indemnité</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr id="noMatchMessage" style="display: none;">
+          <td colspan="8">Aucun match trouvé pour ce lieu.</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- ======= Total des distances ======= -->
+    <div id="stats">
+      <div id="totalKm">Total des distances : 0.0 km</div>
+
+      <!-- ======= Graphique “Équipes les plus arbitrées” ======= -->
+      <div class="chart-container">
+        <div class="chart-title">Équipes les plus arbitrées</div>
+        <div id="teamChart"></div>
+      </div>
+
+      <!-- ======= Graphique “Catégories les plus arbitrées” ======= -->
+      <div class="chart-container">
+        <div class="chart-title">Catégories les plus arbitrées</div>
+        <div id="categoryChart"></div>
+      </div>
+
+      <!-- ======= Graphique “Arbitres ayant officié avec FEROUX Elliot” ======= -->
+      <div class="chart-container">
+        <div class="chart-title">Arbitres ayant officié avec moi</div>
+        <div id="refereeChart"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================SCRIPT (filtrage + affichage)================= -->
+  <script>
+    // --------------------------------------
+    // 1) Récupérer les paramètres “lieu” et “km” uniquement
+    // --------------------------------------
+    function getQueryParams() {
+      const params = {};
+      window.location.search
+        .substring(1)
+        .split("&")
+        .forEach(pair => {
+          if (!pair) return;
+          const [key, value] = pair.split("=");
+          params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
+      return params;
+    }
+
+    const params = getQueryParams();
+    const lieuParam = (params.lieu || "").trim();
+    const kmParam = parseFloat(params.km || "Infinity");
+
+    // --------------------------------------
+    // 2) Charger le CSV et afficher le détail
+    // --------------------------------------
+    let rawDataGlobal = [];
+
+    d3.dsv(";", "../images/datamatch.csv")
+      .then(data => {
+        // Nettoyage : on supprime les espaces en début/fin de clés et valeurs
+        rawDataGlobal = data.map(row => {
+          const cleanRow = {};
+          Object.keys(row).forEach(key => {
+            cleanRow[key.trim()] = row[key].trim();
+          });
+          cleanRow.km = parseFloat((cleanRow.km || "0").replace(",", "."));
+          return cleanRow;
+        });
+        afficherDetails();
+      })
+      .catch(err => {
+        console.error("Erreur de chargement CSV :", err);
+        // Si échec, on montre un message dans le tableau
+        const tbody = document.querySelector("#matches-table tbody");
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 8;
+        td.style.textAlign = "center";
+        td.textContent = "Impossible de charger les données.";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      });
+
+    // --------------------------------------
+    // 3) Fonction d’affichage des détails + stats
+    // --------------------------------------
+    function afficherDetails() {
+      const tbody = document.querySelector("#matches-table tbody");
+      const noMatchMsg = document.getElementById("noMatchMessage");
+      tbody.innerHTML = "";  // On vide le tableau avant d’ajouter
+
+      // On filtre uniquement sur le lieu (exact, sans différences de casse) et la distance
+      const filtered = rawDataGlobal.filter(r => {
+        return r.Lieu.trim() === lieuParam && !isNaN(r.km) && r.km <= kmParam;
+      });
+
+      // Si aucun match trouvé : on affiche la ligne “aucun match”
+      if (filtered.length === 0) {
+        noMatchMsg.style.display = "table-row";
+      } else {
+        noMatchMsg.style.display = "none";
+      }
+
+      // Parcours de tous les matchs filtrés pour remplir le tableau
+      filtered.forEach(r => {
+        const tr = document.createElement("tr");
+
+        // Date
+        const tdDate = document.createElement("td");
+        tdDate.textContent = r.Date;
+        tr.appendChild(tdDate);
+
+        // Heure
+        const tdHeure = document.createElement("td");
+        tdHeure.textContent = r.Heure;
+        tr.appendChild(tdHeure);
+
+        // Catégorie
+        const tdCat = document.createElement("td");
+        tdCat.textContent = r.Categorie;
+        tr.appendChild(tdCat);
+
+        // Arbitre(s)
+        const tdArbitres = document.createElement("td");
+        // On affiche “Nom arbitre 1 / Nom arbitre 2” (si arbitre 2 existe)
+        tdArbitres.textContent = r["Nom arbitre 1"] +
+          (r["Nom arbitre 2"] ? " / " + r["Nom arbitre 2"] : "");
+        tr.appendChild(tdArbitres);
+
+        // Équipe 1
+        const tdE1 = document.createElement("td");
+        tdE1.textContent = r["Equipe 1"];
+        tr.appendChild(tdE1);
+
+        // Équipe 2
+        const tdE2 = document.createElement("td");
+        tdE2.textContent = r["Equipe 2"];
+        tr.appendChild(tdE2);
+
+        // Distance (km)
+        const tdKm = document.createElement("td");
+        tdKm.textContent = isNaN(r.km) ? "" : r.km;
+        tr.appendChild(tdKm);
+
+        // Indemnité (recherche de la clé commençant par “indem” sans accent)
+        const indemKey =
+          Object.keys(r).find(k =>
+            k.normalize("NFD")
+             .replace(/[\u0300-\u036f]/g, "")
+             .toLowerCase()
+             .startsWith("indem")
+          ) || null;
+        const tdIndem = document.createElement("td");
+        tdIndem.textContent = indemKey ? r[indemKey] : "";
+        tr.appendChild(tdIndem);
+
+        tbody.appendChild(tr);
+      });
+
+      // Après avoir rempli le tableau, on calcule et affiche les statistiques
+      afficherStatistiques(filtered);
+    }
+
+    // --------------------------------------
+    // 4) Fonction pour afficher les trois graphiques de statistiques
+    // --------------------------------------
+    function afficherStatistiques(filteredData) {
+      // 4.1) Total des kilomètres
+      const totalKm = filteredData.reduce((acc, r) => acc + (r.km || 0), 0);
+      document.getElementById("totalKm").textContent =
+        `Total des distances : ${totalKm.toFixed(1)} km`;
+
+      // 4.2) Équipes les plus arbitrées
+      const teamCounts = {};
+      filteredData.forEach(r => {
+        const eq1 = r["Equipe 1"].trim();
+        const eq2 = r["Equipe 2"].trim();
+        teamCounts[eq1] = (teamCounts[eq1] || 0) + 1;
+        teamCounts[eq2] = (teamCounts[eq2] || 0) + 1;
+      });
+      const teamPairs = Object.entries(teamCounts).sort((a, b) => b[1] - a[1]);
+      const teamNames = teamPairs.map(p => p[0]);
+      const teamFreqs = teamPairs.map(p => p[1]);
+
+      // 4.3) Catégories les plus arbitrées
+      const categoryCounts = {};
+      filteredData.forEach(r => {
+        const cat = r.Categorie.trim();
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+      });
+      const categoryPairs = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]);
+      const catNames = categoryPairs.map(p => p[0]);
+      const catFreqs = categoryPairs.map(p => p[1]);
+
+      // 4.4) Arbitres ayant officié avec « FEROUX Elliot »
+      const coRefCounts = {};
+      filteredData.forEach(r => {
+        const a1 = r["Nom arbitre 1"].trim();
+        const a2 = r["Nom arbitre 2"].trim();
+        if (a1.toLowerCase() === "feroux elliot" && a2.toLowerCase() !== "feroux elliot") {
+          coRefCounts[a2] = (coRefCounts[a2] || 0) + 1;
+        }
+        if (a2.toLowerCase() === "feroux elliot" && a1.toLowerCase() !== "feroux elliot") {
+          coRefCounts[a1] = (coRefCounts[a1] || 0) + 1;
+        }
+      });
+      const coRefPairs = Object.entries(coRefCounts).sort((a, b) => b[1] - a[1]);
+      const refNames = coRefPairs.map(p => p[0]);
+      const refFreqs = coRefPairs.map(p => p[1]);
+
+      // Common layout pour Plotly
+      const commonLayout = {
+        margin: { l: 40, r: 20, t: 20, b: 80 },
+        xaxis: {
+          tickangle: -45,
+          automargin: true
+        },
+        yaxis: {
+          title: "Nombre de matchs",
+          automargin: true
+        },
+        paper_bgcolor: "white",
+        plot_bgcolor: "white",
+        font: { family: "Kanit, sans-serif", size: 13, color: "#333" }
+      };
+
+      // 4.2) Affichage “Équipes les plus arbitrées”
+      Plotly.newPlot(
+        "teamChart",
+        [{
+          x: teamNames,
+          y: teamFreqs,
+          type: "bar",
+          marker: { color: "#1f77b4" },
+          hovertemplate: "%{x}<br>%{y} match(s)<extra></extra>"
+        }],
+        {
+          ...commonLayout,
+          title: { text: "Équipes les plus arbitrées", font: { size: 18 } },
+          xaxis: { ...commonLayout.xaxis, title: { text: "Équipes", standoff: 15 } }
+        },
+        { responsive: true }
+      );
+
+      // 4.3) Affichage “Catégories les plus arbitrées”
+      Plotly.newPlot(
+        "categoryChart",
+        [{
+          x: catNames,
+          y: catFreqs,
+          type: "bar",
+          marker: { color: "#ff7f0e" },
+          hovertemplate: "%{x}<br>%{y} match(s)<extra></extra>"
+        }],
+        {
+          ...commonLayout,
+          title: { text: "Catégories les plus arbitrées", font: { size: 18 } },
+          xaxis: { ...commonLayout.xaxis, title: { text: "Catégories", standoff: 15 } }
+        },
+        { responsive: true }
+      );
+
+      // 4.4) Affichage “Arbitres ayant officié avec « FEROUX Elliot »”
+      Plotly.newPlot(
+        "refereeChart",
+        [{
+          x: refNames,
+          y: refFreqs,
+          type: "bar",
+          marker: { color: "#2ca02c" },
+          hovertemplate: "%{x}<br>%{y} match(s)<extra></extra>"
+        }],
+        {
+          ...commonLayout,
+          title: {
+            text: "Arbitres ayant officié avec « FEROUX Elliot »",
+            font: { size: 18 }
+          },
+          xaxis: { ...commonLayout.xaxis, title: { text: "Arbitres", standoff: 15 } }
+        },
+        { responsive: true }
+      );
+    }
+  </script>
+
+  <!-- ===================== Scripts de la navbar ===================== -->
+  <script src="../JS/headerloader.js"></script>
+  <script src="../JS/script_projets.js"></script>
+</body>
+</html>
