@@ -3,6 +3,17 @@
    Scripts d'Interactivite
    =================================== */
 
+var activeModal = null;
+var lastFocusedElement = null;
+var focusableModalSelector = [
+    "a[href]",
+    "button:not([disabled])",
+    "textarea:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "[tabindex]:not([tabindex='-1'])"
+].join(",");
+
 document.addEventListener("DOMContentLoaded", function () {
 
     // ---- Menu Burger ----
@@ -14,12 +25,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---- Lightbox Images ----
     initLightbox();
 
-    // ---- Raccourci Clavier (Echap) ----
+    // ---- Raccourcis clavier ----
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
+            if (isLightboxOpen()) {
+                closeLightbox();
+                return;
+            }
+
             closeAllModals();
             closeBurgerMenu();
-            closeLightbox();
+            return;
+        }
+
+        if (e.key === "Tab" && activeModal) {
+            trapModalFocus(e);
         }
     });
 });
@@ -38,6 +58,9 @@ function display_project(id) {
 
     if (!modal) return;
 
+    lastFocusedElement = document.activeElement;
+    activeModal = modal;
+
     if (!modal.hasAttribute("tabindex")) {
         modal.setAttribute("tabindex", "-1");
     }
@@ -53,11 +76,13 @@ function display_project(id) {
     document.body.style.overflow = "hidden";
 
     requestAnimationFrame(function () {
-        try {
-            modal.focus({ preventScroll: true });
-        } catch (e) {
-            modal.focus();
-        }
+        focusModal(modal);
+
+        setTimeout(function () {
+            if (!modal.contains(document.activeElement)) {
+                focusModal(modal);
+            }
+        }, 60);
     });
 }
 
@@ -71,16 +96,8 @@ function close_display(id) {
 
     if (!modal) return;
 
-    modal.classList.remove("modal-open");
-    modal.classList.add("modal-close");
     if (overlay) overlay.classList.remove("visible");
-
-    modal.addEventListener("animationend", function handler() {
-        modal.style.display = "none";
-        modal.classList.remove("modal-close");
-        document.body.style.overflow = "";
-        modal.removeEventListener("animationend", handler);
-    });
+    hideModal(modal, true);
 }
 
 /**
@@ -89,22 +106,107 @@ function close_display(id) {
 function closeAllModals() {
     var modals = document.querySelectorAll(".project-page");
     var overlay = document.getElementById("modal-overlay");
+    var shouldRestoreFocus = false;
 
     modals.forEach(function (modal) {
         if (modal.style.display === "block") {
-            modal.classList.remove("modal-open");
-            modal.classList.add("modal-close");
-
-            modal.addEventListener("animationend", function handler() {
-                modal.style.display = "none";
-                modal.classList.remove("modal-close");
-                document.body.style.overflow = "";
-                modal.removeEventListener("animationend", handler);
-            });
+            shouldRestoreFocus = shouldRestoreFocus || modal === activeModal;
+            hideModal(modal, modal === activeModal);
         }
     });
 
     if (overlay) overlay.classList.remove("visible");
+
+    if (!shouldRestoreFocus) {
+        activeModal = null;
+    }
+}
+
+function hideModal(modal, shouldRestoreFocus) {
+    var fallbackTimer;
+
+    modal.classList.remove("modal-open");
+    modal.classList.add("modal-close");
+
+    function finishClose() {
+        clearTimeout(fallbackTimer);
+        modal.style.display = "none";
+        modal.classList.remove("modal-close");
+        document.body.style.overflow = "";
+        modal.removeEventListener("animationend", finishClose);
+
+        if (activeModal === modal) {
+            activeModal = null;
+        }
+
+        if (shouldRestoreFocus) {
+            restoreFocus();
+        }
+    }
+
+    modal.addEventListener("animationend", finishClose);
+    fallbackTimer = setTimeout(finishClose, 350);
+}
+
+function restoreFocus() {
+    if (
+        lastFocusedElement &&
+        typeof lastFocusedElement.focus === "function" &&
+        document.contains(lastFocusedElement)
+    ) {
+        try {
+            lastFocusedElement.focus({ preventScroll: true });
+        } catch (e) {
+            lastFocusedElement.focus();
+        }
+    }
+
+    lastFocusedElement = null;
+}
+
+function focusModal(modal) {
+    var target = modal.querySelector("button") || modal;
+
+    try {
+        target.focus({ preventScroll: true });
+    } catch (e) {
+        target.focus();
+    }
+}
+
+function trapModalFocus(e) {
+    var focusableElements = Array.prototype.slice.call(
+        activeModal.querySelectorAll(focusableModalSelector)
+    ).filter(function (element) {
+        return element.offsetParent !== null || element === document.activeElement;
+    });
+
+    if (focusableElements.length === 0) {
+        e.preventDefault();
+        activeModal.focus();
+        return;
+    }
+
+    var firstElement = focusableElements[0];
+    var lastElement = focusableElements[focusableElements.length - 1];
+
+    if (!activeModal.contains(document.activeElement)) {
+        e.preventDefault();
+        if (e.shiftKey) {
+            lastElement.focus();
+        } else {
+            firstElement.focus();
+        }
+        return;
+    }
+
+    if (e.shiftKey && (document.activeElement === firstElement || document.activeElement === activeModal)) {
+        e.preventDefault();
+        lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+    }
 }
 
 /* ===================================
@@ -345,7 +447,7 @@ function initLightbox() {
         var overlay = document.createElement("div");
         overlay.id = "lightbox-overlay";
         overlay.className = "lightbox-overlay";
-        overlay.innerHTML = '<button class="lightbox-close" aria-label="Fermer">&times;</button><img class="lightbox-content" src="" alt="Plein écran">';
+        overlay.innerHTML = '<button class="lightbox-close" type="button" aria-label="Fermer">&times;</button><img class="lightbox-content" src="" alt="Plein écran">';
         document.body.appendChild(overlay);
 
         overlay.addEventListener("click", function(e) {
@@ -367,7 +469,11 @@ function initLightbox() {
     });
 }
 
-function onImageClick() {
+function onImageClick(e) {
+    if (e) {
+        e.stopPropagation();
+    }
+
     openLightbox(this.src, this.alt);
 }
 
@@ -385,4 +491,9 @@ function closeLightbox() {
     if (overlay) {
         overlay.classList.remove("visible");
     }
+}
+
+function isLightboxOpen() {
+    var overlay = document.getElementById("lightbox-overlay");
+    return !!(overlay && overlay.classList.contains("visible"));
 }

@@ -36,6 +36,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -138,6 +139,14 @@ p {
     color: inherit;
     text-decoration: underline;
     font-weight: 500;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    line-height: 1.4;
 }
 
 /* ---- Tags Affichés ---- */
@@ -486,6 +495,99 @@ p {
     margin-bottom: 0;
 }
 
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 18px;
+    padding: 6px 14px;
+    border: 1px solid rgba(250, 235, 215, 0.24);
+    border-radius: 999px;
+    color: var(--cream);
+    background: rgba(250, 235, 215, 0.08);
+    font-family: var(--font-main);
+    font-size: 0.78em;
+    letter-spacing: 0.6px;
+    line-height: 1.35;
+}
+
+.project-section-title {
+    margin: 24px 0 10px;
+    color: var(--cream);
+    font-family: var(--font-main);
+    font-size: 1.05em;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+}
+
+.project-section-title:first-child,
+.project-status + .project-section-title {
+    margin-top: 0;
+}
+
+.gallery-heading {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(250, 235, 215, 0.1);
+}
+
+.project-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 8px 0 22px;
+}
+
+.project-fact {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid rgba(250, 235, 215, 0.12);
+    border-radius: 8px;
+    background: rgba(250, 235, 215, 0.055);
+}
+
+.project-fact span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--cream);
+    font-family: var(--font-main);
+    font-size: 0.72em;
+    letter-spacing: 0.8px;
+    opacity: 0.58;
+    text-transform: uppercase;
+}
+
+.project-fact strong {
+    display: block;
+    color: var(--cream);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.project-quote {
+    margin: 20px 0;
+    padding: 16px 18px;
+    border-left: 3px solid var(--cream);
+    border-radius: 0 8px 8px 0;
+    background: rgba(250, 235, 215, 0.06);
+    color: var(--cream);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.94em;
+    font-style: italic;
+    line-height: 1.65;
+}
+
+.project-quote cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-weight: 600;
+    opacity: 0.78;
+}
+
 /* --- Liens PDF dans la modale --- */
 .text-details a {
     color: var(--cream) !important;
@@ -567,6 +669,10 @@ p {
     .filter-bar {
         padding: 12px 4%;
         gap: 6px;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: thin;
     }
 
     .filter-btn {
@@ -613,6 +719,14 @@ p {
     .all-project-container {
         padding: 0 18px 24px;
         padding-right: 50px;
+    }
+
+    .project-facts {
+        grid-template-columns: 1fr;
+    }
+
+    .project-status {
+        width: auto;
     }
 
     .diplayed-title {
