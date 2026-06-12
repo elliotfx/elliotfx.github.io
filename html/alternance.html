@@ -116,16 +116,16 @@
 
         <div class="project-block" data-tags="BUT2, Tableau de bord, SQL">
             <div class="project-text">
-                <div class="titre">Tableau de bord global de la sinistralité</div>
+                <div class="titre">Tableaux de bord des sinistres climatiques</div>
                 <div class="project-description">
-                    <p>Après les premiers travaux sur les catastrophes naturelles, le périmètre a été élargi à l’ensemble des sinistres. J’ai construit trois tableaux de bord permettant d’analyser les volumes, les montants, la géolocalisation et les délais d’ouverture avec des filtres et paramètres manipulables par les utilisateurs.</p>
+                    <p>Après les premiers travaux sur les catastrophes naturelles, j’ai construit trois tableaux de bord consacrés aux sinistres climatiques. Ils permettent d’analyser les volumes, les montants, la géolocalisation et les délais d’ouverture avec des filtres et paramètres manipulables par les utilisateurs.</p>
 
                     <button class="go-to" id="-sinistralite" type="button" onclick="display_project(this.id)">En savoir plus</button>
                 </div>
                 <div class="project-tags"></div>
             </div>
             <div class="project-image">
-                <img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord1-informations-generales.png" alt="Tableau de bord global de la sinistralité" loading="lazy">
+                <img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord1-informations-generales.png" alt="Tableau de bord des sinistres climatiques" loading="lazy">
             </div>
         </div>
 
@@ -191,9 +191,9 @@
 
         <div class="project-block" data-tags="BUT3, Tableau de bord, Recette métier">
             <div class="project-text">
-                <div class="titre">Recette métier des tableaux corporels</div>
+                <div class="titre">Création de tableaux de bord corporels</div>
                 <div class="project-description">
-                    <p>J’ai adapté les tableaux de suivi des dossiers anciens et supérieurs à 100 000 euros au périmètre des sinistres corporels. Les échanges avec les rédacteurs ont permis de corriger des règles de date et d’archivage qui auraient faussé les statistiques malgré un tableau techniquement cohérent.</p>
+                    <p>J’ai créé deux tableaux de bord pour suivre les sinistres corporels anciens et ceux dont les enjeux dépassent 100 000 euros. La recette métier avec les rédacteurs a ensuite permis d’ajuster certaines règles de date et d’archivage qui auraient faussé les statistiques malgré un tableau techniquement cohérent.</p>
 
                     <button class="go-to" id="-corporel" type="button" onclick="display_project(this.id)">En savoir plus</button>
                 </div>
@@ -320,10 +320,10 @@
 <p>Plusieurs projets étant arrivés en validation au même moment, j’ai appris à mieux organiser mon travail avec Outlook, OneNote et des créneaux consacrés à chaque sujet. Cette période m’a aussi montré que la documentation doit commencer pendant le projet et non uniquement après sa livraison.</p>
 <h2 class="project-section-title gallery-heading">Environnement et flux de données</h2>
 <div class="project-gallery"><figure><img src="./../Images/projets alternance/CLIM_DFC_organigramme-data-office.png" alt="Organigramme de la Direction Financière et Comptable et du Data Office" loading="lazy"><figcaption>Position du Data Office dans l’organisation</figcaption></figure>
-<figure><img src="./../Images/projets alternance/BUT3_DataOffice_organigramme-MDPA.png" alt="Organigramme de la Mutuelle centré sur le Data Office" loading="lazy"><figcaption>Organisation générale autour du Data Office</figcaption></figure>
+<figure><img src="./../Images/projets alternance/BUT3_DataOffice_dictionnaire-de-donnees.png" alt="Organigramme de la Mutuelle centré sur le Data Office" loading="lazy"><figcaption>Organisation générale autour du Data Office</figcaption></figure>
 <figure><img src="./../Images/projets alternance/CLIM_GestionFlux_flux-des-donnees.png" alt="Schéma du parcours des données entre sources, Data Lakes, Smart Data, Dremio et Tableau" loading="lazy"><figcaption>Parcours de la donnée jusqu’à Tableau</figcaption></figure>
 <figure><img src="./../Images/projets alternance/CLIM_GestionFlux_systeme-information-MDPA.png" alt="Schéma entre environnement de production et laboratoire" loading="lazy"><figcaption>Différence entre production à J-1 et environnement de test à J-2</figcaption></figure>
-<figure><img src="./../Images/projets alternance/BUT3_DataOffice_dictionnaire-de-donnees.png" alt="Capture du dictionnaire de données" loading="lazy"><figcaption>Dictionnaire de données utilisé pour comprendre les sources</figcaption></figure>
+<figure><img src="./../Images/projets alternance/BUT3_DataOffice_organigramme-MDPA.png" alt="Capture du dictionnaire de données" loading="lazy"><figcaption>Dictionnaire de données utilisé pour comprendre les sources</figcaption></figure>
 <figure><img src="./../Images/projets alternance/BUT3_MethodeTravail_planning-organisation-projets.png" alt="Planning de suivi des projets en parallèle" loading="lazy"><figcaption>Organisation du travail pendant la deuxième année</figcaption></figure></div>
                 </div>
             </div>
@@ -389,31 +389,34 @@
     </div>
 
     <div class="project-page" tabindex="-1" id="display-sinistralite" role="dialog" aria-modal="true" aria-labelledby="title-sinistralite">
-        <button type="button" id="undisplay-sinistralite" onclick="close_display(this.id)" aria-label="Fermer la fenêtre Donner une vision globale des sinistres"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button type="button" id="undisplay-sinistralite" onclick="close_display(this.id)" aria-label="Fermer la fenêtre Donner une vision globale des sinistres climatiques"><i class="fa fa-times" aria-hidden="true"></i></button>
         <div class="all-project-container">
             <div class="details-project">
-                <div class="title"><h1 class="diplayed-title" id="title-sinistralite">Donner une vision globale des sinistres</h1></div>
+                <div class="title"><h1 class="diplayed-title" id="title-sinistralite">Donner une vision globale des sinistres climatiques</h1></div>
                 <div class="text-details">
                     <div class="project-status">Livré</div>
 <div class="project-facts"><div class="project-fact"><span>Livrables</span><strong>3 tableaux de bord</strong></div>
-<div class="project-fact"><span>Périmètre</span><strong>Ensemble de la sinistralité</strong></div>
+<div class="project-fact"><span>Périmètre</span><strong>Sinistres climatiques</strong></div>
 <div class="project-fact"><span>Outils</span><strong>SQL, Dremio, Tableau</strong></div></div>
-<h2 class="project-section-title">L’évolution du besoin</h2>
-<p>Le travail a commencé sur une tempête précise, puis s’est élargi aux sinistres climatiques avant d’englober l’ensemble de la sinistralité. L’objectif était de remplacer certaines demandes ponctuelles adressées au Data Office par un accès plus autonome aux indicateurs utiles.</p>
+<h2 class="project-section-title">Le besoin</h2>
+<p>Le projet portait sur les sinistres climatiques. L’objectif était de remplacer certaines demandes ponctuelles adressées au Data Office par un accès plus autonome aux indicateurs utiles : volumes, montants, localisation des sinistres et délais d’ouverture.</p>
 <h2 class="project-section-title">La construction de la source</h2>
 <p>J’ai travaillé sur des vues Dremio alimentant Tableau avec des règles de gestion déplacées le plus possible côté SQL. Cette approche évitait de multiplier les champs calculés dans Tableau et facilitait les contrôles de cohérence entre les volumes, les montants et les filtres.</p>
 <h2 class="project-section-title">La granularité des données</h2>
-<p>La difficulté principale venait de la maille d’analyse. Les sinistres, les genres, les règlements et les adresses ne sont pas toujours stockés au même niveau. J’ai donc contrôlé les volumes après jointure et isolé les cas où une répétition était normale du fait du modèle de données.</p>
+<p>La difficulté principale venait de la maille d’analyse. Un genre correspond à une catégorie de gestion rattachée à un sinistre : un même sinistre peut comporter plusieurs genres, et chaque genre peut lui-même avoir plusieurs règlements. Au départ, je descendais à la granularité du règlement alors que certains montants étaient déjà agrégés au niveau du genre.</p>
+<p>Par exemple, si le genre grêle comporte trois règlements de 100 euros, 200 euros et 300 euros, l’agrégat au niveau du genre vaut 600 euros. Mais si cet agrégat est répété sur chaque ligne de règlement, Tableau peut ensuite additionner 600 euros trois fois et afficher 1 800 euros au lieu de 600 euros. J’ai donc dû retravailler la source pour utiliser la bonne granularité selon l’indicateur analysé.</p>
+<h2 class="project-section-title gallery-heading">Illustration de la granularité</h2>
+<div class="project-gallery"><figure><img src="./../Images/projets alternance/CLIM_Sinistralite_granularite-genre-reglements.png" alt="Illustration d’un agrégat au genre répété sur plusieurs lignes de règlement" loading="lazy"><figcaption>Exemple de répétition d’un agrégat au niveau du genre lorsque l’analyse descend à la maille règlement</figcaption></figure></div>
 <h2 class="project-section-title">Le choix de l’adresse</h2>
 <p>Plusieurs adresses pouvaient être disponibles selon les contrats et les lieux de risque. Le tableau de bord devait donc utiliser une règle stable pour sélectionner l’adresse la plus pertinente, tout en gardant une prudence sur les données géographiques encore insuffisamment qualifiées.</p>
 <h2 class="project-section-title">Les trois tableaux de bord</h2>
-<p>Le premier tableau donne une vision générale des volumes et montants. Le deuxième se concentre sur la géolocalisation précise. Le troisième analyse les délais d’ouverture des sinistres. Les filtres et paramètres permettent aux utilisateurs d’adapter eux-mêmes la période, le territoire ou le type d’analyse.</p>
+<p>Le premier tableau donne une vision générale des volumes et montants des sinistres climatiques. Le deuxième se concentre sur la géolocalisation précise. Le troisième analyse les délais d’ouverture des sinistres. Les filtres et paramètres permettent aux utilisateurs d’adapter eux-mêmes la période, le territoire ou le type d’analyse.</p>
 <h2 class="project-section-title">Le résultat</h2>
-<p>Le livrable a permis de fournir une vision plus globale et plus autonome de la sinistralité. Il a aussi montré que la valeur d’un tableau de bord dépend autant de la qualité de la source que de la visualisation finale.</p>
+<p>Le livrable a permis de fournir une vision plus autonome des sinistres climatiques. Il a aussi montré que la valeur d’un tableau de bord dépend autant de la qualité de la source que de la visualisation finale.</p>
 <h2 class="project-section-title gallery-heading">Tableaux de bord finaux</h2>
-<div class="project-gallery"><figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord1-informations-generales.png" alt="Tableau de bord des informations générales sur les sinistres" loading="lazy"><figcaption>Vue globale des volumes et montants de sinistres</figcaption></figure>
-<figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord2-geolocalisation-precise.png" alt="Tableau de bord de géolocalisation précise des sinistres" loading="lazy"><figcaption>Vue cartographique des sinistres</figcaption></figure>
-<figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord3-ouverture-sinistres.png" alt="Tableau de bord des délais d’ouverture des sinistres" loading="lazy"><figcaption>Analyse des délais d’ouverture</figcaption></figure></div>
+<div class="project-gallery"><figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord1-informations-generales.png" alt="Tableau de bord des informations générales sur les sinistres climatiques" loading="lazy"><figcaption>Vue globale des volumes et montants de sinistres climatiques</figcaption></figure>
+<figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord2-geolocalisation-precise.png" alt="Tableau de bord de géolocalisation précise des sinistres climatiques" loading="lazy"><figcaption>Vue cartographique des sinistres climatiques</figcaption></figure>
+<figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord3-ouverture-sinistres.png" alt="Tableau de bord des délais d’ouverture des sinistres climatiques" loading="lazy"><figcaption>Analyse des délais d’ouverture des sinistres climatiques</figcaption></figure></div>
 <h2 class="project-section-title gallery-heading">Difficultés rencontrées</h2>
 <div class="project-gallery"><figure><img src="./../Images/projets alternance/CLIM_Sinistralite_geolocalisation-precise-adresses.png" alt="Carte de géolocalisation précise avec avertissement" loading="lazy"><figcaption>Prudence nécessaire sur certaines adresses</figcaption></figure>
 <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_superposition-annees-graphique.png" alt="Graphique montrant une superposition d’années avant correction" loading="lazy"><figcaption>Exemple de problème visuel corrigé pendant le projet</figcaption></figure></div>
@@ -538,17 +541,17 @@
     </div>
 
     <div class="project-page" tabindex="-1" id="display-corporel" role="dialog" aria-modal="true" aria-labelledby="title-corporel">
-        <button type="button" id="undisplay-corporel" onclick="close_display(this.id)" aria-label="Fermer la fenêtre Confronter les règles techniques à la réalité métier"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button type="button" id="undisplay-corporel" onclick="close_display(this.id)" aria-label="Fermer la fenêtre Créer des tableaux de bord pour les sinistres corporels"><i class="fa fa-times" aria-hidden="true"></i></button>
         <div class="all-project-container">
             <div class="details-project">
-                <div class="title"><h1 class="diplayed-title" id="title-corporel">Confronter les règles techniques à la réalité métier</h1></div>
+                <div class="title"><h1 class="diplayed-title" id="title-corporel">Créer des tableaux de bord pour les sinistres corporels</h1></div>
                 <div class="text-details">
                     <div class="project-status">Validé après recette</div>
 <div class="project-facts"><div class="project-fact"><span>Périmètre</span><strong>Sinistres corporels</strong></div>
-<div class="project-fact"><span>Livrables</span><strong>2 tableaux adaptés</strong></div>
-<div class="project-fact"><span>Méthode</span><strong>Recette avec les rédacteurs</strong></div></div>
-<h2 class="project-section-title">Le périmètre</h2>
-<p>Le projet a été mené avec Catherine D’Ausbourg, responsable du service Sinistres Corporels, et Arnaud Paulhiac, rédacteur corporel. Deux tableaux ont été travaillés : les dossiers ouverts depuis plus de cinq ans et les sinistres corporels supérieurs à 100 000 euros.</p>
+<div class="project-fact"><span>Livrables</span><strong>2 tableaux de bord</strong></div>
+<div class="project-fact"><span>Méthode</span><strong>Création et recette métier</strong></div></div>
+<h2 class="project-section-title">Le besoin</h2>
+<p>Le projet a été mené avec Catherine D’Ausbourg, responsable du service Sinistres Corporels, et Arnaud Paulhiac, rédacteur corporel. L’objectif était de créer deux tableaux de bord : l’un pour suivre les dossiers corporels ouverts depuis plus de cinq ans, l’autre pour suivre les sinistres corporels supérieurs à 100 000 euros.</p>
 <h2 class="project-section-title">La date de référence</h2>
 <p>La recette a montré qu’une date techniquement disponible n’était pas forcément la bonne date métier. Certains indicateurs devaient être calculés à partir de la date de survenance plutôt que de la date d’ouverture afin de refléter correctement la réalité du dossier.</p>
 <h2 class="project-section-title">Les dossiers archivés puis réouverts</h2>
