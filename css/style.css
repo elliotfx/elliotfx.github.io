@@ -1,0 +1,175 @@
+@import "navbar_stylesheet.css";
+
+/* ===================================
+   Page d'Accueil - Portfolio
+   =================================== */
+
+body,
+html {
+    overflow: hidden;
+    font-family: var(--font-main);
+}
+
+/* --- Layout Écran Partagé --- */
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.half {
+    height: 100%;
+    position: relative;
+}
+
+.black {
+    background-color: var(--dark);
+    width: 50%;
+}
+
+.white {
+    background-color: var(--white);
+    width: 50%;
+}
+
+/* --- Blocs Titres --- */
+.titles-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+.portfolio-container {
+    align-self: flex-start;
+    width: 45%;
+    border-top: 4px solid var(--white);
+    border-left: 4px solid var(--white);
+    border-bottom: 4px solid var(--white);
+}
+
+.name-container {
+    align-self: flex-end;
+    width: 55%;
+    border-top: 4px solid var(--white);
+    border-right: 4px solid var(--white);
+    border-bottom: 4px solid var(--white);
+    margin-top: -4px;
+}
+
+h1 {
+    width: 100%;
+    font-size: clamp(1.8em, 4vw, 4em);
+    color: var(--white);
+    text-align: center;
+    font-family: var(--font-serif);
+    margin: 0.3em 0;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    height: 3px;
+    background: var(--white);
+    transform: scaleX(0);
+    transition: transform 0.2s ease-in-out;
+}
+
+h1:hover::after {
+    transform: scaleX(1);
+}
+
+/* --- Photo Profil --- */
+.contenu {
+    position: absolute;
+    right: 15%;
+    top: 15%;
+    transition: transform 0.6s ease;
+}
+
+.contenu:hover {
+    transform: scale(1.1);
+}
+
+.photo {
+    width: 85%;
+    max-width: 460px;
+    height: 520px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: var(--radius);
+    box-shadow: 8px 8px 10px 0 var(--shadow);
+    display: block;
+}
+
+/* --- Section Mobile (Photo en Dessous) --- */
+.bas {
+    display: none;
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    background-color: var(--white);
+}
+
+.containerphoto2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+}
+
+.containerphoto2:hover {
+    transform: scale(1.05);
+}
+
+.photo2 {
+    width: 60%;
+    max-width: 350px;
+    height: 420px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    border-radius: var(--radius);
+    box-shadow: 8px 8px 10px 0 var(--shadow);
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 900px) {
+    body,
+    html {
+        overflow-y: auto;
+    }
+
+    .white {
+        display: none;
+    }
+
+    .black {
+        width: 100%;
+        min-height: 85vh;
+    }
+
+    .bas {
+        display: block;
+    }
+
+    .navbar > ul {
+        justify-content: flex-end;
+    }
+
+    ul > li.left-links,
+    ul > li.right-links {
+        display: none;
+    }
+
+    h1 {
+        font-size: clamp(1.5em, 6vw, 3em);
+    }
+}

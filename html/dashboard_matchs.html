@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Elliot FEROUX">
+    <meta name="description" content="Dashboard de pilotage des matchs d'arbitrage d'Elliot FEROUX">
+    <link rel="shortcut icon" href="./../Images/SD.svg" type="image/svg+xml">
+    <title>Dashboard Matchs — Elliot FEROUX</title>
+
+    <link rel="stylesheet" href="./../css/dashboard_matchs.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar" id="nav">
+            <div class="burger-container">
+                <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="left-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                    </ul>
+                </li>
+                <li class="logo">
+                    <a href="main.html" aria-label="Retour à l'accueil">
+                        <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données">
+                    </a>
+                </li>
+                <li class="right-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="burgerbar">
+            <a href="main.html">
+                <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données" class="logo-burger">
+            </a>
+            <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+            <ul class="burger-menu-list">
+                <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="dashboard-page">
+        <section class="dashboard-hero">
+            <div class="hero-kicker">Pilotage Personnel</div>
+            <h1>Dashboard de mes matchs d'arbitrage</h1>
+            <p id="data-range" class="hero-range">Chargement des données...</p>
+        </section>
+
+        <section class="dashboard-controls card-panel">
+            <div class="control-group">
+                <label for="season-filter">Saison</label>
+                <select id="season-filter">
+                    <option value="all">Toutes les saisons</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="competition-filter">Compétition</label>
+                <select id="competition-filter">
+                    <option value="all">Toutes les compétitions</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="granularity-filter">Granularité temporelle</label>
+                <select id="granularity-filter">
+                    <option value="month">Mois</option>
+                    <option value="quarter">Trimestre</option>
+                    <option value="year">Année</option>
+                </select>
+            </div>
+
+            <div class="control-meta">
+                <span id="match-count">0 match</span>
+                <span class="separator">•</span>
+                <span id="km-summary">Kilométrage en cours d'analyse</span>
+            </div>
+        </section>
+
+        <section class="kpi-grid">
+            <article class="kpi-card">
+                <span class="kpi-label">Matchs arbitrés</span>
+                <strong class="kpi-value" id="kpi-total-matches">0</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Kilomètres cumulés</span>
+                <strong class="kpi-value" id="kpi-total-km">0 km</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Kilométrage moyen</span>
+                <strong class="kpi-value" id="kpi-avg-km">0 km</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Match le plus loin</span>
+                <strong class="kpi-value" id="kpi-max-km">0 km</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Indemnités cumulées</span>
+                <strong class="kpi-value" id="kpi-total-indemnity">0 €</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Indemnité moyenne</span>
+                <strong class="kpi-value" id="kpi-avg-indemnity">0 €</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Compétitions couvertes</span>
+                <strong class="kpi-value" id="kpi-competitions">0</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Kilométrage renseigné</span>
+                <strong class="kpi-value" id="kpi-km-coverage">0%</strong>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">Dernier match</span>
+                <strong class="kpi-value" id="kpi-last-match">-</strong>
+            </article>
+        </section>
+
+        <section class="charts-grid">
+            <article class="chart-card">
+                <h2 id="timeline-title">Activité dans le temps</h2>
+                <canvas id="chart-timeline"></canvas>
+            </article>
+            <article class="chart-card">
+                <h2>Top déplacements</h2>
+                <canvas id="chart-travel"></canvas>
+            </article>
+            <article class="chart-card">
+                <h2>Répartition par compétition</h2>
+                <canvas id="chart-competition"></canvas>
+            </article>
+            <article class="chart-card">
+                <h2>Impact kilométrique par compétition</h2>
+                <canvas id="chart-competition-km"></canvas>
+            </article>
+            <article class="chart-card map-card">
+                <div class="map-card-head">
+                    <div>
+                        <h2>Carte choroplèthe des déplacements</h2>
+                        <p id="map-caption">Chargement de la synthèse géographique...</p>
+                    </div>
+                    <div class="map-controls">
+                        <div class="control-group control-group-compact">
+                            <label for="map-granularity-filter">Découpage cartographique</label>
+                            <select id="map-granularity-filter">
+                                <option value="department">Départements</option>
+                                <option value="region">Régions</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-layout">
+                    <div id="venues-map" class="venues-map" aria-label="Carte choroplèthe des déplacements d'arbitrage"></div>
+                    <aside class="map-anomalies-panel">
+                        <h3>Anomalies à vérifier</h3>
+                        <p>Clubs ou salles sans adresse exploitable, sans zone détectable, ou à compléter côté localisation.</p>
+                        <ul id="map-anomalies-list">
+                            <li>Analyse en cours...</li>
+                        </ul>
+                    </aside>
+                </div>
+            </article>
+        </section>
+
+        <section class="insight-panel card-panel">
+            <h2>Points clés</h2>
+            <ul id="insight-list">
+                <li>Analyse en cours...</li>
+            </ul>
+        </section>
+
+        <section class="table-panel card-panel">
+            <h2>Détail des convocations (Elliot FEROUX)</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Compétition</th>
+                            <th>Visiteur</th>
+                            <th>Recevant</th>
+                            <th>Salle</th>
+                            <th>KM</th>
+                            <th>Indemnité</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matches-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="status-box" class="status-box">Chargement du fichier CSV...</section>
+    </main>
+
+    <script src="./papaparse.min.js"></script>
+    <script src="./chart.umd.min.js"></script>
+    <script src="./vendor/d3.min.js"></script>
+    <script src="./dashboard_matchs_geocode_cache.js"></script>
+    <script src="./dashboard_matchs_map_data.js"></script>
+    <script src="./dashboard_matchs.local.js"></script>
+    <script src="./../js/script_projets.js"></script>
+</body>
+
+</html>

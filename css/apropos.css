@@ -1,0 +1,418 @@
+@import "navbar_stylesheet.css";
+
+/* ===================================
+   Page A Propos
+   =================================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+}
+
+/* --- Sections modifiées pour utiliser .project-block (voir projet.css) --- */
+
+/* --- Bloc Dashboard Matchs --- */
+.section-dashboard-cta {
+    min-height: auto;
+    align-items: stretch;
+    padding-top: 4.5%;
+    padding-bottom: 4.5%;
+}
+
+.dashboard-cta-text {
+    flex: 1;
+    max-width: 46%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dashboard-mosaic {
+    flex: 1;
+    max-width: 48%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.dashboard-kicker {
+    display: inline-block;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    border-radius: 999px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    opacity: 0.82;
+}
+.section-dark .dashboard-kicker { border: 1px solid rgba(250, 235, 215, 0.25); }
+.section-light .dashboard-kicker { border: 1px solid rgba(11, 22, 22, 0.25); }
+
+.dashboard-cta-text p {
+    margin-bottom: 1.2em;
+}
+
+.dashboard-link {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-family: var(--font-main);
+    font-size: 0.96rem;
+    text-decoration: none;
+    transition: transform 0.22s ease, background 0.22s ease;
+}
+.section-dark .dashboard-link {
+    border: 1px solid rgba(250, 235, 215, 0.22);
+    background: rgba(250, 235, 215, 0.1);
+    color: var(--cream);
+}
+.section-light .dashboard-link {
+    border: 1px solid rgba(11, 22, 22, 0.22);
+    background: rgba(11, 22, 22, 0.1);
+    color: var(--dark);
+}
+.dashboard-link:hover { transform: translateY(-1px); }
+.section-dark .dashboard-link:hover { background: rgba(250, 235, 215, 0.2); }
+.section-light .dashboard-link:hover { background: rgba(11, 22, 22, 0.16); }
+
+.dashboard-tile {
+    min-height: 170px;
+    border-radius: 18px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 8px 8px 10px 0 var(--shadow);
+}
+
+.dashboard-tile-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.78;
+}
+
+.dashboard-tile strong {
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1.2;
+}
+
+.dashboard-tile p {
+    margin: 0;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.tile-dark {
+    background: linear-gradient(180deg, #0b1616 0%, #1b3131 100%);
+    color: var(--cream);
+}
+
+.tile-cream {
+    background: linear-gradient(180deg, #f8ecd8 0%, #ead2a8 100%);
+    color: var(--dark);
+}
+
+.tile-accent {
+    background: linear-gradient(180deg, #6d8f88 0%, #2c4947 100%);
+    color: var(--cream);
+}
+
+.section-dark .tile-outline {
+    background: linear-gradient(180deg, rgba(250, 235, 215, 0.12), rgba(250, 235, 215, 0.06));
+    color: var(--cream);
+    border: 1px solid rgba(250, 235, 215, 0.14);
+}
+.section-light .tile-outline {
+    background: linear-gradient(180deg, rgba(250, 235, 215, 0.55), rgba(250, 235, 215, 0.3));
+    color: var(--dark);
+    border: 1px solid rgba(11, 22, 22, 0.14);
+}
+
+/* Effet dynamique : hover sur une tile met en valeur celle-ci et estompe les autres */
+.dashboard-mosaic:has(.dashboard-tile:hover) .dashboard-tile:not(:hover) {
+    opacity: 0.55;
+    transform: scale(0.97);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-mosaic .dashboard-tile {
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-mosaic .dashboard-tile:hover {
+    transform: scale(1.03);
+    box-shadow: 12px 12px 24px 0 rgba(0,0,0,0.4);
+    z-index: 1;
+    position: relative;
+}
+
+/* --- Section AMAM --- */
+.section-amam {
+    align-items: stretch;
+}
+
+.amam-preview {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.amam-preview-swiper {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 8px 8px 10px 0 var(--shadow);
+}
+
+.amam-preview-swiper .swiper-slide {
+    background: rgba(11, 22, 22, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+}
+
+.amam-preview-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.amam-preview-pagination .swiper-pagination-bullet {
+    background: rgba(11, 22, 22, 0.5);
+    opacity: 1;
+}
+
+.amam-preview-pagination .swiper-pagination-bullet-active {
+    background: var(--dark);
+}
+
+.section-amam .go-to {
+    margin-top: 1.4em;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+.section-light .section-amam .go-to {
+    border: 1px solid rgba(11, 22, 22, 0.18);
+    background: rgba(11, 22, 22, 0.08);
+}
+.section-dark .section-amam .go-to {
+    border: 1px solid rgba(250, 235, 215, 0.18);
+    background: rgba(250, 235, 215, 0.08);
+}
+.section-amam .go-to:hover { transform: translateY(-1px); }
+.section-light .section-amam .go-to:hover { background: rgba(11, 22, 22, 0.15); }
+.section-dark .section-amam .go-to:hover { background: rgba(250, 235, 215, 0.15); }
+
+/* --- Section Ecole d'arbitrage --- */
+.section-ecole-arbitrage {
+    align-items: stretch;
+}
+
+.ecole-photos {
+    flex-direction: column;
+    gap: 18px;
+}
+
+.photo-ecole {
+    width: min(86%, 420px);
+    max-width: 420px;
+    border-radius: var(--radius);
+    box-shadow: 8px 8px 10px 0 var(--shadow);
+    transition: transform 0.4s ease;
+}
+
+.pdf-link a {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.section-dark .pdf-link a {
+    border: 1px solid rgba(250, 235, 215, 0.35);
+    background: rgba(250, 235, 215, 0.1);
+}
+.section-dark .pdf-link a:hover { background: rgba(250, 235, 215, 0.2); }
+.section-light .pdf-link a {
+    border: 1px solid rgba(11, 22, 22, 0.2);
+    background: rgba(11, 22, 22, 0.06);
+}
+.section-light .pdf-link a:hover { background: rgba(11, 22, 22, 0.12); }
+
+/* ===================================
+   Modale AMAM (menu + carousel)
+   =================================== */
+
+.amam-modal {
+    width: min(95%, 1180px);
+    max-height: 90vh;
+}
+
+.amam-modal .all-project-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+    gap: 24px;
+    padding: 12px clamp(22px, 3vw, 32px) clamp(24px, 3vw, 32px);
+    padding-right: clamp(22px, 3vw, 32px);
+}
+
+.amam-menu-container {
+    border-right: 1px solid rgba(250, 235, 215, 0.12);
+    padding-right: 18px;
+    align-self: stretch;
+}
+
+.amam-menu-title {
+    margin: 12px 0 14px;
+    font-size: 0.86em;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+#amam-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#amam-menu li {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(250, 235, 215, 0.05);
+    border: 1px solid rgba(250, 235, 215, 0.08);
+    cursor: pointer;
+    font-size: 0.9em;
+    line-height: 1.45;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#amam-menu li:hover {
+    background: rgba(250, 235, 215, 0.1);
+    border-color: rgba(250, 235, 215, 0.2);
+}
+
+#amam-menu li.active {
+    background: rgba(250, 235, 215, 0.18);
+    border-color: rgba(250, 235, 215, 0.35);
+    color: var(--cream);
+}
+
+.amam-content-container {
+    min-width: 0;
+}
+
+.amam-event-panel {
+    display: none;
+}
+
+.amam-event-panel.active {
+    display: block;
+}
+
+.amam-event-swiper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(250, 235, 215, 0.12);
+    background: rgba(4, 9, 9, 0.82);
+}
+
+.amam-event-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 62vh;
+}
+
+.amam-event-swiper .swiper-slide img {
+    width: 100%;
+    height: 62vh;
+    object-fit: contain;
+    background: rgba(4, 9, 9, 0.9);
+}
+
+.amam-modal-pagination .swiper-pagination-bullet {
+    background: rgba(250, 235, 215, 0.6);
+    opacity: 1;
+}
+
+.amam-modal-pagination .swiper-pagination-bullet-active {
+    background: var(--cream);
+}
+
+.amam-modal-prev,
+.amam-modal-next {
+    color: var(--cream);
+}
+
+@media screen and (max-width: 900px) {
+
+    .section-dashboard-cta {
+        padding-top: 8%;
+        padding-bottom: 8%;
+    }
+
+    .dashboard-cta-text,
+    .dashboard-mosaic {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .dashboard-mosaic {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dashboard-tile {
+        min-height: 150px;
+    }
+
+    .titre {
+        font-size: 1.8em;
+    }
+
+    .amam-preview-swiper .swiper-slide {
+        min-height: 300px;
+    }
+
+    .amam-modal {
+        width: min(97%, 1180px);
+        max-height: 94vh;
+    }
+
+    .amam-modal .all-project-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 8px 14px 18px;
+        padding-right: 14px;
+    }
+
+    .amam-menu-container {
+        border-right: none;
+        border-bottom: 1px solid rgba(250, 235, 215, 0.12);
+        padding-right: 0;
+        padding-bottom: 12px;
+    }
+
+    #amam-menu li {
+        font-size: 0.85em;
+    }
+
+    .amam-event-swiper .swiper-slide,
+    .amam-event-swiper .swiper-slide img {
+        min-height: 46vh;
+        height: 46vh;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Elliot FEROUX">
+    <meta name="description" content="Contact - Portfolio de Elliot FEROUX">
+    <link rel="shortcut icon" href="./../Images/SD.svg" type="image/svg+xml">
+    <title>Contact — Portfolio Elliot FEROUX</title>
+
+    <!-- Feuilles de Style -->
+    <link rel="stylesheet" href="./../css/contact.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <!-- ======= En-tête / Navigation ======= -->
+    <header>
+        <div class="navbar" id="nav">
+            <div class="burger-container">
+                <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="left-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                    </ul>
+                </li>
+                <li class="logo">
+                    <a href="main.html" aria-label="Retour à l'accueil">
+                        <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données">
+                    </a>
+                </li>
+                <li class="right-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Menu Burger (Mobile) -->
+        <div id="burgerbar">
+            <a href="main.html">
+                <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données" class="logo-burger">
+            </a>
+            <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+            <ul class="burger-menu-list">
+                <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ======= Remerciements ======= -->
+    <div class="remerciments">
+        <p class="merci">MERCI D'AVOIR VISITÉ MON PORTFOLIO</p>
+    </div>
+
+    <!-- ======= Liens de Contact ======= -->
+    <div class="contact">
+        <div class="contact-item">
+            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            <a href="https://www.linkedin.com/in/elliot-feroux-71334a241/" target="_blank" aria-label="Profil LinkedIn">LINKEDIN</a>
+        </div>
+
+        <div class="contact-item">
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            <a href="mailto:elliotferoux@gmail.com" aria-label="Envoyer un e-mail">E-MAIL</a>
+        </div>
+
+        <div class="contact-item">
+            <i class="fa fa-phone-square" aria-hidden="true"></i>
+            <a href="tel:+33767845073" aria-label="Appeler">TÉLÉPHONE</a>
+        </div>
+    </div>
+
+    <!-- ======= CV Intégré ======= -->
+    <!-- Remplacez le chemin ci-dessous par votre fichier CV.pdf -->
+    <div class="CV">
+        <object data="./../Images/CV.pdf"
+                type="application/pdf"
+                class="cvimg"
+                title="CV de Elliot FEROUX">
+            <div style="text-align:center; padding:40px; color:antiquewhite; font-family:'Bebas Neue',sans-serif;">
+                <i class="fa fa-file-pdf-o" style="font-size:4em; margin-bottom:20px; display:block;" aria-hidden="true"></i>
+                <p style="font-size:1.2em;">CV non disponible pour le moment.</p>
+                <p style="font-size:0.9em; opacity:0.7;">Placez votre fichier CV.pdf dans le dossier Images/</p>
+            </div>
+        </object>
+    </div>
+
+    <script src="./../js/script_projets.js"></script>
+
+</body>
+</html>

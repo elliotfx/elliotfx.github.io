@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Elliot FEROUX">
+    <meta name="description" content="Tous les projets de Elliot FEROUX — BUT Sciences des Données">
+    <link rel="shortcut icon" href="./../Images/SD.svg" type="image/svg+xml">
+    <title>Mes Projets — Portfolio Elliot FEROUX</title>
+
+    <!-- Feuilles de Style -->
+    <link rel="stylesheet" href="./../css/projet.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <!-- ======= En-tête / Navigation ======= -->
+    <header>
+        <div class="navbar" id="nav">
+            <div class="burger-container">
+                <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="left-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                    </ul>
+                </li>
+                <li class="logo">
+                    <a href="main.html" aria-label="Retour à l'accueil">
+                        <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données">
+                    </a>
+                </li>
+                <li class="right-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Menu Burger (Mobile) -->
+        <div id="burgerbar">
+            <a href="main.html">
+                <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données" class="logo-burger">
+            </a>
+            <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+            <ul class="burger-menu-list">
+                <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ======= Barre de Filtres (générée automatiquement par JS) ======= -->
+    <div class="filter-bar" id="filter-bar">
+        <!-- Les boutons apparaissent automatiquement en fonction des data-tags -->
+    </div>
+
+    <!-- ======= Conteneur des Projets ======= -->
+    <!--
+        GUIDE : Pour ajouter un nouveau projet, copiez un bloc .project-block
+        et modifiez le data-tags. Les filtres se mettront à jour automatiquement !
+        Exemple : data-tags="2ème Année, Python, Machine Learning"
+    -->
+
+    <div class="projects-container">
+
+        <!-- ===== PROJET 1 : Oral & Anglais ===== -->
+        <div class="project-block" data-tags="1ère Année, Communication">
+            <div class="project-text">
+                <div class="titre">Oral &amp; Anglais</div>
+                <div class="project-description">
+                    <p>Dans le cadre de nos cours de Communication et d'Anglais, nous devions faire un exposé sur une destination touristique en anglais.</p>
+                    <button class="go-to" id="-light-green" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/NYC.jpeg"
+                     alt="Statue de la Liberté — New York City">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 2 : Python & JSON & CSV ===== -->
+        <div class="project-block" data-tags="1ère Année, Programmation">
+            <div class="project-text">
+                <div class="titre">Python &amp; JSON &amp; CSV</div>
+                <div class="project-description">
+                    <p>Dans le cadre de notre apprentissage du langage Python, nous avons dû traiter un fichier JSON en Python.</p>
+                    <button class="go-to" id="-yellow" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/json.png"
+                     alt="Code Python et JSON">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 3 : Excel & VBA ===== -->
+        <div class="project-block" data-tags="1ère Année, Programmation">
+            <div class="project-text">
+                <div class="titre">Excel &amp; VBA</div>
+                <div class="project-description">
+                    <p>Dans le cadre de notre apprentissage du langage VBA, nous avions un projet sur une semaine où l'objectif était de créer un outil de gestion de notes.</p>
+                    <button class="go-to" id="-dark-purple" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/VBA.png"
+                     alt="Excel et VBA">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 4 : Régression Linéaire ===== -->
+        <div class="project-block" data-tags="1ère Année, Statistiques">
+            <div class="project-text">
+                <div class="titre">Régression Linéaire (R &amp; Excel)</div>
+                <div class="project-description">
+                    <p>Durant ce projet nous avons appris à appliquer un modèle linéaire afin de prédire des prix d'appartements à Paris.</p>
+                    <button class="go-to" id="-orange" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/reg.png"
+                     alt="Régression linéaire — Graphique">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 5 : SAE Portfolio ===== -->
+        <div class="project-block" data-tags="1ère Année, Développement Web">
+            <div class="project-text">
+                <div class="titre">SAE — Portfolio</div>
+                <div class="project-description">
+                    <p>L'objectif de ce projet était de prendre en main les outils tels que HTML, CSS et JS. Il fallait créer un portfolio numérique.</p>
+                    <button class="go-to" id="-pink" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/portfolio.png"
+                     alt="Portfolio — Développement Web">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 6 : Power BI & Python ===== -->
+        <div class="project-block" data-tags="1ère Année, Programmation, Data Visualisation">
+            <div class="project-text">
+                <div class="titre">Power BI &amp; Python</div>
+                <div class="project-description">
+                    <p>L'objectif de cette SAÉ est de créer un outil interactif permettant d'évaluer l'étendue et les caractéristiques des AcVC en France.</p>
+                    <button class="go-to" id="-dark-green" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/pb.png"
+                     alt="Power BI — Data Visualisation">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 7 : Étude Martinique ===== -->
+        <div class="project-block" data-tags="1ère Année, Statistiques, Data Visualisation">
+            <div class="project-text">
+                <div class="titre">Étude Économique — Martinique</div>
+                <div class="project-description">
+                    <p>Étude complète de la situation économique et démographique de la Martinique à partir de données INSEE : déclin démographique, chômage, inégalités et indicateurs statistiques.</p>
+                    <button class="go-to" id="-martinique" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1580541631950-7282082b03fe?w=450&h=350&fit=crop"
+                     alt="Martinique — Paysage tropical">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 8 : Controverse A69 ===== -->
+        <div class="project-block" data-tags="2ème Année, Communication, Environnement">
+            <div class="project-text">
+                <div class="titre">Controverse — Autoroute A69</div>
+                <div class="project-description">
+                    <p>Analyse de la controverse autour de l'autoroute A69 (Toulouse–Castres) : enjeux économiques, environnementaux et sociaux, confrontation des acteurs et alternatives.</p>
+                    <button class="go-to" id="-forest" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=450&h=350&fit=crop"
+                     alt="Autoroute — Controverse A69">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 9 : Analyse SIG — McDonald's ===== -->
+        <div class="project-block" data-tags="2ème Année, SIG, Data Visualisation">
+            <div class="project-text">
+                <div class="titre">Analyse SIG — McDonald's en France</div>
+                <div class="project-description">
+                    <p>Analyse spatiale de l'implantation des restaurants McDonald's en France à l'aide de QGIS : jointures spatiales, zones tampon et cartes thématiques de densité par département.</p>
+                    <button class="go-to" id="-sig" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/SIG/densite_mcdo_dep.png"
+                     alt="Carte de densité McDonald's par département">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 10 : Danemark — Prévision des Importations ===== -->
+        <div class="project-block" data-tags="2ème Année, Statistiques, Séries Temporelles">
+            <div class="project-text">
+                <div class="titre">Prévision des Importations — Danemark</div>
+                <div class="project-description">
+                    <p>Étude de prévision des importations du Danemark à partir de données OCDE, utilisant la décomposition de séries chronologiques et la méthode de Buys-Ballot.</p>
+                    <button class="go-to" id="-denmark" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=450&h=350&fit=crop"
+                     alt="Copenhague — Danemark">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 11 : L'Oréal — Dashboard Excel ===== -->
+        <div class="project-block" data-tags="2ème Année, Data Visualisation, Excel">
+            <div class="project-text">
+                <div class="titre">Reporting L'Oréal</div>
+                <div class="project-description">
+                    <p>Création d'un tableau de bord sous Excel pour analyser les performances économiques et financières du groupe L'Oréal à l'international.</p>
+                    <button class="go-to" id="-loreal" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/tdb Elliot FEROUX loreal.png"
+                     alt="Dashboard Excel L'Oréal">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Message si aucun projet ne correspond au filtre -->
+    <div class="no-results" id="no-results">
+        Aucun projet ne correspond à ce filtre.
+    </div>
+
+    <!-- ======= Overlay pour les Modales ======= -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeAllModals()"></div>
+
+    <!-- ======= Fenêtres Modales (en dehors des blocs pour le filtrage) ======= -->
+
+    <!-- Modale : Oral & Anglais -->
+    <div class="project-page" tabindex="-1" id="display-light-green">
+        <button type="button" id="undisplay-light-green" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Présentation en anglais d'un territoire économique et culturel</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>CHABOT Quentin</li>
+                        <li>⋅</li>
+                        <li>COURTABAN Erwan</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Ce projet fût relativement stressant. Un des premiers de l'année. Toute une phase de recherche sur la ville de New-York City puis une phase à l'oral en Anglais. J'ai pu comprendre l'importance de travailler en équipe afin de se répartir le travail. De plus, il m'a permis de m'améliorer au niveau de ma confiance à m'exprimer en public.</p>
+                </div>
+            </div>
+            <embed src="./../Images/NYC.pdf" width="100%" height="500" type="application/pdf" class="image-project" />
+        </div>
+    </div>
+
+    <!-- Modale : Python & JSON -->
+    <div class="project-page" tabindex="-1" id="display-yellow">
+        <button type="button" id="undisplay-yellow" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Gestion de fichier Python</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>DUJOUR Valentin</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Dans ce projet notre but était de transformer un fichier JSON en fichier CSV avec des colonnes précises. Nous devions utiliser Python. Cela nous a appris à utiliser les librairies json et csv qui permettent respectivement de lire un fichier json et d'écrire un fichier csv. Le sujet était relativement compliqué à traiter notamment dû à la complexité des données médicales. Ce que j'ai le plus compris est "Comprendre les structures algorithmiques de base et leur contexte d'usage" — cette SAE m'a vraiment permis de m'améliorer au niveau de l'algorithmique.</p>
+                </div>
+            </div>
+            <embed src="./../Images/gestion fichiers.pdf" width="100%" height="500" type="application/pdf" class="image-project" />
+        </div>
+    </div>
+
+    <!-- Modale : Excel & VBA -->
+    <div class="project-page" tabindex="-1" id="display-dark-purple">
+        <button type="button" id="undisplay-dark-purple" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAE — Création d'un reporting</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>DUJOUR Valentin</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Afin de réaliser ce projet nous étions en groupe de deux. L'objectif était de réussir à maîtriser les outils graphiques et algorithmiques de VBA. Nous avions le choix de réaliser ça en Excel ou VBA. Notre choix a été de faire la majorité en VBA afin de nous former le plus possible. Cette SAE est devenue un exemple pour moi au niveau organisation et gestion des divergences d'opinions, nous avons réussi à faire ce que nous voulions réaliser dans les délais.</p>
+                </div>
+            </div>
+            <embed src="./../Images/VBA.pdf" width="100%" height="500" type="application/pdf" class="image-project" />
+        </div>
+    </div>
+
+    <!-- Modale : Régression Linéaire -->
+    <div class="project-page" tabindex="-1" id="display-orange">
+        <button type="button" id="undisplay-orange" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Régression sur des données réelles</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>FORESTIER Julien</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Ce projet fut compliqué de mon côté, ayant certaines difficultés en mathématiques, j'ai eu des difficultés pour comprendre la stratégie à adopter. Je me perdais sous la masse de formules à notre disposition. De plus nous devions utiliser le langage "R" qui ne m'était que très peu familier. Malgré cela, ce travail m'a vraiment intéressé et j'ai compris l'importance des modèles de prédictions.</p>
+                </div>
+            </div>
+            <embed src="./../Images/Regression.pdf" width="100%" height="500" type="application/pdf" class="image-project" />
+        </div>
+    </div>
+
+    <!-- Modale : SAE Portfolio -->
+    <div class="project-page" tabindex="-1" id="display-pink">
+        <button type="button" id="undisplay-pink" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAE — Portfolio</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Ce projet s'est révélé assez exigeant lorsqu'il s'agissait de le réaliser manuellement. Certains préfèrent utiliser des modèles déjà existants, tandis que d'autres optent pour des sites qui font le travail à leur place. Pour ma part, j'ai pris la décision de tout créer moi-même. Cela m'a permis de vraiment saisir le fonctionnement du HTML et du CSS. J'ai même réussi à comprendre un peu comment fonctionne le JavaScript. Le défi le plus complexe a été de maîtriser toutes les techniques de mise en page proposées par le CSS pour positionner ces éléments. Mais finalement, j'ai réussi à développer quelques automatismes, et j'en suis fier.</p>
+                </div>
+            </div>
+            <embed src="./../Images/pf.pdf" width="100%" height="500" type="application/pdf" class="image-project" />
+        </div>
+    </div>
+
+    <!-- Modale : Power BI & Python -->
+    <div class="project-page" tabindex="-1" id="display-dark-green">
+        <button type="button" id="undisplay-dark-green" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Analyse de données, reporting et datavisualisation</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>ANDREOLI Andrea</li>
+                        <li>⋅</li>
+                        <li>BERRUYER Justin</li>
+                        <li>⋅</li>
+                        <li>BADOZ Marius</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Au début, avec Andrea, j'ai travaillé sur la représentativité des données (sexes et âges) et leurs graphiques, en utilisant la bibliothèque pandas malgré quelques difficultés avec les dataframes. Nous avons bien réparti les tâches.</p>
+                    <p>Durant les deux derniers jours, en l'absence du SCRUM Master, j'ai organisé des réunions pour maintenir la coordination. Mon ressenti est que, malgré une bonne collaboration et aucun problème majeur, notre organisation était perfectible. Le sujet vague et les données perturbantes ont causé des retards. J'ai apprécié le projet globalement.</p>
+                </div>
+            </div>
+            <iframe class="image-project"
+                    width="560" height="315"
+                    src="https://www.youtube.com/embed/YTrEuMzms54?si=PDIz5C_v3B9qgtbQ"
+                    title="Vidéo de présentation du projet Power BI"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Modale : Étude Martinique -->
+    <div class="project-page" tabindex="-1" id="display-martinique">
+        <button type="button" id="undisplay-martinique" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Étude économique et démographique de la Martinique</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>J'ai réalisé une étude complète de la situation économique et démographique de la Martinique à partir de données INSEE. Le travail couvrait plusieurs axes : l'analyse du déclin démographique (perte de près de 23 000 habitants entre 2014 et 2020), le vieillissement de la population et le calcul du ratio de dépendance économique par commune, l'étude du chômage (22 % en moyenne, 45 % chez les jeunes) et ses liens avec le niveau de diplôme, ainsi que les inégalités d'emploi entre hommes et femmes, notamment sur le temps partiel.</p>
+                    <p>L'étude mobilisait des indicateurs de statistique descriptive (moyennes, médianes, écarts types, coefficients de variation, taux de croissance) et s'appuyait sur des visualisations variées (cartes, pyramides des âges, boîtes à moustaches, diagrammes en barres). L'exercice m'a appris à structurer une analyse complète sur des données réelles, avec l'idée de produire quelque chose d'exploitable pour des élus.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="./../BBUT 1/SAE - Martinique Elliot Feroux.pdf" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">📄 Consulter le rapport (PDF)</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Controverse A69 -->
+    <div class="project-page" tabindex="-1" id="display-forest">
+        <button type="button" id="undisplay-forest" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">Controverse — L'Autoroute A69 (Toulouse–Castres)</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Dans le cadre d'un projet académique, j'ai analysé la controverse autour de l'autoroute A69 (Toulouse–Castres) en étudiant les enjeux économiques, environnementaux et sociaux, ainsi que les arguments des différents acteurs (institutions, entreprises, opposants).</p>
+                    <p>Ce travail m'a permis de structurer une analyse critique d'un débat public réel, de comparer des sources variées et de prendre du recul sur les logiques de décision, notamment en identifiant les limites du projet et les alternatives possibles.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="./../BUT2/Green and Dark Green Simple Forest Of The Future Presentation.pdf" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">📄 Consulter la présentation (PDF)</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Danemark -->
+    <div class="project-page" tabindex="-1" id="display-denmark">
+        <button type="button" id="undisplay-denmark" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">Présentation — Le Danemark</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>J'ai réalisé une étude de prévision des importations du Danemark à partir de données issues de l'OCDE. L'objectif était de décomposer la série chronologique pour en extraire la tendance et la saisonnalité, puis de produire des prévisions à court terme en utilisant la méthode de Buys-Ballot.</p>
+                    <p>Le travail comprenait le traitement et la mise en forme des données, la modélisation statistique, ainsi que la rédaction d'un rapport structuré dans une logique d'aide à la décision économique. Réalisé en première année, ce projet m'a permis de découvrir concrètement l'analyse de séries temporelles et de développer un premier regard critique sur la qualité d'une prévision et ses limites.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="./../BUT2/danemark.pdf" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">📄 Consulter le rapport (PDF)</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Analyse SIG — McDonald's -->
+    <div class="project-page" tabindex="-1" id="display-sig">
+        <button type="button" id="undisplay-sig" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Analyse SIG de l'implantation McDonald's en France</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Dans le cadre d'un projet en Systèmes d'Information Géographique, j'ai mené une analyse spatiale de l'implantation des restaurants McDonald's sur le territoire français à l'aide du logiciel QGIS. Le travail consistait à croiser plusieurs couches de données géographiques grâce à des jointures spatiales, à créer des zones tampon autour des points d'intérêt, et à produire des cartes thématiques représentant la densité de restaurants par département.</p>
+                    <p>L'exercice m'a familiarisé avec la manipulation de données géolocalisées, la logique de superposition de couches et la restitution cartographique. C'est un des projets que j'ai le plus apprécié en BUT. Le fait de voir les données prendre forme sur une carte, de pouvoir les interroger visuellement, ça m'a donné envie de creuser davantage l'analyse spatiale et les outils SIG en général.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="./../BUT2/SIG_Elliot_Feroux.pdf" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">📄 Consulter le compte rendu (PDF)</a>
+                    </p>
+                </div>
+                <div class="sig-maps-gallery">
+                    <h2 style="font-family: var(--font-main); font-size: 1.2em; margin: 1.5em 0 0.8em; color: var(--dark);">Cartes produites</h2>
+                    <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+                        <a href="./../Images/SIG/densite_mcdo_dep.png" target="_blank" style="flex: 1; min-width: 280px; max-width: 48%;">
+                            <img src="./../Images/SIG/densite_mcdo_dep.png" alt="Carte de densité McDonald's par département" style="width: 100%; border-radius: 8px; border: 1px solid #ccc; cursor: zoom-in;">
+                            <p style="text-align: center; font-size: 0.85em; margin-top: 6px; color: #666;">Densité de McDonald's pour 100 000 habitants</p>
+                        </a>
+                        <a href="./../Images/SIG/habitants_15km.png" target="_blank" style="flex: 1; min-width: 280px; max-width: 48%;">
+                            <img src="./../Images/SIG/habitants_15km.png" alt="Zoom Poitou-Charentes — Zone tampon 15km" style="width: 100%; border-radius: 8px; border: 1px solid #ccc; cursor: zoom-in;">
+                            <p style="text-align: center; font-size: 0.85em; margin-top: 6px; color: #666;">Zoom Poitou-Charentes — Habitants dans un rayon de 15 km</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : L'Oréal -->
+    <div class="project-page" tabindex="-1" id="display-loreal">
+        <button type="button" id="undisplay-loreal" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">Reporting Financier — L'Oréal</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>L'objectif de ce projet était de concevoir un tableau de bord analysant la situation économique et les performances mondiales du groupe L'Oréal. À partir d'un jeu de données financiers, j'ai développé un outil de reporting dynamique permettant de suivre l'évolution de l'entreprise dans le temps et à l'international.</p>
+                    <p>Réalisé en autonomie sur une période de deux semaines, ce projet avait pour contrainte l'utilisation exclusive d'Excel. Malgré les limites de cet outil en matière de datavisualisation par rapport aux solutions BI modernes, le résultat final offre des indicateurs clairs et synthétiques. Le reporting permet d'explorer efficacement le chiffre d'affaires, l'évolution de la productivité et la rentabilité globale du groupe.</p>
+                </div>
+                <div style="text-align: center; margin-top: 2em;">
+                    <img src="./../Images/tdb Elliot FEROUX loreal.png" alt="Aperçu du Dashboard L'Oréal" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../js/script_projets.js"></script>
+
+</body>
+</html>

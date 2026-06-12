@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Elliot FEROUX">
+    <meta name="description" content="Mes années d'alternance à la Mutuelle de Poitiers Assurances — Elliot FEROUX">
+    <link rel="shortcut icon" href="./../Images/SD.svg" type="image/svg+xml">
+    <title>Alternance — Portfolio Elliot FEROUX</title>
+
+    <!-- Feuilles de Style -->
+    <link rel="stylesheet" href="./../css/projet.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <!-- ======= En-tête / Navigation ======= -->
+    <header>
+        <div class="navbar" id="nav">
+            <div class="burger-container">
+                <i class="fa fa-bars iconeburger" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="left-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                        <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                    </ul>
+                </li>
+                <li class="logo">
+                    <a href="main.html" aria-label="Retour à l'accueil">
+                        <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données">
+                    </a>
+                </li>
+                <li class="right-links">
+                    <ul>
+                        <li class="link-nav-underline"><a href="alternance.html" class="active">ALTERNANCE</a></li>
+                        <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                        <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Menu Burger (Mobile) -->
+        <div id="burgerbar">
+            <a href="main.html">
+                <img src="./../Images/SD.svg" alt="Logo BUT Sciences des Données" class="logo-burger">
+            </a>
+            <i class="fa fa-times iconeburgerclose" aria-hidden="true"></i>
+            <ul class="burger-menu-list">
+                <li class="link-nav-underline"><a href="bilan.html">BILAN PERSONNEL</a></li>
+                <li class="link-nav-underline"><a href="projets.html">PROJETS</a></li>
+                <li class="link-nav-underline"><a href="alternance.html">ALTERNANCE</a></li>
+                <li class="link-nav-underline"><a href="apropos.html">A PROPOS</a></li>
+                <li class="link-nav-underline"><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ======= Barre de Filtres (générée automatiquement par JS) ======= -->
+    <div class="filter-bar" id="filter-bar">
+        <!-- Les boutons apparaissent automatiquement en fonction des data-tags -->
+    </div>
+
+    <!-- Message si aucun projet ne correspond au filtre -->
+    <div class="no-results" id="no-results" style="display:none; text-align:center; padding: 2em; color: var(--cream);">
+        Aucun résultat ne correspond à ce filtre.
+    </div>
+
+    <!-- ======= Conteneur de l'Alternance ======= -->
+    <div class="projects-container">
+
+        <!-- ===== SECTION : PRÉSENTATION MDPA ===== -->
+        <div class="project-block" data-tags="Présentation">
+            <div class="project-text">
+                <div class="titre">Mutuelle de Poitiers Assurances</div>
+                <div class="project-description">
+                    <p>Fondée en 1838, la Mutuelle de Poitiers Assurances (MDPA) est une société d'assurance mutualiste sans actionnaires, privilégiant la proximité avec ses 489 000 sociétaires via plus de 300 agences.</p>
+                    <p>J'y effectue mon alternance au sein du <strong>Data Office</strong> (Direction Financière et Comptable), où mon rôle de <em>Data Analyst</em> consiste à accompagner les équipes métiers dans l'exploitation de leurs données. Mon travail s'articule autour de la structuration des processus, la fiabilisation des données, et la livraison de tableaux de bord d'aide à la décision.</p>
+                    <button class="go-to" id="-mdpa" type="button" onclick="display_project(this.id)">Organisation du Data Office</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=450&h=350&fit=crop" alt="Mutuelle de Poitiers Assurances">
+            </div>
+        </div>
+
+        <!-- ===== SECTION : RAPPORT BUT2 ===== -->
+        <div class="project-block" data-tags="BUT2, Rapport">
+            <div class="project-text">
+                <div class="titre">Rapport d'Alternance BUT 2</div>
+                <div class="project-description">
+                    <p>Mon rapport de deuxième année retrace ma découverte du Système d'Information de la mutuelle, ma montée en compétences sur le SQL et Dremio, ainsi que mes premiers projets concrets, notamment autour de la sinistralité climatique et de la qualité des données.</p>
+                    <p><a href="./../Images/ELLIOT FEROUX - Mutuelle de Poitiers Assurances.pdf" target="_blank" style="color:inherit;text-decoration:underline;">📄 Télécharger le rapport BUT2 (PDF)</a></p>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/PHOTO.jpg" alt="Rapport BUT2">
+            </div>
+        </div>
+
+        <!-- ===== SECTION : RAPPORT BUT3 ===== -->
+        <div class="project-block" data-tags="BUT3, Rapport">
+            <div class="project-text">
+                <div class="titre">Rapport d'Alternance BUT 3</div>
+                <div class="project-description">
+                    <p>Intitulé « Piloter la donnée : du cadrage métier à la livraison d'outils d'aide à la décision », ce rapport de troisième année illustre mon passage d'une posture de découverte à une réelle autonomie dans la gestion complète de projets Data avec les métiers.</p>
+                    <p><a href="./../Images/Elliot FEROUX - MDPA - BUT3.pdf" target="_blank" style="color:inherit;text-decoration:underline;">📄 Télécharger le rapport BUT3 (PDF)</a></p>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/PHOTO.jpg" alt="Rapport BUT3">
+            </div>
+        </div>
+
+        <!-- ===== PROJETS BUT2 ===== -->
+        
+        <div class="project-block" data-tags="BUT2, Qualité des Données, Data & Informatique">
+            <div class="project-text">
+                <div class="titre">Qualité des données d'adresses</div>
+                <div class="project-description">
+                    <p>Pour affiner l'évaluation des risques climatiques, j'ai vérifié la géolocalisation des adresses de nos contrats. J'ai développé un script Python utilisant la distance de Levenshtein pour comparer nos données avec celles de l'API gouvernementale et fiabiliser la localisation.</p>
+                    <button class="go-to" id="-adresse" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=450&h=350&fit=crop" alt="Qualité des adresses">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT2, Tableau de Bord, Data & Informatique">
+            <div class="project-text">
+                <div class="titre">Plateforme Sinistralité Climatique</div>
+                <div class="project-description">
+                    <p>Création d'un tableau de bord Tableau croisant les arrêtés CatNat publiés par l'État et nos sinistres enregistrés. L'enjeu technique était d'optimiser l'affichage géographique en réduisant le poids des cartes GeoJSON.</p>
+                    <button class="go-to" id="-catnat" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1584483766114-2cea6facdf57?w=450&h=350&fit=crop" alt="Sinistralité Climatique">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT2, Qualité des Données">
+            <div class="project-text">
+                <div class="titre">Recettage et Qualité des Données</div>
+                <div class="project-description">
+                    <p>Validation et certification des données du nouveau système décisionnel (Smart Data) par rapport au Data Lake historique. Rédaction de requêtes SQL complexes sur Dremio pour comparer les totaux de règlements.</p>
+                    <button class="go-to" id="-recettage" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=450&h=350&fit=crop" alt="Recettage Data">
+            </div>
+        </div>
+
+        <!-- ===== PROJETS BUT3 ===== -->
+
+        <div class="project-block" data-tags="BUT3, Tableau de Bord">
+            <div class="project-text">
+                <div class="titre">Tableau de bord Experts IRD</div>
+                <div class="project-description">
+                    <p>Mon projet principal de BUT3 : automatiser le pilotage des cabinets d'expertise partenaires (IRD). Passage d'un suivi chronophage sur Excel à un outil Tableau pérenne regroupant honoraires réglés, volumes de missions et coûts moyens.</p>
+                    <button class="go-to" id="-ird" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=450&h=350&fit=crop" alt="Experts IRD">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT3, Tableau de Bord">
+            <div class="project-text">
+                <div class="titre">Dossiers Anciens et Forts Enjeux</div>
+                <div class="project-description">
+                    <p>Création d'outils de pilotage pour suivre les sinistres de plus de 5 ans ou supérieurs à 100 000 €. L'objectif était de fiabiliser les listes de travail des gestionnaires pour clore des provisions obsolètes et suivre l'avancée des gros dossiers.</p>
+                    <button class="go-to" id="-5ans" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66cb85?w=450&h=350&fit=crop" alt="Dossiers Anciens">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT3, Qualité des Données">
+            <div class="project-text">
+                <div class="titre">Recette Métier - Projet Corporel</div>
+                <div class="project-description">
+                    <p>Accompagnement du service Corporel pour fiabiliser leurs indicateurs. Le défi était de détecter les anomalies fonctionnelles (ex: dates d'ouverture erronées, dossiers réouverts non flagués) afin d'assurer l'exactitude des statistiques remontées.</p>
+                    <button class="go-to" id="-corporel" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=450&h=350&fit=crop" alt="Recette Métier Corporel">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT3, Tableau de Bord">
+            <div class="project-text">
+                <div class="titre">Migration Qlik Maladie vers Tableau</div>
+                <div class="project-description">
+                    <p>Remplacement de l'ancien applicatif Qlik par Tableau pour le suivi mensuel des règlements maladie. Ce travail nécessitait de comprendre les règles de liquidation, le reporting réglementaire FR14, et de contrôler finement la granularité des données.</p>
+                    <button class="go-to" id="-qlik" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=450&h=350&fit=crop" alt="Migration Qlik">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT3, Automatisation">
+            <div class="project-text">
+                <div class="titre">Macro VBA Direction Juridique</div>
+                <div class="project-description">
+                    <p>Développement d'une macro Excel pour automatiser le calcul des délais moyens de traitement liés à la fraude et la lutte contre le blanchiment d'argent. Un projet instructif sur les limites des ressources matérielles des postes métiers.</p>
+                    <button class="go-to" id="-vba" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/VBA.png" alt="Macro VBA" style="background: white;">
+            </div>
+        </div>
+
+        <div class="project-block" data-tags="BUT3, Automatisation, Data & Informatique">
+            <div class="project-text">
+                <div class="titre">Gouvernance Tableau Server</div>
+                <div class="project-description">
+                    <p>Création d'un prototype Python (via API REST) pour monitorer l'utilisation de Tableau Server. Le script extrait les métadonnées pour repérer les tableaux obsolètes et vérifier l'usage réel des sources de données.</p>
+                    <button class="go-to" id="-gouvernance" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=450&h=350&fit=crop" alt="Gouvernance Tableau Server">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ======= Overlay pour les Modales ======= -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeAllModals()"></div>
+
+    <!-- Modale : MDPA -->
+    <div class="project-page" tabindex="-1" id="display-mdpa">
+        <button type="button" id="undisplay-mdpa" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Le Data Office à la Mutuelle de Poitiers</h1></div>
+                <div class="text-details">
+                    <p>Fondée en 1838 et siégeant à Ligugé, la Mutuelle de Poitiers Assurances est une société mutualiste de plus de 489 000 sociétaires, privilégiant la proximité au travers d'un réseau de plus de 300 agences. Lors de ma première année d'alternance, le Data Office était encore en phase de création et de déploiement de ses nouveaux outils (Dremio, Tableau). Au cours de ma troisième année de BUT, l'organisation s'est considérablement structurée.</p>
+                    <p>Au sein du <strong>Data Office</strong> (rattaché à la Direction Financière et Comptable), mon rôle a évolué vers celui d'un Data Analyst complet. L'objectif n'était plus seulement d'exécuter des requêtes techniques, mais d'accompagner les directions métiers (Pilotage, Indemnisation, Actuariat) depuis le cadrage de leurs besoins jusqu'à la livraison et la recette d'outils d'aide à la décision. Ce travail se déroule en étroite collaboration avec la <em>Data Factory</em> (côté DSI) qui gère l'alimentation des Data Lakes (DLK) et la structuration des Smart Data (SMT).</p>
+                    <p>Cette immersion professionnelle m'a permis d'apprendre à formaliser des besoins souvent flous, à fiabiliser des données brutes, et à concevoir des tableaux de bord directement exploitables pour le suivi opérationnel et stratégique de l'entreprise.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/CLIM_DFC_organigramme-data-office.png" alt="Organigramme DFC / Data Office"><figcaption>Organigramme DFC / Data Office</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_DataOffice_organigramme-MDPA.png" alt="Organigramme MDPA centré Data Office"><figcaption>Organigramme MDPA centré Data Office</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_GestionFlux_flux-des-donnees.png" alt="Schéma flux sources → DLK → SMT → Dremio → Tableau"><figcaption>Schéma flux sources → DLK → SMT → Dremio → Tableau</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_ContexteTechno_modele-etoile-smart-data.png" alt="Modèle en étoile (table de faits + dimensions)"><figcaption>Modèle en étoile (table de faits + dimensions)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_GestionFlux_systeme-information-MDPA.png" alt="Schéma SI : prod J-1 vs labo J-2"><figcaption>Schéma SI : prod J-1 vs labo J-2</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_DataOffice_dictionnaire-de-donnees.png" alt="Dictionnaire de données dans Tableau"><figcaption>Dictionnaire de données dans Tableau</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_MethodeTravail_planning-organisation-projets.png" alt="Planning / suivi des projets en parallèle"><figcaption>Planning / suivi des projets en parallèle</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Adresses -->
+    <div class="project-page" tabindex="-1" id="display-adresse">
+        <button type="button" id="undisplay-adresse" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Qualité des données d'adresses</h1></div>
+                <div class="text-details">
+                    <p>Dans le secteur assurantiel, évaluer les risques climatiques nécessite une géolocalisation extrêmement précise des "Lieux de Risque" (LRI) de nos contrats. Lors de ma deuxième année, la mission m'a été confiée d'analyser la qualité des adresses enregistrées dans le système, dont beaucoup étaient historiquement incomplètes ou mal saisies.</p>
+                    <p>Afin de pallier l'absence de coordonnées GPS, nous avons soumis l'intégralité de nos adresses à l'API de géolocalisation du gouvernement (Base Adresse Nationale). J'ai ensuite développé un script de contrôle en Python (sur Jupyter Notebook) exploitant la <strong>distance de Levenshtein</strong> pour mesurer la similitude entre la chaîne de caractères envoyée et celle renvoyée par l'API.</p>
+                    <p>Cette automatisation, incluant une étape de normalisation poussée (suppression d'accents, caractères spéciaux), nous a permis de définir un seuil d'acceptabilité de 70 %. Les résultats ont confirmé l'absence de dysfonctionnements informatiques mais ont révélé que les problèmes venaient de la saisie à la source. Cette analyse a abouti à une campagne opérationnelle sollicitant le réseau d'agents pour reprendre manuellement les adresses considérées comme non-qualitatives.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/CLIM_CatNat_completude-champ-ville.png" alt="KPI complétude du champ ville (1 415 823 / 0 manquant)"><figcaption>KPI complétude du champ ville (1 415 823 / 0 manquant)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Annexe1_script-python-nettoyage-adresses.png" alt="Script Python (Levenshtein) de nettoyage d'adresses"><figcaption>Script Python (Levenshtein) de nettoyage d'adresses</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : CatNat -->
+    <div class="project-page" tabindex="-1" id="display-catnat">
+        <button type="button" id="undisplay-catnat" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Plateforme Sinistralité Climatique</h1></div>
+                <div class="text-details">
+                    <p>La sinistralité liée aux catastrophes naturelles (CatNat) représente un enjeu économique majeur (plus de 200 M€ à la MDPA sur 15 ans, avec une accélération marquée récemment). Les métiers avaient besoin d'une plateforme unifiée sous Tableau pour visualiser les arrêtés reconnus par l'État et évaluer leur impact croisé avec notre portefeuille de sinistres.</p>
+                    <p>Le développement de ce tableau de bord a nécessité une structuration rigoureuse sur Dremio : réconcilier la table exhaustive des sinistres avec le référentiel des départements et les arrêtés CatNat. L'un des défis principaux était d'ordre géographique : l'affichage des polygones de communes alourdissait le tableau (fichier source de 500 Mo). J'ai pris l'initiative d'utiliser des outils de simplification (Mapshaper) pour réduire ce fichier à 40 Mo, garantissant ainsi fluidité et lisibilité.</p>
+                    <p>Le projet final offrait une vue globale avec des paramètres dynamiques (modification des temporalités de comparaison, filtrage géographique). Il a fait l'objet d'une présentation officielle devant les directeurs de la RSE et de la Finance, aboutissant à une mise en production automatisée quotidienne (à J-1).</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/CLIM_Contexte_hausse-charge-climatique-france.png" alt="Infographie hausse des coûts climatiques en France"><figcaption>Infographie hausse des coûts climatiques en France</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Contexte_sinistralite-evenements-naturels.png" alt="Graphique sinistralité événements naturels par année"><figcaption>Graphique sinistralité événements naturels par année</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_CatNat_tableau-bord-arretes-catnat.png" alt="TDB Les Arrêtés CatNat (carte + tableaux)"><figcaption>TDB Les Arrêtés CatNat (carte + tableaux)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_CatNat_tableau-bord-sinistres-catnat.png" alt="TDB Les Sinistres CatNat (carte + détails)"><figcaption>TDB Les Sinistres CatNat (carte + détails)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord1-informations-generales.png" alt="TDB 1 : informations générales sur les sinistres"><figcaption>TDB 1 : informations générales sur les sinistres</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord2-geolocalisation-precise.png" alt="TDB 2 : carte géolocalisation précise des sinistres"><figcaption>TDB 2 : carte géolocalisation précise des sinistres</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_tableau-bord3-ouverture-sinistres.png" alt="TDB 3 : ouverture des sinistres (délais cumulés)"><figcaption>TDB 3 : ouverture des sinistres (délais cumulés)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_geolocalisation-precise-adresses.png" alt="Carte géolocalisation précise + avertissement"><figcaption>Carte géolocalisation précise + avertissement</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Sinistralite_superposition-annees-graphique.png" alt="Problème de superposition d'années (avant correction)"><figcaption>Problème de superposition d'années (avant correction)</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Recettage -->
+    <div class="project-page" tabindex="-1" id="display-recettage">
+        <button type="button" id="undisplay-recettage" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Recettage et Qualité des Données</h1></div>
+                <div class="text-details">
+                    <p>Lors du déploiement progressif des "Smart Data" (SMT) par la DSI, il était impératif de s'assurer qu'aucune information n'avait été corrompue depuis le Data Lake (DLK) brut. Ma mission a consisté à tester, valider et certifier des tables extrêmement volumineuses, telles que celles des sinistres et de leurs règlements.</p>
+                    <p>La complexité résidait dans la différence de modèle : les SMT utilisent des identifiants numériques pointant vers des référentiels, contrairement au DLK qui contient le texte explicite. J'ai donc dû écrire des requêtes SQL très denses sur Dremio pour "reconstituer" les lignes SMT en y joignant tous les référentiels, puis y appliquer les mêmes règles de gestion (par exemple : multiplier l'indicateur de recours par le montant du règlement).</p>
+                    <p>Ce travail d'audit a permis d'isoler des anomalies réelles dans les flux DSI, notamment des désynchronisations sur la catégorisation des genres de sinistres, et a solidifié mon expertise en contrôle qualité sur des bases de données relationnelles volumineuses.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/CLIM_Recettage_SMT-reconstitue.png" alt="Schéma SMT reconstitué (DLK ↔ SMT via référentiels)"><figcaption>Schéma SMT reconstitué (DLK ↔ SMT via référentiels)</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Annexe3_controle-table-catnat.png" alt="Contrôle de cohérence table CatNat"><figcaption>Contrôle de cohérence table CatNat</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Annexe4_controle-table-sinistre.png" alt="Contrôle de cohérence table sinistre"><figcaption>Contrôle de cohérence table sinistre</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Experts IRD -->
+    <div class="project-page" tabindex="-1" id="display-ird">
+        <button type="button" id="undisplay-ird" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Pilotage Experts IRD</h1></div>
+                <div class="text-details">
+                    <p>Ce projet représente ma mission la plus aboutie de la 3ème année. Il a été réalisé en binôme avec le Data Owner du Pôle Performance Sinistre. Son but était d'industrialiser la préparation des "COPIL Experts", des comités de pilotage annuels avec les cabinets d'expertise partenaires, une tâche qui nécessitait auparavant plus de 15 jours de croisements manuels sur Excel.</p>
+                    <p>Après plusieurs versions insatisfaisantes et un vrai travail de cadrage pour définir ce que le métier voulait "réellement" observer, le tableau final s'articule autour de trois axes : le volume des missions confiées, les honoraires réglés et le coût moyen. Une logique de "lecture à N-1 à date équivalente" a été programmée pour éviter les biais de comparaison liés aux données non encore figées.</p>
+                    <p>Au-delà du simple tableau de bord, l'outil permet au métier d'identifier les cabinets sous-exploités ou sur-facturés par territoire, et lui fournit une base solide pour mener ses négociations tarifaires. Ce succès a prouvé la capacité du Data Office à remplacer un héritage manuel lourd par un process automatisé et certifié.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_ExpertsIRD_tableau-bord-partie1-vision-globale.png" alt="TDB Pilotage Experts IRD, partie 1 : KPI + comparaison N-1"><figcaption>TDB Pilotage Experts IRD, partie 1 : KPI + comparaison N-1</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_ExpertsIRD_tableau-bord-partie2-analyse-ecarts.png" alt="TDB partie 2 : analyse des écarts"><figcaption>TDB partie 2 : analyse des écarts</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_ExpertsIRD_tableau-bord-partie3-COPIL-experts.png" alt="TDB partie 3 : missions intra-départementales + support COPIL"><figcaption>TDB partie 3 : missions intra-départementales + support COPIL</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_Annexe4_V1-tableau-bord-IRD-maquette.png" alt="Maquette V1 du TDB (version sombre rejetée)"><figcaption>Maquette V1 du TDB (version sombre rejetée)</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : 5 ans -->
+    <div class="project-page" tabindex="-1" id="display-5ans">
+        <button type="button" id="undisplay-5ans" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Pilotage des Dossiers Anciens et à Forts Enjeux</h1></div>
+                <div class="text-details">
+                    <p>J'ai collaboré avec la responsable des Sinistres matériels IRD pour concevoir des outils de suivi ciblant deux urgences opérationnelles : les dossiers de plus de 5 ans et ceux dépassant les 100 000 €. Auparavant, le suivi de ces "tardifs" se faisait à l'aide de piles de papier ou de fichiers Excel obsolètes, rendant la gestion des prescriptions et des recours très fragile.</p>
+                    <p>Mon intervention a consisté à concevoir des vues Dremio et des tableaux Tableau certifiés, fournissant une "vérité unique" au service. En permettant de filtrer instantanément les informations clés et d'exporter la base, l'outil a fait gagner un temps précieux aux gestionnaires et aux saisonniers. </p>
+                    <p>L'enjeu n'était pas seulement opérationnel, mais aussi financier : un vieux dossier mal suivi conserve souvent une provision inutile (un montant bloqué). Cet outil permet d'optimiser le nettoyage des provisions dormantes de l'entreprise.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_Sinistres5ans-100000_IRD-superieurs-50000-tableau-bord.png" alt="TDB Sinistres IRD supérieurs à 50 000€"><figcaption>TDB Sinistres IRD supérieurs à 50 000€</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Corporel -->
+    <div class="project-page" tabindex="-1" id="display-corporel">
+        <button type="button" id="undisplay-corporel" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Recette Métier - Sinistres Corporels</h1></div>
+                <div class="text-details">
+                    <p>À l'instar des tableaux IRD, j'ai accompagné le service des Sinistres Corporels pour monitorer leurs dossiers sensibles. L'intérêt majeur de ce projet a été la phase de "recette métier", c'est-à-dire la confrontation de la logique informatique avec la réalité du terrain.</p>
+                    <p>C'est en analysant les données avec les rédacteurs experts que nous avons pu repérer d'importants biais statistiques. Par exemple, un dossier de 20 millions d'euros était imputé à la mauvaise année car nous utilisions la date d'ouverture du dossier au lieu de la date de survenance de l'accident. De même, un bug dans un flag booléen d'archivage faussait les volumes des dossiers "réouverts".</p>
+                    <p>Cette mission souligne parfaitement le rôle d'un Data Analyst : la technique n'est rien si la donnée ne reflète pas la vérité métier.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_Corporel_sinistres-plus-5ans-tableau-bord.png" alt="TDB sinistres corporels ouverts > 5 ans"><figcaption>TDB sinistres corporels ouverts > 5 ans</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_Corporel_sinistres-superieurs-100000-tableau-bord.png" alt="TDB sinistres corporels > 100 000€"><figcaption>TDB sinistres corporels > 100 000€</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Qlik -->
+    <div class="project-page" tabindex="-1" id="display-qlik">
+        <button type="button" id="undisplay-qlik" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Migration Qlik Maladie vers Tableau</h1></div>
+                <div class="text-details">
+                    <p>Dans le cadre de la modernisation du SI, l'applicatif historique Qlik Maladie devait être migré sous Tableau. Cet outil est indispensable au service Pilotage pour suivre mois par mois les règlements maladie, préparer les projections de fin d'année, et produire les triangles de liquidation pour la réassurance.</p>
+                    <p>La difficulté n'était pas l'interface, mais le reverse-engineering des règles métier enfouies dans les scripts. Il m'a fallu décortiquer le référentiel FR14 (norme légale de santé) pour assurer un rattachement parfait des prestations remboursées vers des catégories macro (ex: consultations généralistes).</p>
+                    <p>Le projet a été l'occasion d'éviter d'énormes erreurs de granularité : les règlements devaient être joints au niveau du genre du sinistre et non au niveau du sinistre père, sans quoi les montants se retrouvaient multipliés. Au final, l'outil tourne maintenant de façon automatisée en évitant les deux heures de chargement manuel exigées par Qlik.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_QlikMaladie_triangle-liquidation-tableau-bord.png" alt="TDB Triangle Maladie + référentiel FR14"><figcaption>TDB Triangle Maladie + référentiel FR14</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : VBA -->
+    <div class="project-page" tabindex="-1" id="display-vba">
+        <button type="button" id="undisplay-vba" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Macro VBA Direction Juridique</h1></div>
+                <div class="text-details">
+                    <p>Un projet exploratoire lié à la lutte contre la fraude et le blanchiment d'argent (LCB-FT). L'objectif initial était de concevoir un tableau de bord, mais la mauvaise qualité des données sources a rendu l'opération prématurée. J'ai tout de même conçu une macro Excel en VBA pour automatiser le calcul des délais moyens de traitement des signalements frauduleux, une tâche effectuée à la main jusqu'alors.</p>
+                    <p>Le développement s'est bien déroulé, mais il s'est heurté aux contraintes matérielles du parc informatique : si la macro s'exécutait fluidement sur mon poste de développeur doté de 16 Go de RAM, elle faisait crasher les sessions Excel des juristes équipés de 8 Go de RAM. Une bonne leçon sur l'adaptation des livrables techniques aux contraintes de production.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_DirectionJuridique_comite-LCB-FT-maquette.png" alt="Maquette TDB Comité LCB-FT (fraude, PPE, pays à risque)"><figcaption>Maquette TDB Comité LCB-FT (fraude, PPE, pays à risque)</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Gouvernance -->
+    <div class="project-page" tabindex="-1" id="display-gouvernance">
+        <button type="button" id="undisplay-gouvernance" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Gouvernance Tableau Server (API Python)</h1></div>
+                <div class="text-details">
+                    <p>Avec la multiplication des tableaux de bord en interne, l'entreprise risquait d'encombrer ses serveurs avec des rapports obsolètes. J'ai prototypé un script Python interrogeant l'API REST de Tableau Server (via la librairie <code>tableauserverclient</code> et <code>pandas</code>).</p>
+                    <p>L'objectif était d'extraire des métadonnées (dates de dernière connexion, date de mise à jour des sources, fréquentation) pour auditer les projets. L'outil générait des graphiques identifiant les tableaux "stables", "en construction", ou "à auditer/supprimer".</p>
+                    <p>Bien que le projet n'ait pas été industrialisé immédiatement en raison d'un manque de pipelines d'alimentation fixes, il a prouvé la capacité du Data Office à faire du monitoring sur ses propres environnements d'hébergement.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/BUT3_Annexe6_gouvernance-tableaux-par-direction.png" alt="Graphique nombre de tableaux par direction"><figcaption>Graphique nombre de tableaux par direction</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_Annexe6_gouvernance-top10-datasources.png" alt="Top 10 des datasources par nb de connexions"><figcaption>Top 10 des datasources par nb de connexions</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/BUT3_Annexe6_gouvernance-statut-tableaux.png" alt="Statut des tableaux (stable / récent / à auditer)"><figcaption>Statut des tableaux (stable / récent / à auditer)</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Manuel Timestamp -->
+    <div class="project-page" tabindex="-1" id="display-timestamp">
+        <button type="button" id="undisplay-timestamp" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Manuel d'utilisation du format TIMESTAMP</h1></div>
+                <div class="text-details">
+                    <p>Pour fluidifier le travail de l'ensemble de l'équipe Data sur PostgreSQL et Dremio, j'ai rédigé un guide technique complet expliquant la manipulation des formats <code>TIMESTAMP</code>. Il regroupe des cas concrets et documentés : comment extraire correctement une date sans son heure, filtrer des événements sur une plage temporelle précise, ou calculer des écarts inter-dates.</p>
+                    <p>Ce travail de documentation transversale a facilité l'adoption du nouvel environnement technique par les collaborateurs et a posé des standards internes sur les bonnes pratiques de requêtage temporel.</p>
+                                    <div class="project-gallery">
+                        <figure><img src="./../Images/projets alternance/CLIM_Annexe7_manuel-timestamp-differences.png" alt="Manuel TIMESTAMP(3) : fonctions de différences de dates"><figcaption>Manuel TIMESTAMP(3) : fonctions de différences de dates</figcaption></figure>
+                        <figure><img src="./../Images/projets alternance/CLIM_Annexe7_manuel-timestamp-format-date.png" alt="Manuel TIMESTAMP(3) : changement de format de date"><figcaption>Manuel TIMESTAMP(3) : changement de format de date</figcaption></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Extractions VAM -->
+    <div class="project-page" tabindex="-1" id="display-vam">
+        <button type="button" id="undisplay-vam" onclick="close_display(this.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title"><h1 class="diplayed-title">Extractions Sinistres Auto (VAM) Anciens</h1></div>
+                <div class="text-details">
+                    <p>En parallèle des tableaux de bord interactifs, une partie de mon rôle consistait à répondre aux besoins urgents via des extractions SQL brutes. Dans le cas des sinistres automobiles (VAM) vieux de plus de cinq ans, le métier souhaitait consolider une liste détaillée des coûts et des expertises sans forcément recourir à une visualisation complexe.</p>
+                    <p>Ce projet met en lumière qu'un Data Analyst doit savoir s'adapter : un tableau de bord n'est pas toujours la réponse idéale. Une requête bien cadrée et documentée suffit parfois à livrer exactement ce dont le métier a besoin pour mener ses opérations de gestion financière.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../js/script_projets.js"></script>
+
+</body>
+</html>

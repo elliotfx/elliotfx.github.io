@@ -1,0 +1,95 @@
+@import "navbar_stylesheet.css";
+
+/* ===================================
+   Page Contact
+   =================================== */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    background-color: var(--darker);
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* --- Remerciements --- */
+.remerciments {
+    padding-top: 10%;
+    padding-bottom: 5%;
+}
+
+.merci {
+    text-align: center;
+    font-size: clamp(1.5em, 4vw, 3em);
+    font-weight: bold;
+    color: var(--cream);
+    font-family: var(--font-main);
+}
+
+/* --- Liens de Contact --- */
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    padding: 2% 5%;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-item i {
+    color: var(--cream);
+    font-size: 1.2em;
+}
+
+.contact-item a {
+    color: var(--cream);
+    text-decoration: underline;
+    font-family: var(--font-main);
+    font-size: 1.1em;
+    transition: opacity var(--transition);
+}
+
+.contact-item a:hover {
+    opacity: 0.7;
+}
+
+/* --- CV Intégré --- */
+.CV {
+    display: flex;
+    justify-content: center;
+    padding: 4% 0;
+}
+
+.cvimg {
+    width: 40%;
+    max-width: 600px;
+    min-height: 500px;
+    border: none;
+    border-radius: var(--radius);
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 900px) {
+    .contact {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cvimg {
+        width: 90%;
+        min-height: 400px;
+    }
+
+    .merci {
+        font-size: 1.5em;
+        padding: 0 5%;
+    }
+}

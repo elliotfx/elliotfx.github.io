@@ -1,0 +1,246 @@
+/* ===================================
+   Portfolio Elliot FEROUX
+   Barre de Navigation & Styles Partagés
+   =================================== */
+
+/* --- Tokens de Design --- */
+:root {
+    --dark: #222222;
+    --darker: #0B1616;
+    --white: #ffffff;
+    --cream: antiquewhite;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --shadow-light: rgba(205, 205, 205, 0.5);
+    --font-main: 'Bebas Neue', sans-serif;
+    --font-serif: 'Bebas Neue', sans-serif;
+    --transition: 0.3s ease-in-out;
+    --radius: 10px;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--dark);
+    font-family: var(--font-serif);
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    box-shadow: 0 3px 4px var(--shadow-light);
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Navbar --- */
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar > ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* --- Liens de Navigation --- */
+.left-links,
+.right-links {
+    display: flex;
+}
+
+.left-links > ul,
+.right-links > ul {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.link-nav-underline a,
+.link-nav-underline-projet a {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+}
+
+/* --- Logo --- */
+.logo img {
+    width: 60px;
+    height: 60px;
+}
+
+.logo:hover img {
+    animation: logoPulse 1s infinite alternate;
+}
+
+@keyframes logoPulse {
+    0%   { transform: scale(1); opacity: 1; }
+    50%  { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Animation Soulignement --- */
+.link-nav-underline,
+.link-nav-underline-projet {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    font-family: var(--font-main);
+}
+
+.link-nav-underline-projet {
+    width: 150px;
+}
+
+.link-nav-underline::after,
+.link-nav-underline-projet::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease-in-out;
+}
+
+.link-nav-underline:hover::after,
+.link-nav-underline-projet:hover::after {
+    transform: scaleX(1);
+}
+
+/* --- Menu Déroulant (Projets) --- */
+.dropdown {
+    position: absolute;
+    top: 105%;
+    width: 100%;
+    z-index: 1234;
+    display: none;
+}
+
+.dropdown > ul {
+    background-color: var(--white);
+    padding: 10px 0;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    border-radius: 4px;
+}
+
+.dropdown li {
+    padding: 5px 10px;
+}
+
+.dropdown li a {
+    font-family: var(--font-main);
+    font-size: 0.9em;
+}
+
+.link-nav-underline-projet:hover > .dropdown {
+    display: block;
+}
+
+/* --- Menu Burger (Mobile) --- */
+.burger-container {
+    display: none;
+    width: 5%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.burger-container .iconeburger {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+#burgerbar {
+    height: 100vh;
+    width: 50%;
+    background-color: var(--white);
+    position: fixed;
+    top: 0;
+    left: -100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    transition: left var(--transition);
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--shadow);
+}
+
+#burgerbar .iconeburgerclose {
+    font-size: 2em;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#burgerbar .logo-burger {
+    max-width: 50px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.burger-menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.burger-menu-list li {
+    margin: 20px 0;
+}
+
+.burger-menu-list li a {
+    font-family: var(--font-main);
+    font-size: 1.2em;
+}
+
+/* --- Responsive (≤ 900px) --- */
+@media screen and (max-width: 900px) {
+    .burger-container {
+        display: flex;
+    }
+
+    .navbar ul {
+        display: none;
+    }
+
+    .burger-menu-list {
+        display: block;
+    }
+}
