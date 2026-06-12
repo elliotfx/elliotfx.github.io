@@ -267,8 +267,24 @@
                 <div class="project-tags"><!-- auto-rempli par JS --></div>
             </div>
             <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=450&h=350&fit=crop"
-                     alt="Cabinet dentaire moderne">
+                <img src="./../Images/MyDental.png"
+                     alt="Interface de l'application MyDental">
+            </div>
+        </div>
+
+        <!-- ===== PROJET 13 : Classification des sentiments des tweets ===== -->
+        <div class="project-block" data-tags="3ème Année, Machine Learning, Streaming, Data Visualisation">
+            <div class="project-text">
+                <div class="titre">Classification des sentiments des tweets</div>
+                <div class="project-description">
+                    <p>Conception d'un système de classification de tweets en temps réel, de la collecte Kafka jusqu'au tableau de bord de visualisation des sentiments prédits.</p>
+                    <button class="go-to" id="-tweets-sentiment" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/tweets_sentiment_timeline.png"
+                     alt="Évolution temporelle des sentiments prédits sur un flux de tweets">
             </div>
         </div>
 
@@ -621,9 +637,63 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2em;">
-                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&h=550&fit=crop"
-                     alt="Cabinet dentaire moderne"
+                <img src="./../Images/MyDental.png"
+                     alt="Interface de l'application MyDental"
                      style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : Classification des sentiments des tweets -->
+    <div class="project-page" tabindex="-1" id="display-tweets-sentiment">
+        <button type="button" id="undisplay-tweets-sentiment" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">Classification des sentiments des tweets</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Ce projet avait pour objectif de construire une chaîne complète de classification de sentiments appliquée à des tweets en temps réel. J'ai d'abord mis en place la collecte des données avec Kafka, puis préparé et analysé les tweets afin d'entraîner un modèle de classification adapté au traitement de texte.</p>
+                    <p>La solution s'appuie ensuite sur un pipeline de production combinant Spark Structured Streaming et le modèle de machine learning pour prédire automatiquement le sentiment des nouveaux tweets collectés. La dernière étape consistait à concevoir un tableau de bord permettant de suivre les volumes, la répartition des sentiments, leur évolution dans le temps, ainsi que certains indicateurs comme les hashtags et comptes les plus fréquents.</p>
+                    <p>Ce travail m'a permis de relier plusieurs compétences techniques dans un cas d'usage concret : ingestion de données en continu, préparation de texte, entraînement d'un modèle, industrialisation d'un pipeline et restitution visuelle des résultats.</p>
+                    <p style="margin-top: 1em;"><strong>Compétences développées :</strong> Python, PySpark, Kafka.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="./../BUT3/Classification_sentiments_tweets/00_setup.py" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Annexe 00 — Setup</a><br>
+                        <a href="./../BUT3/Classification_sentiments_tweets/01_streaming_indicateurs.py" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Annexe 01 — Streaming et indicateurs</a><br>
+                        <a href="./../BUT3/Classification_sentiments_tweets/02_ml_sentiment_model.py" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Annexe 02 — Modèle de sentiment</a><br>
+                        <a href="./../BUT3/Classification_sentiments_tweets/03_production_pipeline.py" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Annexe 03 — Pipeline de production</a><br>
+                        <a href="./../BUT3/Classification_sentiments_tweets/04_dashboard_tweets.py" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Annexe 04 — Dashboard tweets</a>
+                    </p>
+                    <div style="margin-top: 1.4em;">
+                        <h2 style="font-family: var(--font-main); font-size: 1.2em; margin-bottom: 0.8em; color: var(--dark);">Annexes techniques exploitées</h2>
+                        <p><strong>00 — Setup :</strong> vérification de l'environnement PySpark, HDFS, Kafka et Voila.</p>
+                        <p><strong>01 — Streaming :</strong> connexion au flux, parsing CSV, indicateurs par fenêtre, hashtags, mentions et alertes.</p>
+                        <p><strong>02 — Machine learning :</strong> nettoyage du texte, pipeline TF-IDF et régression logistique avec PySpark MLlib.</p>
+                        <p><strong>03 — Production :</strong> intégration Kafka, Spark Structured Streaming et application du modèle aux tweets entrants.</p>
+                        <p><strong>04 — Dashboard :</strong> visualisations de la répartition des sentiments, de l'évolution temporelle, des hashtags et des mentions.</p>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 2em;">
+                    <a href="./../Images/tweets_sentiment_distribution.png" target="_blank" style="flex: 1; min-width: 280px; max-width: 48%;">
+                        <img src="./../Images/tweets_sentiment_distribution.png" alt="Répartition des prédictions de sentiment" style="width: 100%; border-radius: 8px; border: 1px solid #ccc; cursor: zoom-in;">
+                        <p style="text-align: center; font-size: 0.85em; margin-top: 6px; color: #666;">Répartition des sentiments prédits</p>
+                    </a>
+                    <a href="./../Images/tweets_sentiment_timeline.png" target="_blank" style="flex: 1; min-width: 280px; max-width: 48%;">
+                        <img src="./../Images/tweets_sentiment_timeline.png" alt="Évolution temporelle des sentiments" style="width: 100%; border-radius: 8px; border: 1px solid #ccc; cursor: zoom-in;">
+                        <p style="text-align: center; font-size: 0.85em; margin-top: 6px; color: #666;">Flux de tweets et sentiment moyen</p>
+                    </a>
+                    <a href="./../Images/tweets_hashtags.png" target="_blank" style="flex: 1; min-width: 280px; max-width: 48%;">
+                        <img src="./../Images/tweets_hashtags.png" alt="Top des hashtags les plus fréquents" style="width: 100%; border-radius: 8px; border: 1px solid #ccc; cursor: zoom-in;">
+                        <p style="text-align: center; font-size: 0.85em; margin-top: 6px; color: #666;">Hashtags les plus fréquents</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
