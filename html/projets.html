@@ -256,6 +256,22 @@
             </div>
         </div>
 
+        <!-- ===== PROJET 12 : MyDental ===== -->
+        <div class="project-block" data-tags="3ème Année, Développement Web, Base de données">
+            <div class="project-text">
+                <div class="titre">MyDental</div>
+                <div class="project-description">
+                    <p>Amélioration d'une application de gestion de cabinet dentaire avec de nouvelles fonctionnalités d'analyse, de suivi des performances et de qualité des données.</p>
+                    <button class="go-to" id="-mydental" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=450&h=350&fit=crop"
+                     alt="Cabinet dentaire moderne">
+            </div>
+        </div>
+
     </div>
 
     <!-- Message si aucun projet ne correspond au filtre -->
@@ -570,6 +586,44 @@
                 <div style="text-align: center; margin-top: 2em;">
                     <img src="./../Images/tdb Elliot FEROUX loreal.png" alt="Aperçu du Dashboard L'Oréal" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale : MyDental -->
+    <div class="project-page" tabindex="-1" id="display-mydental">
+        <button type="button" id="undisplay-mydental" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">MyDental — Application de gestion de cabinet dentaire</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>ANDREOLI Andrea</li>
+                        <li>⋅</li>
+                        <li>BERRUYER Justin</li>
+                        <li>⋅</li>
+                        <li>DUJOUR Valentin</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Dans le cadre de ce projet de BUT 3, nous avons repris et enrichi MyDental, une application dédiée à la gestion d'un cabinet dentaire. Notre objectif était de rendre l'outil plus complet et plus utile au quotidien, en ajoutant des indicateurs sur les performances des médecins, l'activité globale du cabinet et la qualité des données présentes dans la base existante.</p>
+                    <p>Nous avons également retravaillé l'interface utilisateur afin de proposer une expérience plus claire et plus agréable. Ce projet m'a permis de consolider mon travail en équipe, de mieux structurer une démarche de gestion de projet et de mobiliser mes compétences en analyse de données sur une application concrète.</p>
+                    <p style="margin-top: 1em;"><strong>Compétences développées :</strong> HTML/CSS/JS, Docker, API, MariaDB.</p>
+                    <p style="margin-top: 1em;">
+                        <a href="https://github.com/elliotfx/Andrea-Elliot-Justin-ValentinSAE" target="_blank" style="color: var(--dark); font-weight: 600; text-decoration: underline;">Consulter le dépôt GitHub</a>
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2em;">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&h=550&fit=crop"
+                     alt="Cabinet dentaire moderne"
+                     style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
             </div>
         </div>
     </div>
