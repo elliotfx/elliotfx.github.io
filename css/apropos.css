@@ -152,18 +152,22 @@ body {
 
 /* --- Section AMAM --- */
 .section-amam {
-    align-items: stretch;
+    align-items: center;
 }
 
 .amam-preview {
-    flex: 1;
-    max-width: 40%;
+    flex: 0 0 45%;
+    max-width: 45%;
+    height: 260px;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    border-radius: var(--radius);
 }
 
 .amam-preview-swiper {
     width: 100%;
+    height: 100%;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 8px 8px 10px 0 var(--shadow);
@@ -174,14 +178,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 300px;
+    height: 260px;
 }
 
 .amam-preview-swiper .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 12px;
+    object-fit: cover;
+    object-position: center top;
     box-sizing: border-box;
 }
 
@@ -215,20 +219,41 @@ body {
 
 /* --- Section Ecole d'arbitrage --- */
 .section-ecole-arbitrage {
-    align-items: stretch;
+    align-items: center;
 }
 
 .ecole-photos {
-    flex-direction: column;
-    gap: 18px;
+    flex: 0 0 45%;
+    max-width: 45%;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--radius);
+    gap: 0;
 }
 
 .photo-ecole {
-    width: min(86%, 420px);
-    max-width: 420px;
-    border-radius: var(--radius);
-    box-shadow: 8px 8px 10px 0 var(--shadow);
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0;
+    box-shadow: none;
     transition: transform 0.4s ease;
+}
+
+.photo-ecole:first-child {
+    border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.photo-ecole:last-child {
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.ecole-photos {
+    box-shadow: 8px 8px 10px 0 var(--shadow);
 }
 
 .pdf-link a {
@@ -430,8 +455,17 @@ body {
         font-size: 1.8em;
     }
 
+    .amam-preview,
+    .ecole-photos {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 200px;
+        margin-top: 2em;
+    }
+
     .amam-preview-swiper .swiper-slide {
-        min-height: 300px;
+        height: 200px;
     }
 
     .amam-modal {

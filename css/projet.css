@@ -227,6 +227,25 @@ p {
     transform: scale(1.03);
 }
 
+/* Aperçu PDF (page de garde) */
+.project-image--pdf {
+    background: var(--cream);
+    overflow: hidden;
+    position: relative;
+}
+
+.pdf-cover-preview {
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    border: none;
+    transform: scale(0.5) translate(-50%, -50%);
+    transform-origin: top left;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* Lightbox pour Plein Écran */
 .lightbox-overlay {
     display: none;
