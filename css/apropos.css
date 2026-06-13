@@ -157,7 +157,7 @@ body {
 
 .amam-preview {
     flex: 1;
-    max-width: 50%;
+    max-width: 40%;
     display: flex;
     align-items: center;
 }
@@ -174,13 +174,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 420px;
+    min-height: 300px;
 }
 
 .amam-preview-swiper .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 12px;
+    box-sizing: border-box;
 }
 
 .amam-preview-pagination .swiper-pagination-bullet {
@@ -358,6 +360,51 @@ body {
     color: var(--cream);
 }
 
+.univ-modal {
+    width: min(94%, 980px);
+    max-height: 90vh;
+}
+
+.univ-modal-content {
+    padding: 18px clamp(22px, 3vw, 32px) 28px;
+}
+
+.univ-event-swiper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(250, 235, 215, 0.12);
+    background: rgba(4, 9, 9, 0.82);
+}
+
+.univ-event-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 58vh;
+}
+
+.univ-event-swiper .swiper-slide img {
+    width: 100%;
+    height: 58vh;
+    object-fit: contain;
+    background: rgba(4, 9, 9, 0.9);
+}
+
+.univ-modal-pagination .swiper-pagination-bullet {
+    background: rgba(250, 235, 215, 0.6);
+    opacity: 1;
+}
+
+.univ-modal-pagination .swiper-pagination-bullet-active {
+    background: var(--cream);
+}
+
+.univ-modal-prev,
+.univ-modal-next {
+    color: var(--cream);
+}
+
 @media screen and (max-width: 900px) {
 
     .section-dashboard-cta {
@@ -414,5 +461,11 @@ body {
     .amam-event-swiper .swiper-slide img {
         min-height: 46vh;
         height: 46vh;
+    }
+
+    .univ-event-swiper .swiper-slide,
+    .univ-event-swiper .swiper-slide img {
+        min-height: 42vh;
+        height: 42vh;
     }
 }

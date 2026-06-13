@@ -170,7 +170,7 @@
             <article class="dashboard-tile tile-dark" data-bg="#0b1616">
                 <span class="dashboard-tile-label">Activité dans le temps</span>
                 <strong>Matchs &amp; km par période</strong>
-                <p>Voir combien de matchs et de km j'ai cumulés chaque mois, trimestre ou saison — pour repérer les pics et les creux d'activité.</p>
+                <p>Voir combien de matchs et de km j'ai cumulés chaque mois, trimestre ou saison, afin de repérer les pics et les creux d'activité.</p>
             </article>
             <article class="dashboard-tile tile-cream" data-bg="#f0d9b5">
                 <span class="dashboard-tile-label">Top déplacements</span>
@@ -196,13 +196,28 @@
             if (!section) return;
             var tiles = section.querySelectorAll('.dashboard-tile[data-bg]');
 
+            function getReadableColor(hexColor) {
+                if (!hexColor) return 'antiquewhite';
+
+                var hex = hexColor.replace('#', '');
+                if (hex.length === 3) {
+                    hex = hex.split('').map(function (char) { return char + char; }).join('');
+                }
+
+                var red = parseInt(hex.slice(0, 2), 16);
+                var green = parseInt(hex.slice(2, 4), 16);
+                var blue = parseInt(hex.slice(4, 6), 16);
+                var luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
+
+                return luminance > 0.68 ? '#0b1616' : 'antiquewhite';
+            }
+
             section.style.transition = 'background-color 0.45s ease, color 0.35s ease';
 
             tiles.forEach(function (tile) {
                 tile.addEventListener('mouseenter', function () {
                     section.style.backgroundColor = tile.dataset.bg;
-                    var isLight = ['#f0d9b5', '#e8d5b0'].indexOf(tile.dataset.bg) !== -1;
-                    section.style.color = isLight ? '#0b1616' : 'antiquewhite';
+                    section.style.color = getReadableColor(tile.dataset.bg);
                 });
                 tile.addEventListener('mouseleave', function () {
                     section.style.backgroundColor = '';
@@ -243,15 +258,16 @@
             <div class="titre">Arbitrage Universitaire</div>
             <div class="project-tags"></div>
             <div class="project-description">
-                <p>Depuis le début de l'année universitaire 2024 - 2025, j'arbitre à l'université, je me rend souvent à Poitiers le jeudi après-midi afin d'arbitrer des matchs au niveau Académique et Inter-Académique. J'ai nottament pu arbitrer la finale inter-académique des ecoles d'ingenieures avec les équipe de l'ENSMA, et des écoles d'ingenieures de bordeaux et Pau</p>
+                <p>Depuis le début de l'année universitaire 2024-2025, j'arbitre à l'université. Je me rends souvent à Poitiers le jeudi après-midi afin d'arbitrer des matchs aux niveaux académique et inter-académique. J'ai notamment pu arbitrer la finale inter-académique des écoles d'ingénieurs avec les équipes de l'ENSMA, ainsi qu'avec celles de Bordeaux et de Pau.</p>
 
-                <p>Les matchs Inter-Université me permettent de prendre de l'experience car on y retrouve des joueurs de plus ou moins haut niveau, j'arbitre actuellement en Régional 3 et je peux me retrouver à arbitrer des joueurs de niveau Régiionale 1 voir Nationale 3. C'est toujours de l'experience à prendre et je me plait énormement. Cela me permet de pratiquer d'autant plus ma passion.</p>
+                <p>Les matchs inter-universitaires me permettent de gagner en expérience, car on y retrouve des joueuses et joueurs de niveaux variés. J'arbitre actuellement en Régional 3 et je peux me retrouver face à des joueurs de niveau Régional 1, voire Nationale 3. C'est toujours de l'expérience à prendre, et je m'y plais énormément. Cela me permet de pratiquer encore davantage ma passion.</p>
 
-                <p>J'abitre certains jeudis apres midi, nottament les finales académiques (Ancien Poitou CHarents) et la je vais arbitrer les finales inter-académiques à bordeaux le 30/04 Nouvelle_Aquitaine</p>
+                <p>J'arbitre certains jeudis après-midi, notamment les finales académiques de l'ancien Poitou-Charentes. Je dois aussi arbitrer les finales inter-académiques à Bordeaux le 30/04 en Nouvelle-Aquitaine.</p>
+                <button class="go-to" type="button" onclick="display_project('-univ')">Voir les photos</button>
             </div>
         </div>
         <div class="project-image">
-            <img src="./../Images/univ.png" alt="Arbitrage universitaire">
+            <img src="./../Images/univ2.jpeg" alt="Arbitrage universitaire">
         </div>
     </div>
 
@@ -340,6 +356,28 @@
         </div>
     </div>
 
+    <div class="project-page univ-modal" tabindex="-1" id="display-univ">
+        <button type="button" id="undisplay-univ" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+
+        <div class="univ-modal-content">
+            <div class="title">
+                <h1 class="diplayed-title">Photos de l'arbitrage universitaire</h1>
+            </div>
+
+            <div class="swiper univ-event-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="./../Images/univ1.jpg" alt="Arbitrage universitaire photo 1"></div>
+                    <div class="swiper-slide"><img src="./../Images/univ2.jpeg" alt="Arbitrage universitaire photo 2"></div>
+                </div>
+                <div class="swiper-pagination univ-modal-pagination"></div>
+                <div class="swiper-button-prev univ-modal-prev"></div>
+                <div class="swiper-button-next univ-modal-next"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -375,6 +413,22 @@
                 })
             };
 
+            var univEventSwiper = new Swiper(".univ-event-swiper", {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                loop: false,
+                observer: true,
+                observeParents: true,
+                navigation: {
+                    nextEl: ".univ-modal-next",
+                    prevEl: ".univ-modal-prev"
+                },
+                pagination: {
+                    el: ".univ-modal-pagination",
+                    clickable: true
+                }
+            });
+
             var menuItems = document.querySelectorAll("#amam-menu li");
             var eventPanels = document.querySelectorAll(".amam-event-panel");
 
@@ -400,12 +454,17 @@
 
             document.addEventListener("click", function (event) {
                 var trigger = event.target.closest("[onclick*='display_project(\'-amam\')']");
-                if (!trigger) return;
+                var univTrigger = event.target.closest("[onclick*='display_project(\'-univ\')']");
+                if (!trigger && !univTrigger) return;
 
                 setTimeout(function () {
                     if (amamEventSwipers["gala-2025"]) {
                         amamEventSwipers["gala-2025"].update();
                         amamEventSwipers["gala-2025"].slideTo(0, 0);
+                    }
+                    if (univEventSwiper) {
+                        univEventSwiper.update();
+                        univEventSwiper.slideTo(0, 0);
                     }
                 }, 120);
             });
