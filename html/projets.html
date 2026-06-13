@@ -288,6 +288,22 @@
             </div>
         </div>
 
+        <!-- ===== PROJET 14 : Site web PHP/MySQL — Statistiques NBA ===== -->
+        <div class="project-block" data-tags="1ère Année, Développement Web, Base de données">
+            <div class="project-text">
+                <div class="titre">Site web PHP &amp; MySQL — Stats NBA</div>
+                <div class="project-description">
+                    <p>Développement en équipe d'un site web PHP connecté à une base de données MySQL pour explorer et comparer des statistiques de joueurs NBA, avec simulation de carrière personnalisée.</p>
+                    <button class="go-to" id="-nba-php" type="button" onclick="display_project(this.id)">En savoir plus</button>
+                </div>
+                <div class="project-tags"><!-- auto-rempli par JS --></div>
+            </div>
+            <div class="project-image">
+                <img src="./../Images/nba_stats.png"
+                     alt="Interface du site de statistiques NBA">
+            </div>
+        </div>
+
     </div>
 
     <!-- Message si aucun projet ne correspond au filtre -->
@@ -698,7 +714,51 @@
         </div>
     </div>
 
+    <!-- Modale : Site web PHP/MySQL — Stats NBA -->
+    <div class="project-page" tabindex="-1" id="display-nba-php">
+        <button type="button" id="undisplay-nba-php" onclick="close_display(this.id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="all-project-container">
+            <div class="details-project">
+                <div class="title">
+                    <h1 class="diplayed-title">SAÉ — Site web PHP &amp; MySQL : Statistiques NBA</h1>
+                </div>
+                <div class="group-member">
+                    <ul>
+                        <li>FEROUX Elliot</li>
+                        <li>⋅</li>
+                        <li>DUJOUR Valentin</li>
+                        <li>⋅</li>
+                        <li>ANDREOLI Andrea</li>
+                    </ul>
+                </div>
+                <div class="text-details">
+                    <p>Ce projet de première année avait pour but de nous initier à la communication entre un site web et une base de données relationnelle. Réalisé en groupe de trois, il nous a amenés à concevoir de bout en bout une application PHP interfacée avec MySQL via EasyPHP, en nous répartissant les tâches à travers un SharePoint collaboratif.</p>
+
+                    <p>Pour le choix du sujet, nous avons opté pour un terrain qui nous motivait : les statistiques des joueurs NBA. Le site permettait d'afficher, comparer et filtrer les performances de différents joueurs, avec des graphiques JavaScript générés dynamiquement et un tableau alimenté directement depuis la base. L'utilisateur pouvait également créer un joueur fictif, lui attribuer des statistiques et simuler sa carrière match par match — chaque compte étant sauvegardé en base pour retrouver son joueur à la prochaine connexion.</p>
+
+                    <p>En termes d'organisation, la répartition des rôles s'est bien passée et le sujet a fédéré le groupe. Notre principal défi a été de maîtriser notre ambition : la fonctionnalité de simulation de carrière s'est révélée bien plus chronophage que prévu, ce qui a empiété sur le temps disponible pour finaliser et peaufiner d'autres parties du site.</p>
+
+                    <p>Dans l'ensemble, je suis satisfait de ce que nous avons produit. Le projet témoigne d'un réel investissement technique et collectif, et je suis fier du résultat, tant pour la partie fonctionnelle que pour la dynamique de groupe qui s'est installée.</p>
+
+                    <p style="margin-top: 1.2em; padding: 0.8em 1em; border-left: 3px solid #c0392b; background: rgba(192,57,43,0.08); border-radius: 6px; font-size: 0.95em;">
+                        <strong>⚠️ Aucune sauvegarde disponible.</strong> Les drives étudiants de l'université ont été entièrement réinitialisés, entraînant la perte définitive de tous les fichiers sources du projet. Il ne m'est donc pas possible de fournir de code ou de rendu visuel.
+                    </p>
+
+                    <p style="margin-top: 1em;"><strong>Compétences développées :</strong> PHP, MySQL, HTML/CSS, JavaScript (graphiques), gestion de base de données, travail en équipe.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2em;">
+                <img src="./../Images/nba_stats.png"
+                     alt="Illustration d'un site de statistiques NBA"
+                     style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
+        </div>
+    </div>
+
     <script src="./../js/script_projets.js"></script>
 
 </body>
+
 </html>
