@@ -211,6 +211,7 @@ p {
     align-items: center;
     overflow: hidden;
     border-radius: var(--radius);
+    box-shadow: 8px 8px 20px 0 var(--shadow);
 }
 
 .project-image img {
@@ -219,7 +220,6 @@ p {
     object-fit: contain;
     object-position: center;
     border-radius: var(--radius);
-    filter: drop-shadow(8px 8px 10px var(--shadow));
     transition: transform 0.4s ease;
 }
 
@@ -229,21 +229,21 @@ p {
 
 /* Aperçu PDF (page de garde) */
 .project-image--pdf {
-    background: var(--cream);
+    background: #f5f0e8;
     overflow: hidden;
     position: relative;
 }
 
 .pdf-cover-preview {
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    border: none;
-    transform: scale(0.5) translate(-50%, -50%);
-    transform-origin: top left;
     position: absolute;
     top: 0;
     left: 0;
+    width: 200%;
+    height: 520px;
+    transform: scale(0.5);
+    transform-origin: top left;
+    border: none;
+    pointer-events: none;
 }
 
 /* Lightbox pour Plein Écran */
