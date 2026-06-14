@@ -1,0 +1,210 @@
+name: Refresh portfolio consistency
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/portfolio-refresh.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update portfolio content
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          ROOT = Path('.')
+
+          def read(path):
+              return (ROOT / path).read_text(encoding='utf-8')
+
+          def write(path, text):
+              (ROOT / path).write_text(text, encoding='utf-8')
+
+          def replace_exact(path, old, new, minimum=1):
+              text = read(path)
+              count = text.count(old)
+              if count < minimum:
+                  raise RuntimeError(f'{path}: texte introuvable: {old[:80]!r}')
+              write(path, text.replace(old, new))
+              print(f'{path}: {count} remplacement(s) exact(s)')
+
+          def replace_regex(path, pattern, replacement, expected=1):
+              text = read(path)
+              updated, count = re.subn(pattern, replacement, text, flags=re.DOTALL)
+              if count != expected:
+                  raise RuntimeError(f'{path}: {count} correspondance(s) pour {pattern[:100]!r}, attendu {expected}')
+              write(path, updated)
+              print(f'{path}: {count} remplacement(s) par expression régulière')
+
+          # Harmonisation de la navigation sur toutes les pages.
+          for html_file in ROOT.rglob('*.html'):
+              text = html_file.read_text(encoding='utf-8')
+              updated = text.replace('A PROPOS', 'À PROPOS')
+              if updated != text:
+                  html_file.write_text(updated, encoding='utf-8')
+                  print(f'{html_file}: navigation corrigée')
+
+          # Le logo possède désormais le même comportement sur toutes les pages.
+          replace_exact(
+              'index.html',
+              '<a href="https://iutp.univ-poitiers.fr/sd/" target="_blank" aria-label="Site BUT Sciences des Données">',
+              '<a href="./index.html" aria-label="Retour à l\'accueil">'
+          )
+          replace_exact(
+              'index.html',
+              '<a href="https://iutp.univ-poitiers.fr/sd/" target="_blank">',
+              '<a href="./index.html" aria-label="Retour à l\'accueil">'
+          )
+
+          # Mise à jour des contenus devenus datés sur la page À propos.
+          replace_regex(
+              'html/apropos.html',
+              r'<p>À 17 ans,.*?Mon ambition est d\'arbitrer au plus haut niveau possible\.</p>',
+              '''<p>À 17 ans, je me suis progressivement tourné vers l’arbitrage. Après une première saison au niveau départemental, j’ai suivi la formation régionale. Je suis aujourd’hui arbitre officiel et je souhaite continuer à progresser vers les niveaux supérieurs.</p>'''
+          )
+          replace_regex(
+              'html/apropos.html',
+              r'<p>Le basket-ball 3x3 est une discipline spéciale.*?traditionnel\.</p>',
+              '''<p>Le basket-ball 3x3 est une discipline olympique inspirée du basket de rue. Son rythme, son organisation et la gestion des acteurs sont différents du basket-ball 5x5. Cette autre manière d’arbitrer m’a rapidement attiré.</p>'''
+          )
+          replace_regex(
+              'html/apropos.html',
+              r'<p>Mes parents m\'ont toujours immergé dans la musique,.*?dès leur arrivée\.</p>',
+              '''<p>La musique a toujours occupé une place importante dans ma famille. J’ai commencé à participer bénévolement au festival Mélusik en 2023, d’abord à la restauration et à la logistique.</p>
+
+                <p>Lors de l’édition suivante, j’ai rejoint l’accueil du festival. J’étais chargé de servir les festivaliers en jetons, de gérer les retours de caution et de répondre à leurs questions. J’ai particulièrement apprécié ce poste, qui demandait du contact, de la rigueur et des responsabilités.</p>
+
+                <p>Cette expérience m’a aidé à gagner en confiance et à comprendre l’importance de l’accueil dans l’image donnée par un événement dès l’arrivée du public.</p>'''
+          )
+          replace_regex(
+              'html/apropos.html',
+              r'<p>Depuis le début de l\'année universitaire 2024-2025,.*?le 30/04 en Nouvelle-Aquitaine\.</p>',
+              '''<p>Depuis l’année universitaire 2024-2025, j’arbitre régulièrement dans le cadre universitaire, principalement à Poitiers. Ces rencontres me permettent de travailler avec des joueuses et joueurs de niveaux variés et d’enrichir mon expérience.</p>
+
+                <p>J’ai notamment arbitré des finales académiques et interacadémiques, dont une finale réunissant des équipes de l’ENSMA, de Bordeaux et de Pau. Ces rendez-vous complètent mon activité en club et me permettent de pratiquer encore davantage ma passion.</p>'''
+          )
+
+          # Harmonisation des intitulés et du statut de l’alternance.
+          replace_exact(
+              'html/alternance.html',
+              'J’y ai effectué deux années d’alternance au sein du Data Office, avec un rôle qui a progressivement évolué de la découverte des données vers la gestion plus complète de projets data.',
+              'J’y effectue actuellement ma deuxième année d’alternance au sein du Data Office, avec un rôle qui a progressivement évolué de la découverte des données vers la gestion plus complète de projets data.'
+          )
+          replacements_alternance = {
+              'Recettage des Smart Data': 'Recette des Smart Data',
+              'Pilotage des cabinets d’expertise IRD': 'Pilotage des sociétés d’expertise IRD',
+              'Dossiers anciens et à forts enjeux': 'Suivi des sinistres IRD anciens et à forts enjeux',
+              'Création de tableaux de bord corporels': 'Suivi des sinistres corporels anciens et à forts enjeux',
+          }
+          for old, new in replacements_alternance.items():
+              replace_exact('html/alternance.html', old, new)
+
+          # Harmonisation du projet consacré au Danemark.
+          replace_exact(
+              'html/projets.html',
+              'Prévision des Importations — Danemark',
+              'Prévision des importations du Danemark'
+          )
+          replace_exact(
+              'html/projets.html',
+              'Présentation — Le Danemark',
+              'Prévision des importations du Danemark'
+          )
+
+          # Simplification des anciens bilans afin de mettre en avant la progression.
+          replace_regex(
+              'html/bilan.html',
+              r'<div class="titre">BILAN PERSONNEL — BUT 1</div>.*?(?=<div class="titre">BILAN PERSONNEL — BUT 2</div>)',
+              '''<div class="titre">BILAN PERSONNEL — BUT 1</div>
+
+                <p>Cette première année de BUT Science des Données m’a permis de découvrir la diversité de la formation, entre programmation, statistiques, gestion de données et projets collectifs. Les nombreux travaux réalisés m’ont appris à mieux répartir les tâches, à communiquer au sein d’un groupe et à présenter des résultats de manière structurée.</p>
+
+                <p>Les enseignements les plus théoriques, notamment en mathématiques, ont représenté une difficulté importante. Cette expérience m’a fait comprendre que je devais travailler plus régulièrement, chercher des explications complémentaires et ne pas attendre les évaluations pour revenir sur les notions mal comprises.</p>
+
+                <p>Cette année m’a surtout donné envie de confronter mes compétences à des problématiques concrètes. L’entrée en alternance constituait donc une suite logique pour mieux comprendre les attentes professionnelles et donner davantage de sens aux connaissances acquises en cours.</p>
+
+                ''',
+              expected=1
+          )
+          replace_regex(
+              'html/bilan.html',
+              r'<div class="titre">BILAN PERSONNEL — BUT 2</div>.*?(?=<div class="titre">BILAN PERSONNEL — BUT 3</div>)',
+              '''<div class="titre">BILAN PERSONNEL — BUT 2</div>
+
+                <p>Cette deuxième année a été contrastée. Les résultats académiques n’ont pas toujours été à la hauteur de mes attentes, mais cette période m’a permis de mieux identifier mes difficultés, en particulier dans les matières très théoriques et dans l’utilisation de nouveaux outils techniques.</p>
+
+                <p>J’ai compris que mon principal axe de progression concernait la régularité. Pour avancer, j’ai commencé à mieux organiser mes semaines, à travailler davantage avec d’autres étudiants et à rechercher des ressources complémentaires lorsque les explications du cours ne suffisaient pas.</p>
+
+                <p>L’alternance a constitué le point fort de cette année. Elle m’a permis de développer des compétences concrètes, de progresser techniquement et de gagner en aisance à l’oral. Le fait de voir l’utilisation réelle de mes analyses et de mes tableaux de bord m’a aidé à prendre confiance dans mes capacités.</p>
+
+                <p>Ce bilan m’a servi de point de départ pour aborder la troisième année avec davantage de méthode. Mon objectif était de mieux relier les enseignements du BUT aux besoins rencontrés en entreprise et de prendre une place plus active dans la conduite des projets.</p>
+
+                ''',
+              expected=1
+          )
+
+          # Amélioration de l’accès au CV, notamment sur mobile.
+          replace_exact(
+              'html/contact.html',
+              '    <div class="CV">\n        <object data="./../Images/CV.pdf"',
+              '''    <div class="CV">
+        <p style="text-align:center; margin: 20px 0;">
+            <a href="./../Images/CV.pdf" target="_blank" rel="noopener noreferrer" download style="color: antiquewhite; font-family: 'Bebas Neue', sans-serif; font-size: 1.2em;">TÉLÉCHARGER MON CV</a>
+        </p>
+        <object data="./../Images/CV.pdf"'''
+          )
+          replace_exact(
+              'html/contact.html',
+              '''                <p style="font-size:1.2em;">CV non disponible pour le moment.</p>
+                <p style="font-size:0.9em; opacity:0.7;">Placez votre fichier CV.pdf dans le dossier Images/</p>''',
+              '''                <p style="font-size:1.2em;">Le CV ne peut pas être affiché dans ce navigateur.</p>
+                <p style="font-size:0.9em; opacity:0.7;"><a href="./../Images/CV.pdf" target="_blank" rel="noopener noreferrer" style="color: antiquewhite;">Ouvrir le CV au format PDF</a></p>'''
+          )
+
+          # Contrôles finaux simples.
+          checks = {
+              'html/apropos.html': [
+                  'j’attends les résultats pour le 15',
+                  'fera partie des Jeux Olympiques de Paris',
+                  'Je dois aussi arbitrer les finales inter-académiques',
+              ],
+              'html/alternance.html': [
+                  'Recettage des Smart Data',
+                  'Pilotage des cabinets d’expertise IRD',
+                  'Création de tableaux de bord corporels',
+              ],
+              'html/projets.html': ['Présentation — Le Danemark'],
+              'html/contact.html': ['Placez votre fichier CV.pdf dans le dossier Images/'],
+          }
+          for path, forbidden in checks.items():
+              text = read(path)
+              for phrase in forbidden:
+                  if phrase in text:
+                      raise RuntimeError(f'{path}: ancien contenu encore présent: {phrase!r}')
+
+          print('Toutes les corrections ont été appliquées avec succès.')
+          PY
+
+      - name: Commit the refreshed portfolio
+        shell: bash
+        run: |
+          rm .github/workflows/portfolio-refresh.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Refresh portfolio content and consistency"
+          git push
