@@ -232,18 +232,16 @@ p {
     background: #f5f0e8;
     overflow: hidden;
     position: relative;
+    height: 450px;
 }
 
 .pdf-cover-preview {
     position: absolute;
     top: 0;
     left: 0;
-    width: 200%;
-    height: 520px;
-    transform: scale(0.5);
-    transform-origin: top left;
+    width: 100%;
+    height: 100%;
     border: none;
-    pointer-events: none;
 }
 
 /* Lightbox pour Plein Écran */
