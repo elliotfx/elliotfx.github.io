@@ -232,7 +232,7 @@ p {
     background: #f5f0e8;
     overflow: hidden;
     position: relative;
-    height: 450px;
+    height: 600px !important;
 }
 
 .pdf-cover-preview {
