@@ -61,7 +61,7 @@ function applyPortfolioConsistencyUpdates() {
 }
 
 function updateNavigationAndHomeLogo() {
-    document.querySelectorAll('.link-nav-underline a[href$="apropos.html"]').forEach(function (link) {
+    document.querySelectorAll('a[href$="apropos.html"]').forEach(function (link) {
         link.textContent = "À PROPOS";
     });
 
@@ -108,25 +108,25 @@ function setProjectParagraphs(title, paragraphs) {
 
 function updateAboutPage() {
     setProjectParagraphs("Arbitrage basket-ball 5x5", [
-        "De 8 à 18 ans, j'ai joué au basket en club, d'abord à Ménigoute puis à Lusignan. Je pratiquais avant tout pour le plaisir et pour partager ma passion avec les autres.",
-        "À 17 ans, je me suis progressivement tourné vers l'arbitrage. Après une première saison au niveau départemental, j'ai suivi la formation régionale. Je suis aujourd'hui arbitr[...]
-        "L'arbitrage est devenu une véritable passion. Il m'a permis de gagner en confiance, de prendre des décisions sous pression et de rencontrer de nombreuses personnes dans le milieu d[...]
+        "De 8 à 18 ans, j’ai joué au basket en club, d’abord à Ménigoute puis à Lusignan. Je pratiquais avant tout pour le plaisir et pour partager ma passion avec les autres.",
+        "À 17 ans, je me suis progressivement tourné vers l’arbitrage. Après une première saison au niveau départemental, j’ai suivi la formation régionale. Je suis aujourd’hui arbitre officiel et je souhaite continuer à progresser vers les niveaux supérieurs.",
+        "L’arbitrage est devenu une véritable passion. Il m’a permis de gagner en confiance, de prendre des décisions sous pression et de rencontrer de nombreuses personnes dans le milieu du basket-ball."
     ]);
 
     setProjectParagraphs("Arbitrage basket-ball 3x3", [
-        "Le basket-ball 3x3 est une discipline olympique inspirée du basket de rue. Son rythme, son organisation et la gestion des acteurs sont différents du basket-ball 5x5. Cette autre maniè[...]
-        "J'ai depuis arbitré plusieurs événements, dont les Jeux européens inter-entreprises de Bordeaux, l'Urban PB de Poitiers et le Tournoi international du Grand Cognac. Cette discipl[...]
+        "Le basket-ball 3x3 est une discipline olympique inspirée du basket de rue. Son rythme, son organisation et la gestion des acteurs sont différents du basket-ball 5x5. Cette autre manière d’arbitrer m’a rapidement attiré.",
+        "J’ai depuis arbitré plusieurs événements, dont les Jeux européens inter-entreprises de Bordeaux, l’Urban PB de Poitiers et le Tournoi international du Grand Cognac. Cette discipline me permet de voyager, de profiter du basket en plein air et de découvrir de nouveaux environnements."
     ]);
 
     setProjectParagraphs("Bénévolat - Mélusik", [
-        "La musique a toujours occupé une place importante dans ma famille. J'ai commencé à participer bénévolement au festival Mélusik en 2023, d'abord à la restauration et à la logi[...]
-        "Lors de l'édition suivante, j'ai rejoint l'accueil du festival. J'étais chargé de servir les festivaliers en jetons, de gérer les retours de caution et de répondre à leurs [...]
-        "Cette expérience m'a aidé à gagner en confiance et à comprendre l'importance de l'accueil dans l'image donnée par un événement dès l'arrivée du public."
+        "La musique a toujours occupé une place importante dans ma famille. J’ai commencé à participer bénévolement au festival Mélusik en 2023, d’abord à la restauration et à la logistique.",
+        "Lors de l’édition suivante, j’ai rejoint l’accueil du festival. J’étais chargé de servir les festivaliers en jetons, de gérer les retours de caution et de répondre à leurs questions. J’ai particulièrement apprécié ce poste, qui demandait du contact, de la rigueur et des responsabilités.",
+        "Cette expérience m’a aidé à gagner en confiance et à comprendre l’importance de l’accueil dans l’image donnée par un événement dès l’arrivée du public."
     ]);
 
     setProjectParagraphs("Arbitrage Universitaire", [
-        "Depuis l'année universitaire 2024-2025, j'arbitre régulièrement dans le cadre universitaire, principalement à Poitiers. Ces rencontres me permettent de travailler avec des joueus[...]
-        "J'ai notamment arbitré des finales académiques et interacadémiques, dont une finale réunissant des équipes de l'ENSMA, de Bordeaux et de Pau. Ces rendez-vous complètent mon act[...]
+        "Depuis l’année universitaire 2024-2025, j’arbitre régulièrement dans le cadre universitaire, principalement à Poitiers. Ces rencontres me permettent de travailler avec des joueuses et joueurs de niveaux variés et d’enrichir mon expérience.",
+        "J’ai notamment arbitré des finales académiques et interacadémiques, dont une finale réunissant des équipes de l’ENSMA, de Bordeaux et de Pau. Ces rendez-vous complètent mon activité en club et me permettent de pratiquer encore davantage ma passion."
     ]);
 }
 
@@ -142,7 +142,7 @@ function replaceTitles(replacements) {
 function updateAlternancePage() {
     replaceTitles({
         "Recettage des Smart Data": "Recette des Smart Data",
-        "Pilotage des cabinets d'expertise IRD": "Pilotage des sociétés d'expertise IRD",
+        "Pilotage des cabinets d’expertise IRD": "Pilotage des sociétés d’expertise IRD",
         "Dossiers anciens et à forts enjeux": "Suivi des sinistres IRD anciens et à forts enjeux",
         "Création de tableaux de bord corporels": "Suivi des sinistres corporels anciens et à forts enjeux"
     });
@@ -152,7 +152,7 @@ function updateAlternancePage() {
 
     var paragraph = presentationBlock.querySelector(".project-description p");
     if (paragraph) {
-        paragraph.textContent = "Fondée en 1838, la Mutuelle de Poitiers Assurances est une société d'assurance mutualiste qui accompagne près de 500 000 sociétaires grâce à un réseau d[...]
+        paragraph.textContent = "Fondée en 1838, la Mutuelle de Poitiers Assurances est une société d’assurance mutualiste qui accompagne près de 500 000 sociétaires grâce à un réseau de plus de 300 agences réparties dans 59 départements. J’y effectue actuellement ma deuxième année d’alternance au sein du Data Office, avec un rôle qui a progressivement évolué de la découverte des données vers la gestion plus complète de projets data.";
     }
 }
 
@@ -197,16 +197,16 @@ function replaceBilanSection(startText, endText, paragraphs) {
 
 function updateBilanPage() {
     replaceBilanSection("BILAN PERSONNEL — BUT 1", "BILAN PERSONNEL — BUT 2", [
-        "Cette première année de BUT Science des Données m'a permis de découvrir la diversité de la formation, entre programmation, statistiques, gestion de données et projets collectifs.[...]
-        "Les enseignements les plus théoriques, notamment en mathématiques, ont représenté une difficulté importante. Cette expérience m'a fait comprendre que je devais travailler plus r[...]
-        "Cette année m'a surtout donné envie de confronter mes compétences à des problématiques concrètes. L'entrée en alternance constituait donc une suite logique pour mieux comprend[...]
+        "Cette première année de BUT Science des Données m’a permis de découvrir la diversité de la formation, entre programmation, statistiques, gestion de données et projets collectifs. Les nombreux travaux réalisés m’ont appris à mieux répartir les tâches, à communiquer au sein d’un groupe et à présenter des résultats de manière structurée.",
+        "Les enseignements les plus théoriques, notamment en mathématiques, ont représenté une difficulté importante. Cette expérience m’a fait comprendre que je devais travailler plus régulièrement, chercher des explications complémentaires et ne pas attendre les évaluations pour revenir sur les notions mal comprises.",
+        "Cette année m’a surtout donné envie de confronter mes compétences à des problématiques concrètes. L’entrée en alternance constituait donc une suite logique pour mieux comprendre les attentes professionnelles et donner davantage de sens aux connaissances acquises en cours."
     ]);
 
     replaceBilanSection("BILAN PERSONNEL — BUT 2", "BILAN PERSONNEL — BUT 3", [
-        "Cette deuxième année a été contrastée. Les résultats académiques n'ont pas toujours été à la hauteur de mes attentes, mais cette période m'a permis de mieux identifier mes[...]
-        "J'ai compris que mon principal axe de progression concernait la régularité. Pour avancer, j'ai commencé à mieux organiser mes semaines, à travailler davantage avec d'autres é[...]
-        "L'alternance a constitué le point fort de cette année. Elle m'a permis de développer des compétences concrètes, de progresser techniquement et de gagner en aisance à l'oral. [...]
-        "Ce bilan m'a servi de point de départ pour aborder la troisième année avec davantage de méthode. Mon objectif était de mieux relier les enseignements du BUT aux besoins rencontré[...]
+        "Cette deuxième année a été contrastée. Les résultats académiques n’ont pas toujours été à la hauteur de mes attentes, mais cette période m’a permis de mieux identifier mes difficultés, en particulier dans les matières très théoriques et dans l’utilisation de nouveaux outils techniques.",
+        "J’ai compris que mon principal axe de progression concernait la régularité. Pour avancer, j’ai commencé à mieux organiser mes semaines, à travailler davantage avec d’autres étudiants et à rechercher des ressources complémentaires lorsque les explications du cours ne suffisaient pas.",
+        "L’alternance a constitué le point fort de cette année. Elle m’a permis de développer des compétences concrètes, de progresser techniquement et de gagner en aisance à l’oral. Le fait de voir l’utilisation réelle de mes analyses et de mes tableaux de bord m’a aidé à prendre confiance dans mes capacités.",
+        "Ce bilan m’a servi de point de départ pour aborder la troisième année avec davantage de méthode. Mon objectif était de mieux relier les enseignements du BUT aux besoins rencontrés en entreprise et de prendre une place plus active dans la conduite des projets."
     ]);
 }
 
