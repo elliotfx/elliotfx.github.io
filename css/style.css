@@ -116,6 +116,7 @@ h1:hover::after {
     width: 100%;
     min-height: 340px;
     background-color: var(--white);
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -160,7 +161,7 @@ h1:hover::after {
     }
 
     .bas {
-        display: flex;
+        display: block;
     }
 
     .navbar > ul {
