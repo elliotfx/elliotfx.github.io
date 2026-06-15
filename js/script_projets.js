@@ -60,10 +60,9 @@ function applyPortfolioConsistencyUpdates() {
     }
 }
 
-function updateNavigationAndHomeLogo() {
-    document.querySelectorAll('a[href$="apropos.html"]').forEach(function (link) {
-        link.textContent = "À PROPOS";
-    });
+document.querySelectorAll('.link-nav-underline a[href$="apropos.html"]').forEach(function (link) {
+    link.textContent = "À PROPOS";
+});
 
     document.querySelectorAll('a[href*="iutp.univ-poitiers.fr/sd"]').forEach(function (link) {
         link.href = "./index.html";
